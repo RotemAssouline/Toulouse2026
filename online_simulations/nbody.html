@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>N-Body Simulation (with Mass-Scaled Bodies)</title>
+  <style>
+    canvas {
+      background: white;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<canvas id="nbodyCanvas" width="700" height="700"></canvas>
+
+<script>
+// === Simulation Parameters ===
+const canvas = document.getElementById('nbodyCanvas');
+const ctx = canvas.getContext('2d');
+const width = canvas.width;
+const height = canvas.height;
+const G = 1.0;
+const dt = 1.0;  // faster motion
+const numParticles = 10; // 1 central + 9 orbiting
+const positions = [];
+const velocities = [];
+const masses = [];
+
+// === Initial Conditions ===
+function initSystem() {
+  masses[0] = 1000; // Central massive body
+  positions[0] = { x: 0, y: 0 };
+  velocities[0] = { x: 0, y: 0 };
+
+  for (let i = 1; i < numParticles; i++) {
+    let angle = (i - 1) * (2 * Math.PI / (numParticles - 1));
+    let radius = 100 + i * 20;
+    let x = radius * Math.cos(angle);
+    let y = radius * Math.sin(angle);
+    positions[i] = { x: x, y: y };
+    masses[i] = 1;
+
+    // Circular orbit velocity
+    let rMag = Math.sqrt(x * x + y * y);
+    let speed = Math.sqrt(G * masses[0] / rMag);
+    velocities[i] = {
+      x: -y / rMag * speed,
+      y:  x / rMag * speed
+    };
+  }
+}
+
+// === Compute Accelerations ===
+function computeAccelerations() {
+  const acc = Array(numParticles).fill().map(() => ({ x: 0, y: 0 }));
+
+  for (let i = 0; i < numParticles; i++) {
+    for (let j = 0; j < numParticles; j++) {
+      if (i !== j) {
+        let dx = positions[j].x - positions[i].x;
+        let dy = positions[j].y - positions[i].y;
+        let distSq = dx * dx + dy * dy + 1e-5;
+        let dist = Math.sqrt(distSq);
+        let force = G * masses[j] / distSq;
+        acc[i].x += force * dx / dist;
+        acc[i].y += force * dy / dist;
+      }
+    }
+  }
+  return acc;
+}
+
+// === Simulation Step ===
+function step() {
+  const acc = computeAccelerations();
+
+  for (let i = 0; i < numParticles; i++) {
+    positions[i].x += velocities[i].x * dt + 0.5 * acc[i].x * dt * dt;
+    positions[i].y += velocities[i].y * dt + 0.5 * acc[i].y * dt * dt;
+  }
+
+  const newAcc = computeAccelerations();
+  for (let i = 0; i < numParticles; i++) {
+    velocities[i].x += 0.5 * (acc[i].x + newAcc[i].x) * dt;
+    velocities[i].y += 0.5 * (acc[i].y + newAcc[i].y) * dt;
+  }
+}
+
+// === Draw Particles ===
+function draw() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.save();
+  ctx.translate(width / 2, height / 2);
+
+  for (let i = 0; i < numParticles; i++) {
+    const pos = positions[i];
+    const radius = i === 0 ? 8 : Math.sqrt(masses[i]) * 5; // slightly bigger center
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = '#7FAEBA';
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+// === Animation Loop ===
+function animate() {
+  step();
+  draw();
+  requestAnimationFrame(animate);
+}
+
+// === Start ===
+initSystem();
+animate();
+</script>
+</body>
+</html>

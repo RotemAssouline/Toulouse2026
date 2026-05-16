@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle in Scalar Potential Field</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Global variables
+        const fieldGridSize = 20;
+        let potentialField = [];
+        let gradientField = [];
+        let particles = [];
+        let initialized = false;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+        }
+        
+        class Particle {
+            constructor(x, y, vx, vy, mass = 1) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.mass = mass;
+                this.radius = Math.sqrt(mass) * 4;
+            }
+            
+            update(dt) {
+                const width = canvas.width;
+                const height = canvas.height;
+                
+                // Get force from precomputed gradient field
+                const force = getForce(this.x, this.y);
+                
+                // F = ma, so a = F/m
+                const ax = force.x / this.mass;
+                const ay = force.y / this.mass;
+                
+                // Velocity Verlet integration
+                const vx_half = this.vx + ax * dt * 0.5;
+                const vy_half = this.vy + ay * dt * 0.5;
+                
+                this.x += vx_half * dt;
+                this.y += vy_half * dt;
+                
+                const force_new = getForce(this.x, this.y);
+                const ax_new = force_new.x / this.mass;
+                const ay_new = force_new.y / this.mass;
+                
+                this.vx = vx_half + ax_new * dt * 0.5;
+                this.vy = vy_half + ay_new * dt * 0.5;
+                
+                // Add damping
+                this.vx *= 0.999;
+                this.vy *= 0.999;
+                
+                // Boundary conditions
+                if (this.x < this.radius || this.x > width - this.radius) {
+                    this.vx = -this.vx;
+                    this.x = Math.max(this.radius, Math.min(width - this.radius, this.x));
+                }
+                if (this.y < this.radius || this.y > height - this.radius) {
+                    this.vy = -this.vy;
+                    this.y = Math.max(this.radius, Math.min(height - this.radius, this.y));
+                }
+            }
+            
+            draw() {
+                // Same color for both particles (original color)
+                ctx.fillStyle = '#4d6970';
+                
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function generatePotentialField() {
+            potentialField = [];
+            gradientField = [];
+            
+            // Generate potential field
+            for (let i = 0; i < fieldGridSize; i++) {
+                potentialField[i] = [];
+                for (let j = 0; j < fieldGridSize; j++) {
+                    const x = i / (fieldGridSize - 1);
+                    const y = j / (fieldGridSize - 1);
+                    
+                    let potential = 0;
+                    
+                    // Main well at center (much deeper)
+                    potential += -5.0 * Math.exp(-((x - 0.5)**2 + (y - 0.5)**2) * 8);
+                    
+                    // Secondary well (deeper)
+                    potential += -3.0 * Math.exp(-((x - 0.2)**2 + (y - 0.3)**2) * 12);
+                    
+                    // Hill/barrier
+                    potential += 1.0 * Math.exp(-((x - 0.8)**2 + (y - 0.7)**2) * 15);
+                    
+                    // Wavy component (reduced so wells dominate)
+                    potential += 0.1 * Math.sin(x * Math.PI * 4) * Math.cos(y * Math.PI * 3);
+                    
+                    potentialField[i][j] = potential;
+                }
+            }
+            
+            // Calculate gradient field
+            for (let i = 0; i < fieldGridSize; i++) {
+                gradientField[i] = [];
+                for (let j = 0; j < fieldGridSize; j++) {
+                    let gradX = 0;
+                    let gradY = 0;
+                    
+                    if (i > 0 && i < fieldGridSize - 1) {
+                        gradX = (potentialField[i + 1][j] - potentialField[i - 1][j]) / 2;
+                    } else if (i === 0) {
+                        gradX = potentialField[i + 1][j] - potentialField[i][j];
+                    } else {
+                        gradX = potentialField[i][j] - potentialField[i - 1][j];
+                    }
+                    
+                    if (j > 0 && j < fieldGridSize - 1) {
+                        gradY = (potentialField[i][j + 1] - potentialField[i][j - 1]) / 2;
+                    } else if (j === 0) {
+                        gradY = potentialField[i][j + 1] - potentialField[i][j];
+                    } else {
+                        gradY = potentialField[i][j] - potentialField[i][j - 1];
+                    }
+                    
+                    gradX *= (fieldGridSize - 1);
+                    gradY *= (fieldGridSize - 1);
+                    
+                    gradientField[i][j] = {x: gradX, y: gradY};
+                }
+            }
+        }
+        
+        function getForce(x, y) {
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            const gx = Math.max(0, Math.min(fieldGridSize - 1, (x / width) * (fieldGridSize - 1)));
+            const gy = Math.max(0, Math.min(fieldGridSize - 1, (y / height) * (fieldGridSize - 1)));
+            
+            const x1 = Math.max(0, Math.floor(gx));
+            const x2 = Math.min(x1 + 1, fieldGridSize - 1);
+            const y1 = Math.max(0, Math.floor(gy));
+            const y2 = Math.min(y1 + 1, fieldGridSize - 1);
+            
+            const wx = gx - x1;
+            const wy = gy - y1;
+            
+            const grad11 = gradientField[x1][y1];
+            const grad21 = gradientField[x2][y1];
+            const grad12 = gradientField[x1][y2];
+            const grad22 = gradientField[x2][y2];
+            
+            const gradX = grad11.x * (1 - wx) * (1 - wy) +
+                         grad21.x * wx * (1 - wy) +
+                         grad12.x * (1 - wx) * wy +
+                         grad22.x * wx * wy;
+            
+            const gradY = grad11.y * (1 - wx) * (1 - wy) +
+                         grad21.y * wx * (1 - wy) +
+                         grad12.y * (1 - wx) * wy +
+                         grad22.y * wx * wy;
+            
+            const forceScale = 1000;
+            return {
+                x: -gradX * forceScale,
+                y: -gradY * forceScale
+            };
+        }
+        
+        function drawPotentialField() {
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            if (width <= 0 || height <= 0) return;
+            
+            const imageData = ctx.createImageData(width, height);
+            const data = imageData.data;
+            
+            let minField = Infinity;
+            let maxField = -Infinity;
+            for (let i = 0; i < fieldGridSize; i++) {
+                for (let j = 0; j < fieldGridSize; j++) {
+                    minField = Math.min(minField, potentialField[i][j]);
+                    maxField = Math.max(maxField, potentialField[i][j]);
+                }
+            }
+            
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const fx = (x / width) * (fieldGridSize - 1);
+                    const fy = (y / height) * (fieldGridSize - 1);
+                    
+                    const x1 = Math.floor(fx);
+                    const x2 = Math.min(x1 + 1, fieldGridSize - 1);
+                    const y1 = Math.floor(fy);
+                    const y2 = Math.min(y1 + 1, fieldGridSize - 1);
+                    
+                    const wx = fx - x1;
+                    const wy = fy - y1;
+                    
+                    const field11 = potentialField[x1][y1];
+                    const field21 = potentialField[x2][y1];
+                    const field12 = potentialField[x1][y2];
+                    const field22 = potentialField[x2][y2];
+                    
+                    const field1 = field11 * (1 - wx) + field21 * wx;
+                    const field2 = field12 * (1 - wx) + field22 * wx;
+                    const field = field1 * (1 - wy) + field2 * wy;
+                    
+                    const normalized = (field - minField) / (maxField - minField);
+                    
+                    const baseColor = {r: 127, g: 174, b: 186};
+                    const intensity = normalized;
+                    
+                    const r = Math.floor(baseColor.r + (255 - baseColor.r) * intensity);
+                    const g = Math.floor(baseColor.g + (255 - baseColor.g) * intensity);
+                    const b = Math.floor(baseColor.b + (255 - baseColor.b) * intensity);
+                    
+                    const index = (y * width + x) * 4;
+                    data[index] = r;
+                    data[index + 1] = g;
+                    data[index + 2] = b;
+                    data[index + 3] = 255;
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+        }
+        
+        function animate() {
+            if (!initialized) {
+                requestAnimationFrame(animate);
+                return;
+            }
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            if (width <= 0 || height <= 0) {
+                requestAnimationFrame(animate);
+                return;
+            }
+            
+            ctx.clearRect(0, 0, width, height);
+            drawPotentialField();
+            
+            // Draw both particles
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update(0.008);
+                particles[i].draw();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        function init() {
+            resizeCanvas();
+            generatePotentialField();
+            
+            // Create two particles with different masses and higher initial velocities
+            particles = [
+                new Particle(150, 150, 200, 150, 1),      // Small particle with higher velocity
+                new Particle(canvas.width - 200, canvas.height - 200, -180, -120, 9)  // Large particle with higher velocity
+            ];
+            
+            initialized = true;
+            console.log("Created", particles.length, "particles");
+        }
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            const oldWidth = canvas.width;
+            const oldHeight = canvas.height;
+            
+            resizeCanvas();
+            
+            if (initialized && particles.length > 0 && oldWidth > 0 && oldHeight > 0) {
+                for (let particle of particles) {
+                    particle.x = (particle.x / oldWidth) * canvas.width;
+                    particle.y = (particle.y / oldHeight) * canvas.height;
+                }
+            }
+        });
+        
+        // Start everything
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+        
+        // Start animation immediately
+        animate();
+    </script>
+</body>
+</html>

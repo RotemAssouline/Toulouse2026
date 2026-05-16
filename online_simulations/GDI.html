@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smooth Gaussian Transport</title>
+  <style>
+    body { margin: 0; background: white; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    canvas { border: none; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="900" height="700"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    // domain
+    const xMin = -1, xMax = 7;
+    const yMin = -1, yMax = 7;
+
+    // animation
+    const totalFrames = 240;
+    let frame = 0;
+
+    // parameters that will be randomized each cycle
+    let m0, m1, S0, S1;
+
+    // ---- helpers ----
+    function interpolate(a, b, t) { return a.map((v, i) => (1 - t) * v + t * b[i]); }
+    function matInterp(A, B, t) { return A.map((row, i) => row.map((v, j) => (1 - t) * v + t * B[i][j])); }
+    function matDet2x2(M) { return M[0][0]*M[1][1] - M[0][1]*M[1][0]; }
+    function matInv2x2(M) {
+      const det = matDet2x2(M);
+      return [[ M[1][1]/det, -M[0][1]/det ], [ -M[1][0]/det, M[0][0]/det ]];
+    }
+
+    // random mean within domain with margin
+    function randMean() {
+      const mx = xMin + 0.5 + Math.random() * (xMax - xMin - 1.0);
+      const my = yMin + 0.5 + Math.random() * (yMax - yMin - 1.0);
+      return [mx, my];
+    }
+
+    // random SPD covariance via rotated diagonal with small variances
+    function randCov() {
+      const v1 = 0.005 + Math.random() * 0.045;   // [0.005, 0.05]
+      const v2 = 0.005 + Math.random() * 0.045;
+      const th = Math.random() * Math.PI;
+      const c = Math.cos(th), s = Math.sin(th);
+      // R * diag(v1, v2) * R^T
+      return [
+        [c*c*v1 + s*s*v2, c*s*(v1 - v2)],
+        [c*s*(v1 - v2), s*s*v1 + c*c*v2]
+      ];
+    }
+
+    function resampleParams() {
+      m0 = randMean();
+      m1 = randMean();
+      S0 = randCov();
+      S1 = randCov();
+    }
+
+    function gaussianPDF(x, y, mean, cov) {
+      const dx = [x - mean[0], y - mean[1]];
+      const inv = matInv2x2(cov);
+      const dot = dx[0]*(inv[0][0]*dx[0] + inv[0][1]*dx[1]) +
+                  dx[1]*(inv[1][0]*dx[0] + inv[1][1]*dx[1]);
+      const det = matDet2x2(cov);
+      return Math.exp(-0.5 * dot) / (2 * Math.PI * Math.sqrt(det));
+    }
+
+    function drawFrame(t) {
+      const mean = interpolate(m0, m1, t);
+      const cov  = matInterp(S0, S1, t);
+      const image = ctx.createImageData(W, H);
+      const data = image.data;
+
+      // base → white gradient
+      const base = [127, 174, 186];   // #7FAEBA
+      const white = [255, 255, 255];
+
+      let maxDensity = 0;
+      const densityMap = new Float32Array(W * H);
+
+      // compute densities
+      for (let i = 0; i < H; i++) {
+        for (let j = 0; j < W; j++) {
+          const x = xMin + (j / W) * (xMax - xMin);
+          const y = yMin + ((H - i) / H) * (yMax - yMin);
+          const p = gaussianPDF(x, y, mean, cov);
+          densityMap[i * W + j] = p;
+          if (p > maxDensity) maxDensity = p;
+        }
+      }
+
+      // render base→white with log scaling
+      for (let i = 0; i < H; i++) {
+        for (let j = 0; j < W; j++) {
+          const p = densityMap[i * W + j];
+
+          // normalized increases with density; adjust k as desired
+          const k = 50;
+          const normalized = Math.log(1 + k * p) / Math.log(1 + k * maxDensity);
+          // if you want high density darker, use: const n = 1 - normalized;
+          const n = normalized;
+
+          const r = Math.floor(white[0] + n * (base[0] - white[0]));
+          const g = Math.floor(white[1] + n * (base[1] - white[1]));
+          const b = Math.floor(white[2] + n * (base[2] - white[2]));
+
+          const idx = 4 * (i * W + j);
+          data[idx]   = r;
+          data[idx+1] = g;
+          data[idx+2] = b;
+          data[idx+3] = 255;
+        }
+      }
+
+      ctx.putImageData(image, 0, 0);
+    }
+
+
+    function animate() {
+      // start a new random pair every cycle
+      if (frame % totalFrames === 0) resampleParams();
+      const t = (frame % totalFrames) / totalFrames;
+      drawFrame(t);
+      frame++;
+      requestAnimationFrame(animate);
+    }
+
+    // init
+    resampleParams();
+    animate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spherical Flow • N→S • 45s Loop + Trails</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  html,body{height:100%;margin:0}
+  canvas{display:block;width:100vw;height:100vh;background:#fff}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<script>
+(() => {
+  // ===== Config =====
+  const DURATION_MS = 45000;
+  const CLOUD_SCHEDULE = [0, 10000, 20000, 30000];
+  const PARTICLES_PER_CLOUD = 200;
+  const MAX_PARTICLES = 1600;
+  const CLOUD_SPREAD_DEG = 12;
+  const GRID_LONS = 42, GRID_LATS = 20;
+
+  const MERIDIONAL_SPEED = 0.45;  // radians/s toward south
+  const DOT_RADIUS_PX = 2;
+  const DOT_COLOR = '#000';
+
+  // Trails: fade sooner
+  const TRAIL_MAX = 100;           // was 140
+  const TRAIL_STEP_FRAMES = 1;    // record every frame for smoothness
+  const TRAIL_WIDTH = 1;
+  // per-segment alpha scales as newer^gamma
+  const TRAIL_ALPHA_BASE = 0.25;  // peak opacity of newest link
+  const TRAIL_GAMMA = 1;        // stronger drop-off to fade sooner
+
+  // ===== Canvas / sizing =====
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  const STATIC_SCALE = 1;
+  let DPR=1, W=0, H=0, CX=0, CY=0, Rpx=0;
+  let CAM_D = 3.0;
+  let FOCAL = 1.2;
+
+  function resize(){
+    DPR = Math.max(1, Math.min(window.devicePixelRatio||1, 2));
+    W = Math.round(innerWidth*DPR);
+    H = Math.round(innerHeight*DPR);
+    cv.width=W; cv.height=H;
+    cv.style.width = innerWidth+'px';
+    cv.style.height = innerHeight+'px';
+    CX=W*0.5; CY=H*0.5;
+    Rpx = Math.min(W,H);
+    clearAllTrails();             // screen-space trails invalid after resize
+    drawStatic();
+  }
+  addEventListener('resize', resize);
+
+  // ===== PRNG =====
+  function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296}}
+  let seed=1, rnd=mulberry32(seed);
+
+  // ===== Sphere math =====
+  function sphToCart(phi, theta){
+    const s=Math.sin(phi), c=Math.cos(phi);
+    return {x:s*Math.cos(theta), y:c, z:s*Math.sin(theta)};
+  }
+  function clampPhi(phi){ return Math.max(0, Math.min(Math.PI, phi)); }
+  function wrapTheta(t){ t%=2*Math.PI; return t<0? t+2*Math.PI : t; }
+
+  function project(p){
+    const denom = CAM_D - p.z; // camera at (0,0,CAM_D)
+    if (denom <= 0) return {ok:false, x:0, y:0, depth:Infinity};
+    const k = (FOCAL/denom)*Rpx;
+    return {ok: denom>0.15, x:CX+p.x*k, y:CY-p.y*k, depth:denom};
+  }
+
+  // ===== Static arrows (front hemisphere only) =====
+  const staticCanvas = document.createElement('canvas');
+  const sctx = staticCanvas.getContext('2d');
+
+  function drawStatic(){
+    staticCanvas.width = W;
+    staticCanvas.height = H;
+    sctx.clearRect(0, 0, W, H);
+
+    sctx.strokeStyle = '#7FAEBA';
+    sctx.fillStyle   = '#7FAEBA';
+    for (let j = 0; j < GRID_LONS/2; j++) {
+      const theta = j / GRID_LONS * 2 * Math.PI;
+      for (let i = 1; i < GRID_LATS; i++) {
+        const phi = i / GRID_LATS * Math.PI;
+        drawArrow(phi, theta);
+      }
+    }
+  }
+
+  function drawArrow(phi, theta){
+    const eps = 0.02, seg = 0.10;
+    const phiN = clampPhi(Math.max(eps, phi - seg*0.2));
+    const phiS = clampPhi(Math.min(Math.PI - eps, phi + seg*0.4));
+    const pN = sphToCart(phiN, theta);
+    const pS = sphToCart(phiS, theta);
+    const psN = { x: pN.x * STATIC_SCALE, y: pN.y * STATIC_SCALE, z: pN.z * STATIC_SCALE };
+    const psS = { x: pS.x * STATIC_SCALE, y: pS.y * STATIC_SCALE, z: pS.z * STATIC_SCALE };
+    const a = project(psN), b = project(psS);
+    if(!a.ok || !b.ok) return;
+    sctx.beginPath(); sctx.moveTo(a.x,a.y); sctx.lineTo(b.x,b.y); sctx.stroke();
+    const vx=b.x-a.x, vy=b.y-a.y, L=Math.hypot(vx,vy)||1;
+    const ux=vx/L, uy=vy/L, nx=-uy, ny=ux, head=5*DPR;
+    sctx.beginPath();
+    sctx.moveTo(b.x,b.y);
+    sctx.lineTo(b.x-ux*head-nx*head*0.6, b.y-uy*head-ny*0.6*head);
+    sctx.lineTo(b.x-ux*head+nx*head*0.6, b.y-uy*head+ny*0.6*head);
+    sctx.closePath(); sctx.fill();
+  }
+
+  // ===== Particles =====
+  const parts = new Float32Array(MAX_PARTICLES*2); // [phi, theta]
+  let nParts=0, cloudsSpawned=0;
+
+  // Trails: circular buffers of screen points
+  const trails = new Array(MAX_PARTICLES);
+  const trailHeads = new Int16Array(MAX_PARTICLES);
+  const trailCounts = new Int16Array(MAX_PARTICLES);
+  const trailFrames = new Uint16Array(MAX_PARTICLES);
+
+  function clearAllTrails(){
+    for(let i=0;i<MAX_PARTICLES;i++){
+      trails[i] = undefined;
+      trailHeads[i]=0; trailCounts[i]=0; trailFrames[i]=0;
+    }
+  }
+  function ensureTrail(i){ if(!trails[i]) trails[i] = new Array(TRAIL_MAX); }
+  function trailPush(i, pt){
+    const buf = trails[i]; if(!buf) return;
+    const h = trailHeads[i];
+    buf[h] = pt;
+    trailHeads[i] = (h+1) % TRAIL_MAX;
+    trailCounts[i] = Math.min(TRAIL_MAX, trailCounts[i]+1);
+  }
+  function trailAt(i, kFromOldest){
+    const cnt = trailCounts[i]; if(!cnt) return null;
+    const start = (trailHeads[i] - cnt + TRAIL_MAX) % TRAIL_MAX;
+    return trails[i][(start + kFromOldest) % TRAIL_MAX];
+  }
+
+  function resetState(){
+    seed = (seed+1)>>>0; rnd = mulberry32(seed);
+    nParts=0; cloudsSpawned=0;
+    clearAllTrails();
+  }
+
+  function addCloud(latDeg, lonDeg){
+    const spread = CLOUD_SPREAD_DEG * Math.PI/180;
+    const latRad = latDeg * Math.PI/180;
+    const lonRad = lonDeg * Math.PI/180;
+    const phi0 = Math.PI/2 - latRad;
+    const theta0 = lonRad;
+    for(let i=0;i<PARTICLES_PER_CLOUD && nParts<MAX_PARTICLES;i++){
+      const dLat = (rnd()*2-1)*spread;
+      const dLon = (rnd()*2-1)*spread;
+      parts[2*nParts  ] = clampPhi(phi0 + dLat);
+      parts[2*nParts+1] = wrapTheta(theta0 + dLon);
+      ensureTrail(nParts);
+      nParts++;
+    }
+  }
+
+  function spawnScheduled(ms){
+    while(cloudsSpawned < CLOUD_SCHEDULE.length && ms >= CLOUD_SCHEDULE[cloudsSpawned]){
+      const baseLat=60, baseLon=90, jitter=10;
+      const lat = baseLat + (rnd()*2-1)*jitter;
+      const lon = baseLon + (rnd()*2-1)*jitter;
+      addCloud(lat, lon);
+      cloudsSpawned++;
+    }
+  }
+
+  // ===== Animation with hard loop reset =====
+  let t0=0, last=0, frameId=0;
+  function startCycle(now){
+    t0 = now;
+    last = now;
+    resetState();     // clears particles and trails, reseeds
+    ctx.clearRect(0,0,W,H);
+  }
+
+  function frame(now){
+    if(!t0) startCycle(now);
+
+    const prevPhase = ((now - t0 - 16) % DURATION_MS + DURATION_MS) % DURATION_MS / DURATION_MS;
+    const phase     = ((now - t0) % DURATION_MS) / DURATION_MS;
+
+    // robust wrap detection
+    if(phase < prevPhase || now - t0 >= DURATION_MS){
+      startCycle(now); // hard reset for a clean loop
+    }
+
+    spawnScheduled(phase*DURATION_MS);
+
+    // integrate N→S
+    const dt = Math.min(0.05, (now - last)/1000) || 0.0167; last = now;
+    const dphi = MERIDIONAL_SPEED * dt;
+    for(let i=0;i<nParts;i++){ parts[2*i] = clampPhi(parts[2*i] + dphi); }
+
+    // render
+    ctx.clearRect(0,0,W,H);
+    ctx.drawImage(staticCanvas, 0, 0);
+
+    // update trails
+    for(let i=0;i<nParts;i++){
+      if(trailFrames[i]++ % TRAIL_STEP_FRAMES !== 0) continue;
+      const p = sphToCart(parts[2*i], parts[2*i+1]);
+      const q = project(p);
+      // store only front-hemisphere points; break continuity when offscreen
+      trailPush(i, q.ok ? {x:q.x, y:q.y, ok:1} : {x:0, y:0, ok:0});
+    }
+
+    // draw trails
+    ctx.lineWidth = TRAIL_WIDTH * DPR;
+    for(let i=0;i<nParts;i++){
+      const cnt = trailCounts[i];
+      if(cnt < 2) continue;
+      let prev = trailAt(i, 0);
+      for(let k=1;k<cnt;k++){
+        const curr = trailAt(i, k);
+        if(prev && curr && prev.ok && curr.ok){
+          const t = k/(cnt-1);                 // 0..1 old→new
+          const a = TRAIL_ALPHA_BASE * Math.pow(t, TRAIL_GAMMA);
+          ctx.strokeStyle = `rgba(0,0,0,${a})`;
+          ctx.beginPath();
+          ctx.moveTo(prev.x, prev.y);
+          ctx.lineTo(curr.x, curr.y);
+          ctx.stroke();
+        }
+        prev = curr;
+      }
+    }
+
+    // draw dots
+    const r = DOT_RADIUS_PX * DPR;
+    ctx.fillStyle = DOT_COLOR;
+    for(let i=0;i<nParts;i++){
+      const p = sphToCart(parts[2*i], parts[2*i+1]);
+      const q = project(p);
+      if(!q.ok) continue;
+      ctx.beginPath();
+      ctx.arc(q.x, q.y, r, 0, 2*Math.PI);
+      ctx.fill();
+    }
+
+    frameId++;
+    requestAnimationFrame(frame);
+  }
+
+  // ===== Start =====
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

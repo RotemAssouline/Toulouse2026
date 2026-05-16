@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>45-Second Clean Loop Animation</title>
+    <style>
+        body { margin: 0; padding: 0; background: transparent; overflow: hidden; }        
+        canvas { display: block; width: 100vw; height: 100vh; border: 0; margin: 0; background: #ffffff; }                                                                    </style>
+</head>
+<body>
+    
+    
+    <canvas id="mainCanvas"></canvas>
+
+    <script>
+        const mainCanvas = document.getElementById('mainCanvas');
+        const canvasContext = mainCanvas.getContext('2d');
+        let canvasW = 0, canvasH = 0;
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            canvasW = window.innerWidth;
+            canvasH = window.innerHeight;
+            mainCanvas.width = Math.round(canvasW * dpr);
+            mainCanvas.height = Math.round(canvasH * dpr);
+            canvasContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        let activeParticles = [];
+        let isAnimationRunning = false;
+        let animationBeginTime = 0;
+        let animationDurationMs = 45000; // 45 seconds total
+        let cloudsSpawned = 0;
+        const cloudSchedule = [0, 10000, 20000, 30000];
+        // Enhanced vector field computation
+        function computeFieldVector(xPos, yPos) {
+            // Gradient of distance to a source point outside the upper-left corner
+            const margin = 0.2 * Math.min(canvasW || 1, canvasH || 1);
+            const srcX = -margin; // outside left
+            const srcY = -margin; // outside top
+            const dx = xPos - srcX;
+            const dy = yPos - srcY;
+            const r = Math.hypot(dx, dy) || 1; // avoid 0
+            // ∇|x - p| = (x - p)/|x - p|
+            return { x: dx / r, y: dy / r };
+        }
+class FlowingParticle {
+            constructor(startX, startY) {
+                this.xPosition = startX;
+                this.yPosition = startY;
+                this.particleSize = 2;
+                this.trailPoints = [];
+                this.maxTrailLength = 600; // Longer trails for better visibility
+            }
+            
+            updateParticle() {
+                // Add current position to trail
+                this.trailPoints.push({ x: this.xPosition, y: this.yPosition });
+                
+                // Limit trail length to prevent memory issues
+                if (this.trailPoints.length > this.maxTrailLength) {
+                    this.trailPoints.shift();
+                }
+                
+                const fieldValue = computeFieldVector(this.xPosition, this.yPosition);
+                const flowSpeed = 1;
+                
+                this.xPosition += fieldValue.x * flowSpeed * 2;
+                this.yPosition += fieldValue.y * flowSpeed * 2;
+                
+                // Keep particle if within extended boundary
+                return this.xPosition >= -250 && this.xPosition <= canvasW + 250 &&
+                       this.yPosition >= -250 && this.yPosition <= canvasH + 250;
+            }
+            
+            renderParticle() {
+                // Draw the complete trail with low opacity
+                if (this.trailPoints.length > 1) {
+                    canvasContext.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+                    canvasContext.lineWidth = 1;
+                    canvasContext.beginPath();
+                    canvasContext.moveTo(this.trailPoints[0].x, this.trailPoints[0].y);
+                    for (let i = 1; i < this.trailPoints.length; i++) {
+                        canvasContext.lineTo(this.trailPoints[i].x, this.trailPoints[i].y);
+                    }
+                    canvasContext.stroke();
+                }
+                
+                // Draw the particle dot
+                canvasContext.fillStyle = 'black';
+                canvasContext.beginPath();
+                canvasContext.arc(this.xPosition, this.yPosition, this.particleSize, 0, Math.PI * 2);
+                canvasContext.fill();
+            }
+        }
+        
+        function spawnNewParticleCloud() {
+            // Random spawn point in upper-left area
+            const spawnX = Math.random() * 170;
+            const spawnY = Math.random() * 170;
+            
+            const particlesInCloud = 200;
+            const cloudSpreadRadius = 40;
+            
+            for (let i = 0; i < particlesInCloud; i++) {
+                const randomAngle = Math.random() * 2 * Math.PI;
+                const randomRadius = Math.random() * cloudSpreadRadius;
+                const particleX = spawnX + Math.cos(randomAngle) * randomRadius;
+                const particleY = spawnY + Math.sin(randomAngle) * randomRadius;
+                
+                activeParticles.push(new FlowingParticle(particleX, particleY));
+            }
+        }
+        
+        function renderVectorFieldArrows() {
+            const gridSize = 40;
+            
+            // Soft blue arrows with transparency
+            canvasContext.globalAlpha = 0.6;
+            canvasContext.strokeStyle = '#7FAEBA';
+            canvasContext.fillStyle = '#7FAEBA';
+            canvasContext.lineWidth = 1.5;
+            
+            for (let x = gridSize/2; x < canvasW; x += gridSize) {
+                for (let y = gridSize/2; y < canvasH; y += gridSize) {
+                    const fieldVector = computeFieldVector(x, y);
+                    
+                    const arrowScale = 15;
+                    const arrowTipX = x + fieldVector.x * arrowScale;
+                    const arrowTipY = y + fieldVector.y * arrowScale;
+                    
+                    // Draw arrow shaft
+                    canvasContext.beginPath();
+                    canvasContext.moveTo(x, y);
+                    canvasContext.lineTo(arrowTipX, arrowTipY);
+                    canvasContext.stroke();
+                    
+                    // Draw arrowhead
+                    const direction = Math.atan2(fieldVector.y, fieldVector.x);
+                    canvasContext.save();
+                    canvasContext.translate(arrowTipX, arrowTipY);
+                    canvasContext.rotate(direction);
+                    canvasContext.beginPath();
+                    canvasContext.moveTo(0, 0);
+                    canvasContext.lineTo(-5, -2.5);
+                    canvasContext.lineTo(-5, 2.5);
+                    canvasContext.closePath();
+                    canvasContext.fill();
+                    canvasContext.restore();
+                }
+            }
+            
+            canvasContext.globalAlpha = 1.0;
+        }
+        
+        function executeAnimationFrame() {
+            if (!isAnimationRunning) { return; }
+            
+            const currentTime = Date.now();
+            const totalElapsed = currentTime - animationBeginTime;
+            
+            // Stop animation when duration complete
+            if (totalElapsed >= animationDurationMs) {
+                completeAnimation();
+                return;
+            }// Spawn exactly 4 clouds within first 30s
+            while (cloudsSpawned < cloudSchedule.length && totalElapsed >= cloudSchedule[cloudsSpawned]) {
+                spawnNewParticleCloud();
+                cloudsSpawned++;
+            }
+            
+            // Clear entire canvas
+            canvasContext.clearRect(0, 0, canvasW, canvasH);
+            
+            // Draw vector field
+            renderVectorFieldArrows();
+            
+            // Update and render all particles
+            activeParticles = activeParticles.filter(particle => {
+                const stillActive = particle.updateParticle();
+                if (stillActive) {
+                    particle.renderParticle();
+                }
+                return stillActive;
+            });
+            
+            requestAnimationFrame(executeAnimationFrame);
+        }
+        
+        function startNewAnimation() {
+            isAnimationRunning = true;
+            animationBeginTime = Date.now();
+            cloudsSpawned = 0;
+            activeParticles = [];
+            executeAnimationFrame();
+        }
+        function completeAnimation() { isAnimationRunning = false; setTimeout(startNewAnimation, 0); }
+        
+        // Attach event handlers
+        // Initialize display
+        renderVectorFieldArrows();
+        startNewAnimation();
+    </script>
+</body>
+</html>

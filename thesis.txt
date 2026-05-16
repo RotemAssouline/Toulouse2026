@@ -1,0 +1,7258 @@
+Thesis for the degree
+Doctor of Philosophy
+Submitted to the Scientific Council of the Weizmann Institute of Science Rehovot, Israel
+
+ )(  
+ 
+        ,
+
+By Rotem Assouline
+
+
+ 
+
+ ' - Curvature-Dimension for Autonomous Lagrangians
+
+Advisor: Prof. Bo'az Klartag
+
+:    '
+
+October 2025
+
+" 
+
+3
+Acknowledgements
+I would like to express my gratitude to: My advisor, Prof. Bo'az Klartag, for his unwavering support and encouragement, and for
+being a true mentor and role model. My Ph.D. years were enjoyable, challenging, and indeed, formative; all thanks to the excellent supervision of Prof. Klartag.
+My Ph.D. examining committee: Prof. Itai Benjamini, for professional and personal mentorship, and for many ideas for future research, and Prof. Omri Sarig, for valuable discussions, questions and suggestions.
+My Ph.D. approval committee: Prof. Gady Kozma and Prof. Emanuel Milman. I am especially grateful to Prof. Milman for his thorough and careful reading of the thesis, and for many valuable remarks, corrections, and suggestions for further reflection.
+Prof. Yanir Rubinstein, for hosting me at the University of Maryland during the writing of parts of this thesis.
+My friend Roee Leder, for personal and mathematical companionship. The Weizmann Institute, for providing me with an ideal environment for research, and for supporting me through the Lopatie fellowship, the Susan Sapir Memorial Prize and the Lady Anne Chain Memorial Prize. My parents, for cultivating my curiosity and for supporting me through the years of my academic studies. This work is supported by a grant from the ISF.
+Declaration
+I hereby declare that this thesis is the result of my independent research.
+
+4
+Abstract
+We introduce a curvature-dimension condition for autonomous Lagrangians on weighted manifolds, which depends on the Euler-Lagrange dynamics on a single energy level. By generalizing Klartag's needle decomposition technique to the Lagrangian setting, we prove that this curvature-dimension condition is equivalent to displacement convexity of entropy along cost-minimizing interpolations in an L1 sense, and that it implies various consequences of lower Ricci curvature bounds, as in the metric setting. As examples we consider classical and isotropic Lagrangians on Riemannian manifolds. In particular, we generalize the horocyclic Brunn-Minkowski inequality to complex hyperbolic space of arbitrary dimension, and present a new Brunn-Minkowski inequality for contact magnetic geodesics on odd-dimensional spheres.
+
+Contents
+
+1 Introduction
+
+7
+
+1.1 Background . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+1.2 Main results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+1.3 On the proofs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+2 Lagrangians and Hamiltonians
+
+15
+
+2.1 Tonelli Lagrangians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+2.2 Cost and supercriticality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+2.3 Assumptions on the Lagrangian . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+3 Ricci curvature of Lagrangians
+
+23
+
+3.1 Semisprays and connections . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+
+3.2 The connection associated to a Lagrangian . . . . . . . . . . . . . . . . . . . . 26
+
+3.3 Weighted Ricci curvature . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+3.4 The curvature-dimension condition . . . . . . . . . . . . . . . . . . . . . . . . 33
+
+4 Dominated functions
+
+35
+
+4.1 Transport rays . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+
+4.2 Strain set regularity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39
+
+4.3 Ray clusters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+
+5 Optimal transport
+
+53
+
+5.1 The Monge-Kantorovich problem . . . . . . . . . . . . . . . . . . . . . . . . 53
+
+5.2 Mass balance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+
+5.3 Needle decomposition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+
+5.4 Displacement interpolations . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62
+
+5.5 Displacement convexity of entropy . . . . . . . . . . . . . . . . . . . . . . . . 66
+
+6 Consequences of the curvature-dimension condition
+
+73
+
+6.1 The Brunn-Minkowski inequality . . . . . . . . . . . . . . . . . . . . . . . . . 73
+
+6.2 The Bonnet-Myers theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+
+6.3 The Bishop-Gromov inequality . . . . . . . . . . . . . . . . . . . . . . . . . . 78
+
+6.4 The isoperimetric inequality . . . . . . . . . . . . . . . . . . . . . . . . . . . 79
+
+6.5 Functional inequalities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+
+7 Examples
+
+83
+
+7.1 Classical Lagrangians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83
+
+7.2 Isotropic Lagrangians . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91
+
+5
+
+6
+
+CONTENTS
+
+Chapter 1
+Introduction
+1.1 Background
+Riemannian manifolds with Ricci curvature bounded from below possess a variety of geometric and analytic properties. Some of those properties make sense beyond the classical setting of Riemannian geometry, and can be used to define more general notions of lower Ricci curvature bounds. The CD(K, N ) condition of Bakry and E´ mery [10], which for a Riemannian manifold (M, g) is equivalent to the conditions Ricg  Kg and dim M  N , may be formulated in terms of a Bochner-type inequality; since it involves only the Laplace operator and the measure, it is a property of abstract Markov semigroups. The synthetic characterization of curvaturedimension bounds via optimal transport, initiated by Sturm [91] and Lott-Villani [68], provides a way of defining curvature-dimension bounds on geodesic metric measure spaces with no differentiable structure.
+While optimal transport on manifolds with general Lagrangian costs is a well-studied subject [13, 14, 50, 47, 92], to the best of our knowledge, the use of optimal transport to harness curvature-dimension bounds has not been explored for Lagrangians other than Riemannian, sub-Riemannian [15, 16], Finslerian [79, 82, 83] and Lorentzian [74, 31, 77, 20] metrics, with the exception of the works by Lee [66] and Ohta [80]. It was shown in [66] that a lower bound on a certain Ricci curvature associated to a Hamiltonian system implies convexity of entropy along smooth displacement interpolations with respect to the corresponding Lagrangian cost. Here we take a complementary approach, namely that of L1, rather than L2, mass transport, and do not make any a-priori assumptions on the regularity of the displacement interpolation.
+One of the main goals of this work is to demonstrate the equivalence between three notions of curvature-dimension bounds for a weighted manifold endowed with a Lagrangian: the first, in terms of a quantity on the tangent bundle generalizing the weighted Riemannian (and Finslerian) Ricci curvature; the second, in terms of a Bochner-type formula for solutions to the Hamilton-Jacobi equation; and the third, in terms of displacement convexity of entropy along cost-minimizing interpolations between probability measures.
+It is a feature of our curvature-dimension condition that it only depends on the EulerLagrange dynamics on a single energy level. If the Lagrangian comes from a Finsler metric (that is, if it is two-homogeneous on each fiber of the tangent bundle), then this determines the dynamics on all energy levels; but if there is no homogeneity then this is no longer true. By adding a constant to the Lagrangian, one can pass to a different energy level - but the validity of the curvature-dimension condition depends on the chosen energy level. At this point it is worth mentioning that our results do not follow from analogous results on Finsler manifolds, since in general there is no Finsler metric whose geodesic flow coincides with the Euler-Lagrange flow
+7
+
+8
+
+CHAPTER 1. INTRODUCTION
+
+on the given energy level (although there is a Finsler metric whose unit-speed geodesics are reparametrizations of solutions to the Euler-Lagrange equation on the given energy level [60]).
+For more information on the synthetic characterization of curvature-dimension bounds, see [90, 92, 83]. Notions of curvature for Lagrangian and Hamiltonian systems were studied in [1, 2, 3, 21, 53, 57]; for the special case of (electro)magnetic Lagrangians, which serve as one of our main examples, see [7, 9, 56, 58, 93]. Displacement convexity in optimal transport with Lagrangian cost was studied previously in Schachter [87] and in Yang [94].
+
+1.2 Main results
+
+Before presenting our results, let us briefly introduce the objects involved in their formulation; precise definitions are given in Chapters 2, 3 and 5. A Lagrangian on a smooth manifold M is a function
+L : T M  R,
+where  : T M  M is the tangent bundle. We thus concern ourselves with autonomous, i.e. time-independent, Lagrangians. The rather standard assumptions we impose on our Lagrangian are given in Section 2.3. Associated to such a Lagrangian is a Hamiltonian
+
+H : T M  R,
+
+H(p) := sup [p(v) - L(v)], p  TxM, x  M. vTxM
+
+The cost is the function c : M × M  R defined by ^
+c(x0, x1) := inf L( (t))dt, 
+
+(1.2.1)
+
+where the infimum is taken over curves joining x0 to x1. A curve realizing this infimum will be called a minimizing extremal; under our assumptions it will always exist and solve the EulerLagrange equation. Solutions of the Euler-Lagrange equation are projections to M of trajectories of a flow L on T M , the Euler-Lagrange flow.
+The Legendre transform L : T M  T M provides an identification between the tangent and cotangent bundles. The gradient u of a function u is defined to be the image of its differential under the Legendre transform:
+
+u := Ldu.
+
+The energy is the function
+
+E = H  L-1 : T M  R.
+
+Since the infimum in (1.2.1) allows the domain of  to be any finite interval, minimizing extremals satisfy E( )  0, see Section 2.2. We will thus work exclusively on the energy level
+SM := E-1(0).
+
+In the Riemannian case we take the Lagrangian to be L = (g + 1)/2, so that SM is the unit tangent bundle. In any case, the energy level SM will never intersect the zero section of T M .
+In addition to the Lagrangian L, we fix a measure µ on M with a smooth density, and define an operator L by
+Lu := divµ(u).
+
+1.2. MAIN RESULTS
+
+9
+
+In Section 3 we construct a quantity on T M , a weighted Ricci curvature Ricµ,N depending on the Lagrangian L, the measure µ and a parameter N , which generalizes the weighted Ricci curvature of a Riemannian or Finslerian manifold (see e.g. [10, 91, 92]). The construction is based on the formalism of semisprays and nonlinear connections [57, 51, 21, 64]; the resulting notion of weighted Ricci curvature coincides with the one in [80] except for some extra terms which account for the volume distortion of the Euler-Lagrange flow in the tangential direction, see the discussion following Theorem 1.
+
+Let us also recall some concepts from optimal transport theory (some of our definitions are a bit different from the standard ones). For two probability measures µ0, µ1 on M , set
+^
+
+C(µ0, µ1) := inf
+
+c(x0, x1) d(x0, x1),
+
+ M ×M
+
+where the infimum is over couplings  between the measures µ0 and µ1, i.e. measures on M × M whose marginals are µ0 and µ1. A coupling attaining this infimum is called an optimal coupling between µ0 and µ1. Let
+
+SM ×0 [0, ) := SM × [0, )
+
+where  is the equivalence relation defined by:
+
+(v, 0)  (v, 0) whenever (v) = (v),
+
+i.e. when v and v share the same basepoint. For 0    1, define a map
+
+Exp : SM ×0 [0, )  M, Exp(v, ) = (L(v))
+(recall that L is the Euler-Lagrange flow). Thus Exp(v, ) = (), where  : [0, ]  M is a solution to the Euler-Lagrange equation satisfying  (0) = v.
+
+A transport plan is a Borel probability measure on SM ×0 [0, ). A family {µ}01 of Borel probability measures on M will be called a displacement interpolation between µ0 and µ1 if:
+
+· There exists a transport plan  such that
+
+µ = (Exp),   [0, 1]. Informally, this means that µ is the law of (), where  : [0, ]  M is a random extremal such that the pair ( (0), ) is distributed according to .
+· For every 0      1, the measure
+
+, := (Exp × Exp) on M × M is an optimal coupling between µ and µ.
+
+For an absolutely-continuous probability measure µ0 = f0µ on M and for N  (1, ) we
+
+set
+
+^
+
+^
+
+SN [µ0|µ] := - f0-1/N dµ0 = - f01-1/N dµ.
+
+M
+
+M
+
+We also set
+
+^
+
+^
+
+S[µ0|µ] := log f0 dµ0 = f0 log f0 dµ.
+
+M
+
+M
+
+We can now state our main result. Denote by P1(L) the collection of absolutely continuous probability measures on M with finite first moment with respect to the cost c, see Section 5.1.
+
+10
+
+CHAPTER 1. INTRODUCTION
+
+Theorem 1. Let M be a smooth manifold and let L : T M  R be a Lagrangian satisfying assumptions (I)-(III) from Section 2.3 which is smooth away from the zero section. Let µ be a measure on M with a smooth density, and let K  R and N  [n, ]. Then the following conditions are equivalent:
+
+(i) Ricµ,N  K on SM . (ii) Every local solution u to the Hamilton-Jacobi equation H(du) = 0 satisfies
+
+(Lu)2
+
+(dLu)(u) +
+
++ K  0.
+
+N -1
+
+(1.2.2)
+
+(iii) For every µ0 = f0µ, µ1 = f1µ  P1(L) there exists a displacement interpolation µ = (Exp) between µ0 and µ1 such that for every   [0, 1],
+
+´
+ 
+
+1K-,N ·
+
+-f0-1/N  Exp0
+
++ K,N ·
+
+-f1-1/N  Exp1
+
+d
+
+SN [µ|µ] 
+
+´
+
+(1
+
+-
+
+)
+
+·
+
+S[µ0|µ]
+
++
+
+
+
+·
+
+S[µ1|µ]
+
+-
+
+K 2
+
+·
+
+
+
+·
+
+(1
+
+-
+
+)
+
+·
+
+2d
+
+N < N = ,
+
+where the coefficients tK,N : SM ×0 [0, )  [0, ] are defined in Section 5.5, and  : SM ×0 [0, )  [0, ) denotes the second variable.
+Corollary 1. Let N  [n, ]. Then the following conditions are equivalent:
+
+(i) Ricµ,N  0 on SM .
+(ii) For every µ0, µ1  P1(L) there exists a displacement interpolation {µ}01 between µ0 and µ1 such that the function   SN [µ|µ]
+is convex.
+
+If any of the equivalent conditions in Theorem 1 is met then we say that the pair (µ, L) satisfies CD(K, N ).
+
+Remark. The equivalence (ii)  (iii) in Theorem 1 requires only C2 regularity of L away from the zero section, see Theorem 5.5.2. The equivalence (i)  (ii) holds for every N  (-, ] \ [1, n), see Corollary 3.4.1. The equivalence (ii)  (iii) can be extended to the range N  (-, 0] for an appropriate definition of SN , see e.g. [83, Theorem 18.6] and references therein; we do not include this regime in the present work.
+
+Theorem 1 extends to the Lagrangian setting the equivalence between lower bounds on weighted Ricci curvature and convexity of entropy along displacement interpolations in the space of probability measures [72, 68, 91, 92]. However, in contrast to the Lott-Sturm-Villani theory, here the characterization is in terms of L1 optimal transport; see [4, 27, 28] for analogous results in the metric-measure setting. A unique feature of the L1 optimal transport problem is that its solution gives rise to a disintegration of the manifold into disjoint trajectories along which mass travels. In Section 1.3 we elaborate on how this fact can be put to use.
+A weaker form of the Bochner-type inequality (1.2.2), with N - 1 replaced by N , was proved in [66]. In order to obtain the sharp inequality, it is necessary to separate the tangential and normal components of the Hessian of a solution to the Hamilton-Jacobi equation (this is the
+
+1.2. MAIN RESULTS
+
+11
+
+same as separating the tangential and normal components of a Jacobi field; here `tangential' and `normal' is with respect to the gradient u). In Riemannian geometry, where the HamiltonJacobi equation reads |du|g = 1, the Hessian of a solution has no tangential component (when u is the distance function from a point, this is the content of Gauss' Lemma). In the Lagrangian setting this is no longer true, and it is therefore necessary to incorporate into the definition of the weighted Ricci curvature a term which measures the non-homogeneity of the Euler-Lagrange flow (called the deviation in [57]), and which vanishes for Finsler Lagrangians, see Section 3.1.
+
+One significant consequence of the curvature-dimension condition for metric measure spaces is the Brunn-Minkowski inequality [39, 91, 29], which gives a lower bound on the measure of a set formed by midpoints of geodesic segments joining a given pair of sets. We prove the following analogous result:
+
+Theorem 2 (A Brunn-Minkowski inequality for CD(K, N ) Lagrangians). Suppose that the pair (µ, L) satisfies CD(K, N ) for some K  R and some N  [n, ]. Then for every pair A0, A1  M of Borel sets and every 0 <  < 1,
+
+µ(A)  M 1 N
+
+1K-,N (A0, A1) · µ(A0), K,N (A0, A1) · µ(A1);  ,
+
+where
+
+A := {() |  : [0, ]  M is a minimizing extremal, (0)  A0, ()  A1},
+
+and the generalized means M and distortion coefficients tK,N (A0, A1) are defined in Section 6.1. In particular, if the pair (µ, L) satisfies CD(0, N ) and if µ(A0)µ(A1) > 0 then
+
+µ(A) 
+
+(1 - ) · µ(A0)1/N +  · µ(A1)1/N N µ(A0)1- · µ(A1)
+
+N < N = .
+
+(1.2.3)
+
+In the Riemannian case, the Brunn-Minkowski inequality is known to imply the curvaturedimension condition [70]. The extent to which this reverse implication holds for arbitrary Lagrangians will be the subject of a separate work.
+
+Theorem 2 follows from a more general Borell-Brascamp-Lieb-type inequality, Theorem 6.1.3. In addition to the Brunn-Minkowski and Borell-Brascamp-Lieb inequalities, we show that the curvature-dimension condition implies other familiar results from Riemannian geometry, which were extended to Finsler manifolds and metric measure spaces in [39, 91, 68, 79, 82, 30]: a Bonnet-Myers theorem (Theorem 6.2.3), a Bishop-Gromov inequality (Theorem 6.3.1), isoperimetric inequalities by comparison to one-dimensional model spaces (Theorem 6.4.1), and Functional inequalities (Theorem 6.5.1 and Theorem 6.5.2).
+
+We discuss two types of examples of Lagrangians on Riemannian manifolds: Classical Lagrangians, which are the sum of kinetic energy, potential energy and a magnetic vector potential, and isotropic Lagrangians, which are spherically-symmetric on each fiber. As a particular case of the former, we obtain from Theorem 2 a higher-dimensional analogue of the horocyclic Brunn-Minkowski inequality proved in [8]:
+Theorem 3 (Horocyclic Brunn-Minkowski inequality in complex hyperbolic space). Let CHd denote the complex hyperbolic space of complex dimension d. Let A0, A1  CHd be Borel sets of positive measure and let 0    1. Denote by A the set of points of the form (), where  : [0, ]  CHd is a unit-speed horocycle contained in a single complex geodesic and satisfying (0)  A0 and ()  A1. Then
+Vol(A)1/n  (1 - ) · Vol(A0)1/n +  · Vol(A1)1/n,
+where Vol denotes the hyperbolic volume measure and n = 2d.
+
+12
+
+CHAPTER 1. INTRODUCTION
+
+We also obtain the following spherical companion to the horocyclic Brunn-Minkowski inequality, where this time the interpolating curves are contact magnetic geodesics on odddimensional spheres, see Section 7.1 for the definition. Each fiber of the Hopf fibration Hopf : S2d+1  CPd is a contact magnetic geodesic.
+Theorem 4 (Brunn-Minkowski inequality for contact magnetic geodesics on S2d+1). Let S2d+1 = {z  Cd+1 | |z| = 1} denote the unit sphere in (d + 1)-dimensional complex Euclidean space. Let A0, A1  S2d+1 be Borel sets of positive measure and let 0    1. Fix 0  s < 1 and denote by A the set of points of the form (), where  : [0, ]  S2d+1 is a unit-speed contact magnetic geodesic of strength s satisfying (0)  A0 and ()  A1. Then
+Vol(A)1/n  (1 - ) · Vol(A0)1/n +  · Vol(A1)1/n,
+
+where Vol denotes the spherical volume measure and n = 2d + 1.
+
+When s = 0, Theorem 4 follows from the (stronger) spherical Brunn-Minkowski inequality [38, 39], since contact magnetic geodesics of strength 0 are ordinary geodesics (great circles).
+Another interesting example is the Lagrangian of the classical many-body system consisting of k bodies x1, . . . , xk  Rd (d  3), with masses mi > 0 and gravitational constant G > 0:
+
+L
+
+=
+
+1 2
+
+k i=1
+
+mi|x i|2
+
++
+
+1 2
+
++
+1i<jk
+
+Gmimj |xi - xj|
+
+(the constant 1/2 is added since we always restrict to the energy level {E = 0}). We prove
+in Section 7.1 that this Lagrangian satisfies CD(0, ) with respect to the Lebesgue measure on (Rd)k; in fact, this remains true if we replace the last term with any positive function U = U (x1, . . . , xk) which is superharmonic as a function on (Rd)k, see [1, 66, 80] and Remark 7.1.8 below.
+
+1.3 On the proofs
+In the proof of the implication (ii) = (iii) in Theorem 1, as well as in most of the proofs in Section 6, we use the needle decomposition technique, put forth by Klartag [62] as a method for proving geometric and functional inequalities on Riemannian manifolds. Roughly speaking, a needle decomposition is a partition of a Riemannian manifold into a disjoint collection of geodesic segments, constructed so as to enable a change of variables which reduces the desired inequality to an analogous inequality on the real line. This strategy, known as localization, originated in the works Gromov and Milman [59], and Lova´sz and Simonovits [69], and the idea behind it can be traced back to Payne and Weinberger [84]. Since the work of Klartag, the needle decomposition technique has been extended to metric measure spaces by Cavalletti and Mondino [29], to Finsler manifolds by Ohta [82], and more recently to Lorentzian metric measure spaces by Braun and McCann [22] and Cavalletti and Mondino [31].
+The solution to the Monge-Kantorovich problem by Evans and Gangbo [43] and the ensuing works of Caffarelli, Feldman and McCann [25] and Feldman and McCann [49], provided a detailed description of the L1 optimal transport map, which was utilized by Klartag in his construction of needle decompositions on Riemannian manifolds. Of importance to us are also the works of Bernard and Buffoni [13], Figalli [50] and Fathi and Figalli [47] on the Monge-Kantorovich problem for general Lagrangian costs, which give a clear idea of how to
+
+1.3. ON THE PROOFS
+
+13
+
+generalize the needle decomposition procedure to the Lagrangian setting. We adopt some of the terminology used in those works.
+The following needle decomposition theorem resembles the main result in [62].
+
+Theorem 5 (Needle decomposition for CD(K, N ) Lagrangians). Let M be a smooth manifold and let L : T M  R be a Lagrangian satisfying assumptions (I)-(III) from Section 2.3. Let µ be a measure on M with a smooth density. Suppose that the pair (µ, L) satisfies CD(K, N )
+
+for some K  R and some N  (-, ] \ [1, n). Let f : M  R be a µ-integrable function
+
+satisfying
+
+^
+
+f dµ = 0.
+M
+
+Assume that for some x0  M , ^
+
+(|c(x0, ·)| + |c(·, x0)|) f dµ < .
+M
+
+Then there exists a collection {µ}A of Borel measures on M and a measure  on the set A such that the following hold:
+
+(i) For -almost every   A , the measure µ is either a Dirac measure, or a measure of the form
+
+µ = () m
+
+(1.3.1)
+
+where m is a measure on an interval I  R satisfying CD(K, N ) with respect to the Euclidean metric on R, and  : I  M is a minimizing extremal.
+
+(ii) Disintegration of measure: The measure µ disintegrates as
+
+^
+
+µ = µd().
+
+A
+
+´ More precisely, for every Borel function h : M  R, the function   M hdµ is
+
+-measurable and
+
+^
+
+^^
+
+h dµ =
+
+hdµ d().
+
+M
+
+AM
+
+(1.3.2)
+
+(iii) Mass Balance: For -almost every   A , ^
+f dµ = 0.
+M
+
+(1.3.3)
+
+Moreover, if µ takes the form (1.3.1), then for every t  R, ^
+
+f dµ,t  0
+M
+
+where
+
+µ,t = () m|[t,) .
+
+(1.3.4)
+
+Our proof of Theorem 5 is modeled on [62]. While some modifications are due in the Lagrangian setting, many of the arguments carry over quite directly. Some of the arguments were simplified, notably the proof of the regularity theorem for dominated functions, Theorem 4.2.2. We hope that our nearly self-contained proof will serve as an additional source of reference to the rather involved construction laid out in [62].
+
+14
+
+CHAPTER 1. INTRODUCTION
+
+The thesis is organized as follows. In Section 2 we give some basic background on Lagrangians and Hamiltonians, and specify our assumptions on the Lagrangian. In Section 3, after invoking some definitions from the theory of nonlinear connections, we define the weighted Ricci curvature and prove the equivalence (i)  (ii) in Theorem 1. In Section 4 we discuss dominated functions, which generalize 1-Lipschitz functions from the Riemannian setting. In Section 5 we discuss optimal transport with Lagrangian cost and prove Theorem 5 and the equivalence (ii)  (iii) in Theorem 1. In Section 6 we use Theorem 5 to prove various results under the curvature-dimension condition. In Section 7 we consider examples, and prove Theorems 3 and 4.
+
+Chapter 2 Lagrangians and Hamiltonians
+
+2.1 Tonelli Lagrangians
+Let M be a smooth manifold. A (time-independent, or autonomous) Lagrangian is a function
+L : T M  R.
+References for the standard definitions and results mentioned below include [36, 48, 26] and [47, Appendix B]. We denote the zero section of T M by 0.
+Definition 2.1.1 (Tonelli Lagrangian). We shall say that a Lagrangian L is Tonelli if it satisfies the following assumptions:
+· Smoothness: The Lagrangian L is C1-smooth on T M and C2-smooth on T M \ 0.
+· Strict convexity: The restriction of L to each fiber of T M is strictly convex, i.e. its Hessian is positive definite.
+· Superlinearity: For every compact set A  M and every Riemannian metric g on M there exists a constant CA,g > 0 such that
+L(v)  |v|g - CA,g for all v  TxM, x  A.
+
+Naturally associated to a Tonelli Lagrangian is a Hamiltonian, which is the function
+
+H : T M  R,
+
+H(p) := sup [p(v) - L(v)] ,
+vTxM
+
+p  TxM, x  M.
+
+Strict convexity and superlinearity of L imply that the supremum is achieved at a unique
+
+point Lp  TxM , where
+
+L : TM  TM
+
+is the Legendre transform, defined in local canonical coordinates (xj, vj) on T M and (xj, pj)
+
+on T M by the relation
+
+L pj = vj Lp
+
+1  j  n,
+
+(2.1.1)
+
+or equivalently
+
+(Lp)j
+
+=
+
+H pj
+
+,
+p
+
+1  j  n.
+
+(2.1.2)
+
+15
+
+16
+
+CHAPTER 2. LAGRANGIANS AND HAMILTONIANS
+
+Moreover, the Hamiltonian H is C1 smooth on T M and C2-smooth on T M \ L-1(0), strictly convex and superlinear, and the Legendre transform is a homeomorphism from T M to T M and a C1 diffeomorphism from T M \ L-1(0) to T M \ 0.
+An extremal is a C2 curve  on M solving the Euler-Lagrange equation
+
+d L
+
+L
+
+=
+
+,
+
+dt vj  (t)
+
+xj  (t)
+
+1  j  n.
+
+(2.1.3)
+
+Since (2.1.3) is a second-order ordinary differential equation, its solutions are projections to M of integral curves of a flow on T M , namely the Euler-Lagrange flow L, whose infinitesimal generator is the Euler-Lagrange vector field XL on T M .
+A Tonelli minimizer is a piecewise-C1 curve  : [a, b]  M minimizing the action ^b L( (t))dt
+a
+among all piecewise-C1 curves joining its endpoints and defined on the interval [a, b]. By Tonelli's theorem, every Tonelli minimizer is an extremal.
+The Hamiltonian H gives rise to a Hamiltonian flow Ht on T M , which is the flow of the vector field XH defined by the relation
+dH = 0(XH, ·),
+where 0 is the canonical symplectic form on T M (given in canonical local coordinates on T M by dxi  dpi). The Euler-Lagrange flow and the Hamiltonian flow are conjugate via the Legendre transform:
+Lt := L  tH  L-1. Solutions to (2.1.3) are projections to M of integral curves of the flow L, and therefore also of the flow H. The energy is the function
+E : T M  R E := H  L-1.
+
+If  is any solution to (2.1.3) then E( ) is constant. The definitions of H, L and E imply that
+
+E(v) + L(v) = (L-1v)(v), v  T M.
+
+(2.1.4)
+
+We define the indicatrix bundle by
+SM := {v  T M | E(v) = 0}.
+Thus SM = L(SM ), where
+SM := {p  T M | H(p) = 0}.
+Remark. We will concern ourselves only with the dynamics on SM . This is, of course, a normalization, and other energy levels can be considered by adding a constant to L as long as it remains supercritical. In the Riemannian case we take the Lagrangian to be L(v) = (|v|2+1)/2, in which case SM is the unit tangent bundle since the energy is E(v) = (|v|2 - 1)/2.
+
+2.2. COST AND SUPERCRITICALITY
+
+17
+
+The (time-independent) Hamilton-Jacobi equation is the first-order nonlinear partial differ-
+
+ential equation
+
+H(du) = 0.
+
+(HJ)
+
+A local solution to (HJ) with prescribed second-order data at a point can always be found:
+
+Lemma 2.1.2. Let x  M , let p  SxM and let W be a Lagrangian subspace of TpT M which is contained in the kernel of dH. Let k  2 and assume that H is Ck in a neighborhood of p and that 0 is a regular value of H. Then there exists a neighborhood U  x and a Ck+1
+solution u : U  R to (HJ) such that du|x = p and the tangent space to the graph of du at p is
+W.
+
+Proof. This amounts to finding a Ck Lagrangian submanifold of T M through p which is contained in SM , a goal that can be achieved using the method of characteristics, see e.g. [44,
+Section 3.2], [26, Section 1.5] or [46, Section 5]. We include a short proof for completeness.
+By our assumptions, XH |p  W  TpSM.
+Let W0  W be an (n-1)-dimensional subspace not containing XH, and let Q0 be any (2n-2)dimensional submanifold of SM containing p and transverse to XH, such that W0  TpQ0. Since 0 is a regular value of H, the submanifold SM is Ck-smooth, so the submanifold Q0 can be taken to be Ck as well. The canonical symplectic form 0 restricts to a symplectic form on Q0, and W0 is a Lagrangian subspace of TpQ0. Using Darboux coordinates on Q0 in a neighborhood of p, we can find a Lagrangian submanifold N0  Q0 containing p, such that TpN0 = W0.
+Since the Hamiltonian vector field XH is transverse to N0, by applying a flowout of XH to the submanifold N0 we obtain a Lagrangian submanifold N  T M (see e.g. [65, Theorem 22.23]). Since N0  SM and XH is tangent to SM , the submanifold N is contained in SM , and by our construction, the tangent space to N at p is spanned by W0 and XH hence equals W . Since H is Ck in a neighborhood of p, the Hamiltonian vector field XH is Ck-1, whence the resulting Lagrangian submanifold N is Ck.
+
+2.2 Cost and supercriticality
+A Lagrangian gives rise to a cost function on M ×M , obtained by minimizing the action among all curves joining a given pair of points. If L is a Riemannian or Finslerian Lagrangian, then this cost is simply distance.
+Definition 2.2.1 (Cost and minimizing extremals). The cost associated with L is the function ^
+c : M × M  R, c(x, x) := inf L( (t))dt, 
+where the infimum is over all piecewise-C1 curves joining x to x, without restriction on their domain. A curve  achieving the infimum above will be called a minimizing extremal. Clearly if  is a minimizing extremal then it is a Tonelli minimizer, hence an extremal. If  is defined on an unbounded interval then we say that it is a minimizing extremal if its restriction to every finite subinterval is a minimizing extremal.
+
+18
+
+CHAPTER 2. LAGRANGIANS AND HAMILTONIANS
+
+If  is a minimizing extremal then
+
+E( )  0.
+
+Indeed, E( ) is constant since  solves the Euler-Lagrange equation, and the fact that this
+
+caoctnisotnan´t0Ti/s0Lc(an(bte))pdrtoavted
+
+by considering the variation (t) = (t) and differentiating the = 1. Thus, every minimizing extremal is the projection to M of an
+
+integral curve of the Euler-Lagrange flow L on the indicatrix bundle SM .
+
+Lemma 2.2.2. The function c satisfies the triangle inequality:
+
+c(x, x) + c(x, x)  c(x, x), x, x, x  M,
+
+with equality if and only if x, x, x lie on a single minimizing extremal in this order. A curve  : I  M is a minimizing extremal if and only if for every t < t < t  I,
+
+c((t), (t)) + c((t), (t)) = c((t), (t)).
+
+(2.2.1)
+
+Proof. The triangle inequality is a direct consequence of the fact that the action is additive with
+respect to concatenation of curves. If equality holds, then by concatenating the minimizing extremal joining x to x to the one joining x to x, we obtain a minimizing extremal joining x to x which must be a solution to the Euler-Lagrange equation by Tonelli's theorem, whence x, x, x lie on a single minimizing extremal. If  is a minimizing extremal then equality must hold in (2.2.1), for otherwise the concatenation of the minimizing extremals from x to x and from x to x gives a curve joining x to x with smaller action than that of .
+
+We shall impose a condition on our Lagrangian which is known as Man~e´ supercriticality [71, 35, 37, 13]. In order for the cost c to make sense, the action of a closed curve should be at the very least nonnegative; indeed, otherwise, by traversing a closed curve with negative action many times, every pair of points could be joined by a curve with arbitrarily low action, and we would have c  -. We shall require a bit more, in order to avoid some intricacies in the critical case.
+
+Definition 2.2.3. A Tonelli Lagrangian L : T M  R will be called supercritical if for every
+
+closed curve  : [a, b]  M ,
+
+^b
+
+L( (t))dt > 0.
+
+a
+
+In particular,
+
+c(x, x) + c(x, x) > 0
+
+for every x = x  M .
+
+Remark. By taking  in Definition 2.2.3 to be constant we see that supercriticality implies that
+
+L|0 > 0,
+
+and consequently, by (2.1.4), that In particular,
+
+E|0 < 0. SM  0 = .
+
+2.3. ASSUMPTIONS ON THE LAGRANGIAN
+
+19
+
+If c(L) denotes the Man~e´ critical value of L (which is the infimum over constants c  R such that the cost associated with L + c is not identically -, see [35]) then we have the chain of implications:
+
+c(L) < 0 = L is supercritical in the sense of Definition 2.2.3 = c(L)  0.
+
+Both implications cannot be reversed: the Lagrangian (7.1.6) on the hyperbolic plane,
+which gives rise to the horocycle flow, satisfies the middle condition but not the leftmost, while the contact magnetic Lagrangian (7.1.8) on, say, the unit sphere S3  C4, satisfies the rightmost condition but not the middle one when s = 1.
+
+2.3 Assumptions on the Lagrangian
+We make the following assumptions on the Lagrangian L:
+(I) The Lagrangian L is Tonelli and supercritical, and 0 is a regular value of the energy E.
+(II) For every x, x  M there exists at least one minimizing extremal joining x to x. In particular, M is connected.
+(III) For every compact set A  M there exists a compact set A~  A such that every minimizing extremal with endpoints in A is contained in A~.
+Remark. We do not require completeness of the Euler-Lagrange flow. In particular, if L is a Finsler Lagrangian, we don't require the Finsler manifold to be complete (in this case assumption (II) means that the manifold is geodesically-convex).
+
+Under assumptions (I)-(III), the cost c is finite and continuous. Moreover
+
+c(x, x) = 0 for all x  M ,
+
+as can be seen by taking  to be a constant curve defined on an arbitrarily short time interval.
+
+Example 2.3.1. In the following examples, the Lagrangian L satisfies all the assumptions.
+
+· Tonelli Lagrangians on complete Riemannian manifolds: (M, g) is a complete Riemannian manifold and L = L + c where L is any Tonelli Lagrangian satisfying uniform superlinearity and convexity conditions and c is a sufficiently large constant, see [48, 35]. If M is compact, then uniform superlinearity and convexity follow from the Tonelli assumption.
+
+· Geodesically convex Riemannian and Finsler metrics: (M, g) is a geodesically-convex Riemannian manifold and
+
+L(v)
+
+=
+
+|v|gq
+
++
+
+q
+
+-
+
+1 ,
+
+q
+
+v  TM
+
+for some q > 1. More generally, |v|g can be replaced by F (v), where F is a Finsler metric. See [83] for more details on Finsler metrics.
+
+20
+
+CHAPTER 2. LAGRANGIANS AND HAMILTONIANS
+
+· Classical Lagrangians: (M, g) is a Riemannian manifold, and
+
+L(v) = |v|2g + U (x) - (v), 2
+
+v  TxM, x  M,
+
+where U is a smooth positive function and  is a 1-form, see Section 7.1 (note the difference in sign from the convention used in classical mechanics). If ||g < 2U then L is supercritical; if, in addition, g is complete and U is bounded from above and from below by positive constants then L satisfies (I)-(III).
+
+Supercriticality, together with assumptions (II) and (III), imply some important global properties.
+
+Definition 2.3.2 (Diameter). The diameter of a set A  M is defined to be
+
+diam(A) := sup{ > 0 |  a minimizing extremal  : [0, ]  M such that (0), ()  A}.
+
+Lemma 2.3.3. Every compact set has finite diameter. If the Euler-Lagrange flow is complete then the converse is true: a set of finite diameter is contained in a compact set.
+
+Proof. Assume by contradiction that there exists a compact set A  M and a sequence of minimizing extremals i : [0, ti]  M with endpoints in A such that ti  . By assumption (III), the curves i are all contained in a fixed compact set A~  A. By superlinearily of H, the set
+SA~ = {v  TxM | E(v) = 0, x  A~} is compact, and i(0)  SA~ for all i since i are minimizing extremals. We may therefore pass to a subsequence and assume that i(0) converge to a tangent vector v  TxM for some x  A. Since each i is a minimizing extremal, the sequence i converges on compact subsets of the half-line [0, ) to a minimizing extremal  defined on the entire ray [0, ) and contained in the compact set A~. Now we use the argument in [35, Theorem V] to get a contradiction to supercriticality. Since E( )  0, compactness of SA~ and the fact that the SM does not intersect the zero section imply that there exists an increasing sequence mj of integers and some 0 <  < 1 such that the sequence
+{( (mj),  (mj + ))}j=1  SM × SM
+converges to some element of SM ×SM whose components have distinct basepoints z, w  A~, i.e.
+zj := (mj)  z and wj := (mj + )  w.
+Since  is a minimizing extremal,
+
+c(z, w) + c(w, z) = lim (c(zj, wj) + c(wj, zj+1)) j
+
+^ mj +
+
+^ mj+1
+
+= lim
+
+L( (t))dt +
+
+L( (t))dt
+
+j
+
+mj
+
+mj +
+
+^ mj+1
+
+= lim
+
+L( (t))dt
+
+j
+
+mj
+
+= lim c(zj, zj+1) j
+
+= c(z, z)
+
+= 0,
+
+2.3. ASSUMPTIONS ON THE LAGRANGIAN
+
+21
+
+a contradiction to the assumption that L is supercritical.
+Assume now that A is a closed set of diameter D <  and that the Euler-Lagrange flow is complete, i.e. L : R × T M is defined and continuous on all of R × T M (where we write L(t, x) = tL(x)). Let x0  A. By the definition of diameter, the set A is contained in the set
+(L(Sx0M × [0, D])),
+which is compact (here Sx0M = SM  Tx0M is the indicatrix at x0).
+
+Lemma 2.3.4. For every x  M and every neighborhood U  x there exists a neighborhood U  U   x such that every x, x  U  are joined by a unique minimizing extremal which lies entirely in U . In particular, for every extremal  there exists t > 0 such that |[0,t] is uniquely minimizing.
+Proof. Assume by contradiction that for every neighborhood U   x there exist x, x which are joined by two distinct minimizing extremals. Then there are two sequences i : [0, Ti]  M and i : [0, Si]  M of minimizing extremals such that i and i are distinct for each i  1, but share the same endpoints, and those endpoints converge to x. By passing to a subsequence we may assume that i(0), i(0) both converge to v, w  SxM , respectively. Since i and i are distinct solutions to Euler-Lagrange, the inverse function theorem implies that it cannot be the case that both Ti and Si converge to zero. On the other hand, they are both bounded by Lemma 2.3.3. Thus at least one of the sequences of curves has to have a subsequence converging to a closed curve; but a limit of minimizing extremals is a minimizing extremal, and closed minimizing extremals do not exist by supercriticality. This contradiction shows that there exists a neighborhood U   U containing x, such that every x, x  U  are joined by a unique minimizing extremal. Furthermore, if U  is small enough then this minimizing extremal must lie in U . Indeed, otherwise there exists a sequence i of minimizing extremals with both endpoints tending to x and with at least one point outside U ; a similar argument shows that such a sequence will converge to a closed minimizing extremal which, again, is ruled out by supercriticality.
+
+Let u : M  R be a C1 function. The gradient of u is the vector field
+
+u := Ldu.
+
+Lemma 2.3.5. Let U  M be an open set and let u be a C1 function. Then u solves the Hamilton-Jacobi equation (HJ) if and only if the integral curves of u are zero-energy extremals.
+
+Proof. If integral curves of u are zero-energy extremals then in particular 0 = E(u) =
+
+H(du). Conversely, suppose that H(du) = 0 on U . Let T > 0 and let  : [0, T ]  U be a piecewise-C1 curve. By the definitions of H and L,
+
+^T
+
+^T
+
+du((t)) - L((t)) dt 
+
+sup [du(v) - L(v)] dt
+
+0
+
+0 vT(t)M
+
+^T
+
+= H(du|(t))dt
+0
+
+= 0,
+
+22
+
+CHAPTER 2. LAGRANGIANS AND HAMILTONIANS
+
+with equality if and only if   Ldu = u. It follows that
+^T L((t))dt  u((T )) - u((0)),
+0
+and equality holds if and only if  is an integral curve of u.
+Now let T  > 0, let  : [0, T ]  U be an integral curve of u and let t  [0, T ]. By Lemma 2.3.4, there exists  > 0 such that for every t -  < t < t < t + , the points (t) and (t) are joined by a unique minimizing extremal which is contained in U ; the above argument shows that this minimizing extremal must be |[t,t].
+
+Chapter 3
+Ricci curvature of Lagrangians
+The notion of Ricci curvature for Lagrangians developed below is equivalent to the one introduced in Lee [66] following Agrachev and Gamkrelidze [3] (see also Ohta [80]). However, our approach is closer to the one taken in Grifone [57] (see also [51, 21, 76]). We will depart from the above sources when dealing with weighted Ricci curvature, since we wish to incorporate into it the tangential component of the volume distortion of the Euler-Lagrange flow; this will be done in Section 3.3.
+3.1 Semisprays and connections
+We state below without proof various well-known facts regarding nonlinear connections, and refer the reader to [57, 64, 66, 76, 88] for more details. Let M be a smooth manifold and let
+ : TM  M
+be its tangent bundle. Denote by d : T T M  T M
+the differential of the projection . For the reader's convenience, most of the constructions described below will be presented
+both in coordinate-free notation and in local coordinates; in the latter case we use canonical local coordinates
+x1, . . . , xn, v1, . . . , vn on T M . Einstein's summation convention is in force throughout. The notation xi stands for both the coordinate vector fields on M and their counterparts on T M .
+The canonical lift of a curve  on M is the curve  on T M , and the canonical lift of a vector field X on M is the vector field
+XX on Graph(X).
+Here by XX we mean the pushforward of the vector field X via the map X : M  T M , whose image is denoted by
+Graph(X)  T M. In coordinates, if X = Xixi, then
+XX = Xixi + (Xixi Xj)vj .
+23
+
+24
+
+CHAPTER 3. RICCI CURVATURE OF LAGRANGIANS
+
+The vertical bundle VT M is the subbundle of T T M defined by: VT M := d-1(0) = {  T T M | d() = 0}.
+
+In coordinates,
+
+VT M = span(v1, . . . , vn).
+
+A section of VT M is called a vertical vector field. There is a natural bundle map
+
+ : VT M  T M
+
+given in coordinates by
+
+: VvT M  TxM,  (vi) = xi, v  TxM, x  M.
+
+Given a vector field X on M , there is a unique vertical vector field  X on T M , called the vertical lift of X, such that  ( X)|v = X|x for every x  M and every v  TxM . In coordinates,
+ (Xixi) = Xivi.
+
+The almost tangent structure is the fiberwise linear map J : T T M  VT M given in local
+
+coordinates by
+
+Jxi = vi ,
+
+Jvi = 0,
+
+1  i  n.
+
+Note that J2 = 0. The coordinate-free definitions of J and  involve the pullback bundle T M ,
+
+see [57] for details.
+
+Denote by V the vertical vector field on T M whose flow is given by v  etv for all v  T M and t  R. In coordinates:
+
+V = vivi.
+
+A semispray is a vector field  on T M which is smooth on T M \ 0 and satisfies
+
+J = V.
+
+(3.1.1)
+
+Condition (3.1.1) means that integral curves of  are canonical lifts of curves on M . In coordinates, a semispray  takes the form
+
+ = vixi + ivi for some locally-defined functions i obeying the transformation rule
+
+~ i = x~i j + 2x~i vjvk
+
+xj
+
+ xj  xk
+
+under a change of coordinates xi  x~i. A curve  on M is called a geodesic of the semispray  if its canonical lift  is an integral curve of .
+
+A semispray  gives rise to a (nonlinear) connection on T M . This is by definition a splitting of the double tangent bundle T T M into a Whitney sum:
+
+T T M = VT M  HT M,
+
+3.1. SEMISPRAYS AND CONNECTIONS
+
+25
+
+where HT M is a subbundle called the horizontal bundle; a vector   HT M is called horizontal. Thus specifying a connection is the same as specifying a fiberwise linear projection V whose image is VT M . Let
+H := I - V
+denote the resulting projection onto HT M . The connection associated to a semispray  is characterized by the relation
+
+2H = I + [J, ] = I + [J · , ] - J[ · , ], where [·, ·] is the Fro¨licher-Nijenhuis bracket. In coordinates:
+
+(3.1.2)
+
+H(xi ) = xi - ji vj , where ji are the connection coefficients:
+
+H(vi) = 0,
+
+ij
+
+:=
+
+1 -
+2
+
+·
+
+vi j.
+
+It follows from (3.1.1) and (3.1.2) that
+
+1  i  n,
+
+ - [V, ]
+
+V =  :=
+
+. 2
+
+In coordinates:
+
+ = jvj
+
+where
+
+j := viji + j.
+
+Remark 3.1.1. The vector field  measures the deviation of the semispray  from being 2homogeneous on each fiber. Semisprays satisfying  = 0 are called sprays. The infinitesimal generator of the geodesic flow of a Finsler manifold is a spray.
+
+Associated to a connection is an almost complex structure F on T T M , characterized by the relations
+FJ = H and FH = -J.
+In coordinates:
+
+F(vi ) = xi - ji vj ,
+
+F xi - ijvj = -vi ,
+
+1  i  n.
+
+Clearly F2 = -I. For convenience let us define vector and covector fields
+
+Ei := xi - ji vj ,
+
+j := dvj + ji dxi,
+
+1  i  n.
+
+Together with the vector and covector fields dxi and vi, they constitute a local frame (Ei, vi) and a dual coframe (dxi, i). With this notation,
+
+J = dxi  vi, H = dxi  Ei, V = i  vi and F = di  Ei - dxi  vi. (3.1.3)
+
+The covariant derivative induced by the connection is given for two vector fields X, Y on M by
+DX Y :=  V(YX).
+
+26
+
+CHAPTER 3. RICCI CURVATURE OF LAGRANGIANS
+
+This is well defined since YX is a vector field on the submanifold Graph(Y ), which intersects each fiber once, so the fiberwise linear map  maps it to a vector field on M . More precisely
+
+DXY |x = (  V  dY )(X|x), x  M. In coordinates, if X = Xixi and Y = Y ixi, then
+DX Y = Xkxk Y j + Xk · (jk  Y ) xj . Note that DXY is linear only in X. If X is a vector field on M then
+
+XX = |Graph(X)
+
+ DXX =  (  X).
+
+(3.1.4)
+
+Indeed, J(XX) = V = J since XX is a canonical lift, so by (3.1.3), XX =  if and only if V(XX) = V = . Now apply  to both sides.
+Definition 3.1.2 (Ricci curvature). We define the Ricci curvature of the semispray  by
+
+Ric : T M \ 0  R, Ric := Tr(FV[, H]).
+
+In coordinates:
+
+Ric =i([, Ei]).
+
+(3.1.5)
+
+Remark. The curvature of a connection is the vector-valued two-form on T M defined by
+
+In coordinates:
+
+1 R := - 2 [H, H].
+
+R = Rkij dxi  dxj  vk
+
+where
+
+Rikj = xi jk - xj ki + i v kj - j v ik.
+
+If  = 0 then Ric = -Tr(F  iR) = i(R(Ei, )) and we have the formula
+
+Ric = vj(xi ji - xj ii + ki vk ij - jkvk ii).
+
+Example 3.1.3. If  is the geodesic vector field of a Riemannian metric g, then Ric is the Ricci curvature of the metric, viewed as a function on T M (i.e. v  Ricg(v) = Ricg(v, v)). More generally, if  is the geodesic vector field of a Finsler metric F then Ric is the Finslerian
+Ricci curvature (see [83, Section 5.3]; keep in mind that our notation is a bit different). This corresponds to taking L = F 2/2 in the next section.
+
+3.2 The connection associated to a Lagrangian
+Let L : T M  R be a Lagrangian satisfying assumptions (I)-(III) from Section 2.3. In the present chapter we shall also assume that L is smooth on T M \ 0. The Legendre transform
+L : TM  TM is then a diffeomorphism from T M \ 0 to T M \ 0. The Euler-Lagrange vector field
+ := XL
+
+3.2. THE CONNECTION ASSOCIATED TO A LAGRANGIAN
+
+27
+
+is a semispray, given in coordinates by
+
+ = vixi + ivi
+
+where
+
+i = Lvivj Lxj - vkLvjxk .
+
+Here subscripts denote partial derivatives, and superscripts indicate that a matrix inverse was taken. A computation reveals that the connection coefficients are
+
+ij
+
+=
+
+1 Lvjvk 2
+
+(Lvivk
+
++ Lvkxi
+
+- Lvixk ) .
+
+(3.2.1)
+
+Here and below, a vector field followed by a function (e.g. Xf or X(f )) will always denote
+
+the derivative of the function with respect to the vector field. Let
+
+0 := (L-1)0
+denote the pullback of the canonical symplectic form 0 on T M via the inverse Legendre transform, and let g be the (2, 0)-tensor on T M given by
+
+g := 0(F ·, ·),
+
+where F is the almost complex structure introduced in the previous section. In coordinates:
+
+0 = gij dxi  j
+
+and
+
+g = gij dxidxj,
+
+where gij := Lvivj .
+
+(3.2.2)
+
+If we take traces in (3.2.1), the second and third terms on the right hand side cancel out, and
+
+we get
+
+ii
+
+=
+
+1 2
+
+Lvi
+
+vk
+
+Lvk
+
+vi
+
+=
+
+(log
+
+det g).
+
+(3.2.3)
+
+We will also need the quantities , 2 : T M \ 0  R defined by
+
+g(F, )
+
+ := g(, )
+
+and
+
+In coordinates,
+
+
+
+=
+
+gij vi j gij vi vj
+
+2
+
+:=
+
+g(F, F) , g(, )
+
+where
+
+F := F - .
+
+and
+
+2
+
+=
+
+gij (i
+
+-
+
+vi)(j gij vi vj
+
+-
+
+vj) .
+
+(3.2.4)
+
+Recall that the gradient of a C1 function u is given by u = Ldu. In coordinates,
+
+u
+
+Lvi (u)
+
+=
+
+(du)i
+
+=
+
+. xi
+
+Differentiation with respect to xj gives
+
+Lvixj (u) +
+
+Lvivk (u)xj (u)k
+
+=
+
+2u xixj ,
+
+and after rearrangement,
+
+xi(u)j = Lvjvk (u)
+
+2 xi xk
+
+u
+
+-
+
+Lvk xi
+
+(u)
+
+.
+
+(3.2.5)
+
+Let 2u be the (1, 1) form on M given by (2u)(X) = DXu
+
+28
+
+CHAPTER 3. RICCI CURVATURE OF LAGRANGIANS
+
+for every vector field X. In coordinates:
+
+2u = (2u)ji dxi  xj
+
+where
+
+(2u)ji = xi(u)j + ij  u.
+
+(3.2.6)
+
+Denote also
+
+u := Tr(2u).
+
+From (3.2.1), (3.2.2) and (3.2.5) it follows that
+
+(gik
+
+
+
+u)(2u)kj
+
+=
+
+x2ixj u
+
++
+
+1 2
+
+(Lvivj
+
+-
+
+Lvj xi
+
+-
+
+Lvixj )
+
+
+
+(u).
+
+In particular, since the right hand side is symmetric, the operator 2u is self-adjoint with respect to the Riemannian metric
+
+(u)g = (gij  u)dxidxj.
+
+Proposition 3.2.1 (The Bochner-Weitzenbo¨ck formula, cf. [80, Theorem 4.4]). Let U  M be an open set and let u : U  R be a solution to the Hamilton-Jacobi equation (HJ). Then:
+
+(du)(u) + |2u|2 + Ric(u) = 0,
+
+(3.2.7)
+
+where | · | is the Frobenius norm with respect to the Riemannian metric (u)g.
+
+Lemma 3.2.2. For every vector field Y on U , we have
+
+ (V[ Y, ])|Graph(u) = -(2u)Y + [Y, u].
+Proof. By the definitions of , ij, Ej and V,
+V[ Y, ] = V[Y jvj , vixi + ivi] = V(Y jxj + Y jvj ivi - vixi Y jvj ) = V(Y jxj - 2Y jji vi - vixi Y jvj ) = V(Y jEj - Y jijvi - vixi Y jvj ) = -Y iji vj - vixi Y jvj .
+
+(3.2.8)
+
+Thus, by the definition of ,
+
+ (V[ Y, ])|Graph(u) = (-Y iijvj - vixi Y jvj )|Graph(u) = (-Y iij  u - (u)ixiY j)xj = (-Y iij  u - Y ixi(u)j)xj + [Y, u] = -(2u)Y + [Y, u],
+
+and (3.2.8) is proved.
+
+Proof of Proposition 3.2.1. We may assume that U is contained in a coordinate domain. By Lemma 2.3.5, the integral curves of u are zero-energy extremals, so their canonical lifts are integral curves of  contained in SM . Equivalently,
+
+Graph(u)  SM
+
+and
+
+(u)(u) = |Graph(u).
+
+3.3. WEIGHTED RICCI CURVATURE
+
+29
+
+Let X be a vector field on U . Let  be any vector field on T U satisfying
+
+|Graph(u) = (u)X.
+By the definitions of DXu and , the vector fields V and  DXu coincide on Graph(u); since  is tangent to the graph, it follows that they have the same Lie bracket with . Thus, on Graph(u) we have
+
+V[H, ] = V[, ] - V[V, ] = V[(u)X, (u)(u)] - V[ DXu, ] = V(u)[X, u] - V[ (2u)X, ].
+Applying  to both sides and using (3.2.8) with Y = (2u)X, we get
+ V[H, ]|Graph(u) = D[X,u]u + (2u)2X - [(2u)X, u] = (2u)[X, u] - [(2u)X, u] + (2u)2X = -[2u, u]X + (2u)2X.
+
+Now set X = xi and sum over i; since
+
+H(u)xi = Ei
+
+and
+
+dxi   V = i,
+
+formula (3.1.5) implies that the left hand side becomes -Ric(u), and we get
+
+-Ric(u) = -Tr([2u, u]) + Tr((2u)2) = (du)(u) + |2u|2,
+
+as desired (the identity Tr([A, X]) = -XTrA = -(dTrA)(X) is easy to verify in coordinates).
+
+Remark. If we do not take traces in the above proof, then we obtain a Riccati equation for the (1, 1)-tensor 2u. Write
+Ru := j (V[, Ei])  u dxi  xj . Then the (1, 1) tensor 2u satisfies
+[u, 2u] + (2u)2 + Ru = 0,
+cf. [66, Section 4].
+
+3.3 Weighted Ricci curvature
+
+Recall (see e.g. [65]) that a positive density on M is a smooth choice of a function
+
+x : (TxM )n  [0, ),
+
+x  M,
+
+with the property that for every linear transformation T : TxM  TxM ,
+
+x(T (v1), . . . , T (vn)) = | det T | · x(v1, . . . , vn), v1, . . . , vn  TxM.
+
+30
+
+CHAPTER 3. RICCI CURVATURE OF LAGRANGIANS
+
+If M is oriented, then specifying a positive density amounts to specifying a volume form. We shall say that a measure µ on M has a smooth density if there exists a positive density  on M , which we will call the density of µ, such that for every open set U  M ,
+^ µ(U ) = .
+U
+From now on, we fix a smooth manifold M , a Lagrangian L : T M  R satisfying assumptions (I)-(III) from Section 2, and a measure µ with a smooth density . We denote by H : T M  R the corresponding Hamiltonian.
+Define an operator L on C2 functions u : M  R by:
+
+Lu := divµ(u),
+
+where for a vector field X, the function divµX is defined by the relation
+LX = (divµX),
+where L denotes Lie derivative and  is the density of the measure µ. If the function u is C1,1 then Lu still makes sense as an element of L loc, and is well-defined at every point of differentiability of u.
+The operator , and therefore also the operator L, are not linear in´general. Furtherm´ore, since d(u) and du() may differ, it is not true in general that (Lu) · dµ = u · (L)dµ. We mention i´n passing that the equation Lu = 0 is the Euler-Lagrange equation for the functional E(u) = M H(du)dµ.
+There exists a function  : T M \ 0  R such that, in any canonical local chart (xi, vi) on TM,
+ = e- det g |dx1  · · ·  dxn|.
+Indeed, it is not hard to check that the right hand side is well defined, i.e. does not depend on the choice of canonical coordinates; that such  exists then follows from the fact that both sides vanish on an n-tuple of vectors if one of the vectors is vertical (objects with this property are sometimes called semi-basic).
+
+Definition 3.3.1 (Weighted Ricci curvature). For every N  (-, ] \ [0, n], we define the weighted Ricci curvature Ricµ,N by
+
+Ricµ,N : T M \ 0  R,
+
+Ricµ,N
+
+:=
+
+Ricµ
+
+-
+
+( - )2 N -n
+
++
+
+22
+
++
+
+2,
+
+where
+
+Ricµ := Ric + 2(),
+
+and  and 2 are defined in (3.2.4). Here, by 2() we mean (()), i.e. the second derivative of the function  by the vector field . If  -  = 0 then we also define
+
+Ricµ,n := Ricµ + 22 + 2.
+
+Remark. Note that Ricµ = Ricµ, unless  = 0.
+
+3.3. WEIGHTED RICCI CURVATURE
+
+31
+
+Proposition 3.3.2 (Weighted Bochner-Weitzenbo¨ck formula). Let U  M be an open set and let u : U  R be a solution to the Hamilton-Jacobi equation (HJ). Then:
+
+(dLu)(u) + |2u|2 + Ricµ(u) = 0,
+
+(3.3.1)
+
+where | · | is the Frobenius norm with respect to the Riemannian metric (u)g. Moreover, for every N  (-, ] \ [1, n),
+
+(Lu)2 (dLu)(u) + N - 1 + Ricµ,N (u)  0.
+
+(3.3.2)
+
+Proof. Since u solves the Hamilton-Jacobi equation,
+
+(u)(u) = |Graph(u). By the definition of , the measure µ is given by
+µ = e-u Vol(u)g. Thus, using (3.2.3), (3.2.6) and (3.3.3),
+
+(3.3.3)
+
+Lu = divµ(u) = xj (u)j + (u)(log det(u)g -   u) = xj (u)j + jj  u - ()  u = (2u)jj - ()  u = u - ()  u,
+
+and therefore
+
+(dLu)(u) = (du)(u) - (2)  u.
+
+Together with (3.2.7) and the definition of Ricµ this implies (3.3.1). Let us abbreviate, by a slight abuse of notation,
+
+ :=    u,  :=   u, 2 = 2  u.
+
+The definitions of  and 2 imply that
+
+
+
+=
+
+, u(u)g |u|2(u)g
+
+and
+
+2
+
+=
+
+|
+
+- u|2(u) |u|2(u)g
+
+g
+
+.
+
+In the sequel, norms and inner products are with resepct to (u)g. By (3.1.4),
+
+(2u)u = Duu = .
+
+We can therefore write
+
+2u = 2u + 2u,
+
+where 2u is self-adjoint and annihilates u, and
+
+2u
+
+=
+
+(u)
+
+
+
+(
+
+-
+
+u) + ( u, u
+
+-
+
+u)
+
+
+
+u
+
++
+
+
+
+·
+
+(u)  u .
+u, u
+
+32
+
+CHAPTER 3. RICCI CURVATURE OF LAGRANGIANS
+
+Here  is the musical isomorphism v = v, ·. Note that the summands in the definition of 2u are mutually orthogonal in the Frobenius inner product, since u is the component of  in the direction of u. Hence by the definition of 2 and ,
+|2u|2 = 22 + 2.
+
+By the Cauchy-Schwarz inequality,
+
+2u
+
+2
+
+
+
+Tr(2 u)2 n-1
+
+=
+
+(u - )2 , n-1
+
+(3.3.4)
+
+where the second equality holds true since (2u)u, u / u, u = . Thus
+
+|2u|2
+
+
+
+(u - )2 n-1
+
++
+
+|2u|2
+
+=
+
+(u - )2 n-1
+
++
+
+22
+
++
+
+2.
+
+(3.3.5)
+
+As in [62, Lemma 3.21], we now use the inequality
+
+x2 y2 (x - y)2 +
+a b a+b
+
+which holds for b > 0 and a / [-b, 0], to obtain
+
+( - )2 + (u - )2  ( - u)2 = (Lu)2
+
+N -n
+
+n-1
+
+N -1
+
+N -1
+
+(3.3.6)
+
+since Lu = u - ()  u. Note that this inequality still holds true (and in fact becomes an equality) if N = n and  -  = 0 and we understand the first term on the left hand side to be zero. Putting together (3.3.1), (3.3.5) and (3.3.6) we get
+
+(dLu)(u)
+
++
+
+Ricµ,N (u)
+
+=
+
+(dLu)(u)
+
++
+
+Ricµ(u)
+
+-
+
+( - )2 N -n
+
++
+
+22
+
++
+
+2
+
+
+
+-|2u|2
+
+-
+
+( - )2 N -n
+
++
+
+22
+
++
+
+2
+
+ - (u - )2 + (u - )2 - (Lu)2
+
+n-1
+
+n-1
+
+N -1
+
+(Lu)2
+
+=-
+
+,
+
+N -1
+
+as desired.
+
+From the proof of Lemma 3.3.2 we obtain also the equality case:
+
+Lemma 3.3.3. For every x  M and every v  SxM , there exists a solution u to the HamiltonJacobi equation defined in neighborhood of x such that u|x = v and equality holds in (3.3.2) at the point x.
+
+Proof. Equality holds in (3.3.4) if and only if 2u is a scalar multiple of (u), where (u) denotes projection onto the orthogonal complement of u, while equality holds in (3.3.6) if
+
+and only if
+
+(N - n)u + (n - 1)()  u - (N - 1) = 0.
+
+(3.3.7)
+
+By Lemma 2.1.2, for any c0  R we can find a local solution u to the Hamilton-Jacobi equation satisfying u|x = v and (2u) = c0 · (u). Taking
+
+c0
+
+:=
+
+ -  N -n
+
+guarantees that (3.3.7) holds (if N = n and  =  then any choice of c0 works).
+
+3.4. THE CURVATURE-DIMENSION CONDITION
+
+33
+
+3.4 The curvature-dimension condition
+
+From Proposition 3.3.2 and Lemma 3.3.3 we obtain the equivalence (i)  (ii) in Theorem 1:
+
+Corollary 3.4.1. Let L be a Lagrangian satisfying assumptions (I)-(III) from Section 2 and smooth on T M \ 0. For every N  (-, ] \ [1, n) and K  R, the following are equivalent:
+1. Ricµ,N  K on SM .
+
+2. For every local solution u to the Hamilton-Jacobi equation H(du) = 0,
+
+(Lu)2
+
+(dLu)(u) +
+
++ K  0.
+
+N -1
+
+Definition 3.4.2 (The curvature-dimension condition). If any of the equivalent conditions in Corollary 3.4.1 holds, then we say that the pair (µ, L) satisfies CD(K, N ).
+The second condition in Corollary 3.4.1 still makes sense if L is only C2, since by Lemma 2.1.2 we can always find a local C3 solution with prescribed second-order data at a point. Thus we can take this condition to be the definition of the CD(K, N ) condition for C2 Lagrangians. We will show in Theorem 5.5.2 that the equivalence (ii)  (iii) in Theorem 1 requires only C2 regularity of L. The third condition in Theorem 1 can thus be taken as the definition of the CD(K, N ) condition for Lagrangians of regularity lower than C2.
+
+Example 3.4.3 (Weighted Riemannian manifolds). Let (M, g) be an n-dimensional Riemannian manifold, let L be the Riemannian Lagrangian
+
+L(v)
+
+=
+
+|v|2g
+
++
+
+1 ,
+
+2
+
+v  TxM, x  M,
+
+and let
+
+µ = e-Volg,
+
+where  : M  R is a smooth function and Volg is the Riemannian measure. The gradient is the Riemannian gradient and the operator L is given by
+
+Lu = gu - g, gu ,
+
+where g is the Riemannian Laplacian and g is the Riemannian gradient. The HamiltonJacobi equation is |u|g  1. The CD(K, N ) condition for is then equivalent to the inequality
+
+(d)2 Ricg + Hessg - N - n  K · g,
+
+see e.g. [92, Chapter 14, Theorem 14.8].
+
+Example 3.4.4 (Weighted Finsler manifolds). If L = (F 2 + 1)/2, where F is a Finsler metric, then the CD(K, N ) condition is equivalent to the condition Ricµ,N  K, where Ricµ,N is the weighted Ricci curvature of the Finsler metric F and the measure µ, see [83, Part II].
+
+Example 3.4.5 (Needles). Let M = I  R be an interval, let l be the Lagrangian l = (dt2 +
+
+1)/2 (where dt2 is the Euclidean metric on I), and let m = e-m0, where m0 is the Lebesgue
+
+measure on I and  : I  R is a smooth function. Then the pair (m, l) satisfies CD(K, N ) if
+
+and only if
+
+¨ - 2  K. N -1
+
+More examples will be discussed in detail in Section 7.
+
+34
+
+CHAPTER 3. RICCI CURVATURE OF LAGRANGIANS
+
+Chapter 4 Dominated functions
+
+From this point on, we fix a smooth manifold M , a Lagrangian L satisfying assumptions (I)(III) from Section 2.3, and a measure µ with a smooth density.
+
+In this chapter we will establish some properties of dominated functions. In the language of optimal transport, dominated functions are precisely c-convex functions, see e.g. [92, Chapter 5]; from the analytic perspective, they are viscosity subsolutions to the Hamilton-Jacobi equation, see [48, Section 5]. In the Riemannian case, dominated functions are simply 1-Lipschitz functions. The results of the present chapter will be used in the next chapter to construct needle decompositions and displacement interpolations.
+
+Definition 4.0.1. A function u : M  R is said to be dominated if for every piecewise-C1
+
+curve  : [a, b]  M ,
+
+^b u((b)) - u((a))  L( (t))dt.
+
+a
+
+Equivalently,
+
+u(x) - u(x)  c(x, x) for all x, x  M.
+
+Definition 4.0.2 (Calibrated curves). A calibrated curve is a piecewise-C1 curve  : I  M ,
+
+where I  R is an interval, which satisfies
+
+^ t u((t)) - u((t)) = L( (s))ds
+
+for all t < t, t, t  I.
+
+t
+
+Remark. The notion of a dominated function depends on the Lagrangian L, and the notion of a calibrated curve depends on both L and the dominated function u. Since it will always be clear from the context which Lagrangian and which dominated function we are considering, we will not indicate this dependence in the notation.
+
+Let us state a few elementary properties of dominated functions and calibrated curves, whose simple proofs can be found in [34, 36, 48].
+
+Proposition 4.0.3. Let u : M  R be a dominated function and let  : (a, b)  M be a calibrated curve. Then
+
+(a) The function u is locally Lipschitz.
+
+(b) The curve  is a minimizing extremal.
+
+(c) For all t < t  I,
+
+u((t)) - u((t)) = c((t), (t)).
+
+35
+
+36
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+(d) The function u is differentiable at (t) for all t  (a, b) and satisfies
+
+ (t) = u|(t)
+
+and
+
+H(du|(t)) = 0.
+
+Together with (b), this implies that for all a < t < t < b,
+
+du|(t) = tH-t du|(t).
+
+(e) If two calibrated curves contain a common point in their relative interiors, then they are both part of a single calibrated curve.
+Here and in the sequel, we say that a function between two smooth manifolds is locally Lipschitz if it is locally Lipschitz when expressed in local coordinates about any given point. This notion is independent of the coordinates chosen.
+
+4.1 Transport rays
+For the rest of the chapter we fix a dominated function u : M  R. Definition 4.1.1 (Transport rays). A set   M will be called a transport ray if
+(i) for every x, x  , either u(x) - u(x) = c(x, x) or u(x) - u(x) = c(x, x).
+
+(4.1.1)
+
+(ii)  is maximal with respect to inclusion, i.e. there does not exist a set with the above property which strictly contains the set .
+
+A transport ray can be a singleton; in this case we say that it is degenerate; otherwise it will be called nondegenerate. Note that for every x, y  M satisfying (4.1.1) there exists a transport ray containing x and y (and in particular, every point in M is contained in some transport ray). Indeed, if we write x  x when (4.1.1) holds, then the triangle inequality and the fact that the function u is dominated imply that  is an equivalence relation; the equivalence classes of  are then precisely the transport rays.
+
+Lemma 4.1.2. Every transport ray is the image of a unique calibrated curve. Conversely, the image of a calibrated curve with a maximal domain of definition is a transport ray.
+
+Proof. Let   M be a transport ray. We may assume that  is not a singleton, for otherwise
+
+we can take the calibrated curve  to be constant. Let x = y  . Then without loss of
+
+generality,
+
+u(y) - u(x) = c(x, y).
+
+(4.1.2)
+
+Let  be a minimizing extremal satisfying (0) = x and (T ) = y for some T > 0, and let t  [0, T ]. Then, since u is dominated, the quantities
+
+c(x, (t)) - [u((t)) - u(x)] and c((t), y) - [u(y) - u((t))]
+
+are both nonnegative. But by Lemma 2.2.2 and (4.1.2) they sum to zero:
+
+c(x, (t)) + c((t), y) - [u(y) - u(x)] = c(x, y) - [u(y) - u(x)] = 0.
+
+4.1. TRANSPORT RAYS
+
+37
+
+Thus both summands vanish, and in particular
+
+c((t), y) = u(y) - u((t)).
+Let t  (t, T ). By the same argument as above,
+c((t), (t)) = u((t)) - u((t)).
+We have shown that for every 0 < t < t < T , ^ t
+u((t)) - u((t)) = c((t), (t)) = L( (t))dt,
+t
+whence |[0,T ] is a calibrated curve (the second equality holds since  is a minimizing extremal). We will show that the set  is contained in the image of . Here we take  to be defined on a maximal interval on which it is a minimizing extremal; this interval may be larger than [0, T ].
+Let z  . By the definition of a transport ray, we have
+
+u(z) - u(y)  {c(y, z), -c(z, y)} and u(x) - u(z)  {c(z, x), -c(x, z)}.
+
+It cannot be the case that both u(z) - u(y) = c(y, z) and u(x) - u(z) = c(z, x), because then
+
+c(x, y) + c(y, z) + c(z, x) = 0,
+
+a contradiction to the assumption of supercriticality. An analysis of the remaining cases shows that there exists a relabeling x, y, z of the points x, y, z such that
+c(x, y) + c(y, z) = c(x, z).
+
+It then follows from Lemma 2.2.2 that the points x, y, z lie on a single minimizing extremal, i.e. z = (t) for some t  R.
+Since z is an arbitrarily element of , the above arguments show that there exists an interval I  R such that
+· The set  is contained in (I),
+· The curve |I is calibrated.
+
+In fact, we may take the interval I to be the convex hull of -1(). We claim that  = (I). Indeed, let t  I. By maximality of , in order to prove that (t)   it suffices to prove that for every x  ,
+
+either c(x, (t)) = u((t)) - u(x) or c((t), x) = u(x) - u((t)). (4.1.3)
+
+Let x  . Then
+
+x = (t)
+
+for some t  R. Assume that t < t (the other case is analogous). Since t lies in the convex hull of -1(), there exists also t  t such that (t)  . By the definition of ,
+
+either c((t), (t)) = u((t)) - u((t)) or c((t), (t)) = u((t)) - u((t)).
+
+38
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+But t > t and |I is calibrated, so the former holds, whence u((t)) - u((t)) = c((t), (t)) = c((t), (t)) + c((t), (t)).
+
+Since the function u is dominated, this necessarily implies that c((t), (t)) = u((t)) - u((t)).
+
+This proves (4.1.3), thus completing the proof that  = (I).
+In the other direction, if  : I  M is a calibrated curve defined on a maximal interval, then its image (I) clearly satisfies (4.1.1). If (I) it is contained in a larger set with this property, then the previous argument shows that the interval of definition of  can be extended further, in contradiction to the assumption.
+
+Definition 4.1.3 (Upper transport rays, initial and final points). An upper transport ray is a set of the form
+(I  (a, )),
+where  : I  M is a non-constant, maximal calibrated curve. The point (a) will be called the initial point of the upper transport ray. When a = inf I > -, the point (a) will be called the initial point of the transport ray (I). Final points of transport rays are defined analogously, with (a, ) replaced by (-, b).
+Definition 4.1.4 (Saturation and transport sets). Let A  M .
+· The saturation of A, denoted by A^, is defined to be the union of all transport rays intersecting A. If the set A is Borel measurable set satisfies A^ = A then we say that A is a transport set.
+· The upper saturation of A, denoted by A+, is defined to be the union of all upper transport rays whose initial point lies in A. A Borel measurable set A satisfying A+ = A will be called an upper transport set.
+See Figure 4.1.
+Lemma 4.1.5. The sets of all initial and final points of transport rays have zero measure.
+Proof. This a consequence of Lemma 4.1.6, and the proof is the same as in the Riemannian setting. We refer the reader to [62, Lemma 3.8] for more details.
+
+Let S  M denote the strain set of u, which is defined to be the set of points which lie in the relative interior of some nondegenerate transport ray. By Lemma 4.1.2,
+S := {(t) |  : [a, b]  M is a calibrated curve and t  (a, b)}.
+
+For every x  S we denote by
+
+x : Ix  M
+
+the parametrization of the transport ray through x as a calibrated curve, where
+
+Ix := (a(x), b(x))  R
+
+(4.1.4)
+
+4.2. STRAIN SET REGULARITY
+
+39
+
+Figure 4.1: A set and its saturation and upper saturation.
+
+is taken to be the interior of the maximal interval of definition of x, translated so that
+
+x(0) = x.
+
+The image x(Ix) is a transport ray containing x by Lemma 4.1.2. By Proposition 4.0.3, the function u is differentiable at x(t) for every t  Ix, with
+
+ x(t) = u|x(t), t  Ix.
+
+(4.1.5)
+
+Lemma 4.1.6. The set S and the functions a, b are Borel measurable.
+
+Proof. See [13, Lemma 10], [50, Lemma 2.10] or [62, Lemma 2.9].
+
+4.2 Strain set regularity
+
+In this section we prove C1,1 regularity of the dominated function u inside its strain set S. This
+
+is a crucial ingredient in the proof of the needle decomposition theorem. For each k  1 define
+
+Sk  S by
+
+Sk := {x  S | (-2-k, 2-k)  Ix}.
+
+Note that
+
+
+S = Sk.
+k=1
+
+40
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Lemma 4.2.1. The set Sk is closed for all k  1.
+Proof. The set Sk can be characterized as the set of all points x  M such that there exists a calibrated curve  : (-2-k, 2-k)  M satisfying (0) = x. By continuity of u and c, the pointwise limit of a sequence of calibrated curves is a calibrated curve. If a sequence xi  Sk converges to some x  M , then by compactness of the indicatrix, the sequence xi(0) has a convergent subsequence, and the corresponding subsequence of the sequence  |xi (-2-k,2-k) converges pointwise to a calibrated curve  satisfying (0) = x, whence x  Sk.
+
+A function  : M  R will be called C1,1 if its differential d : M  T M is locally Lipschitz.
+
+Theorem 4.2.2 (cf. [12], [62, Theorem 2.10]). For every k  1 there exists a C1,1 function uk : M  R such that
+
+uk  u and duk  du on Sk.
+
+If u is C1 then one can take uk = u, see [46]. In the case where L is Riemannian, Theorem 4.2.2 was proved in [62]. Our proof is a combination of arguments given in [46] and [62] : we prove C1,1 regularity of u on Sk using the argument in [46] and then apply Whitney's extension theorem as was done in [62]. For a proof of Theorem 4.2.2 when L is Man~e´ critical, see [12].
+
+Lemma 4.2.3 (cf. [46, Theorem 3.2]). For every x0  M and every  > 0 there exists a coordinate neighborhood Ux0  x0 and a constant Cx0 such that for every x  U  S,
+
+|u(x) + (du|x)(x - x) - u(x)|  Cx0 · |x - x|2
+
+for all x  U.
+
+Here we use the coordinate chart to view x, x as points in Rn and du|x as an element in (Rn), and the norm is the Euclidean norm.
+
+Proof. Since u is locally Lipschitz and the Legendre transform is continuous, there exists a
+neighborhood U0  x0 and a constant C0 such that |u|  C0 on U0  Sk (the function u is differentiable on Sk by Proposition 4.0.3). Since calibrated curves are integral curves of u, there exist 0 < 0 < 2-k and neighborhoods U0  U   U  x0 such that every calibrated curve  : (-0, 0)  M with (0)  U is contained inside U . In fact, we can take U and U 
+to be concentric balls about x0 of radius r and R respectively, and assume that every calibrated
+curve  : (-0, 0)  M with (0)  U is contained in a ball centered at x0 of radius R - 2r. From now on we work in normal coordinates on U , identifying it with an open ball in Rn centered at the origin, and identifying T U  with U  × Rn.
+
+Let x  U  Sk. Since 0 < 2-k, there exists a calibrated curve  : (-0, 0)  M with
+
+(0) = x . By construction, the curve  is contained in a ball of radius R - 2r centered at the
+
+origin. Let x  U and set
+
+x - x
+
+v0 :=
+
+. 0/2
+
+Define
+
+(t) := (t) + (t + 0/2) · v0, -0/2  t  0.
+
+Then
+
+(-0/2) = (-0/2) and (0) = x.
+
+4.2. STRAIN SET REGULARITY
+
+41
+
+Since  is contained in a ball of radius R - 2r, and |(t + 0/2)v0|  2|x - x|  2r, the line segment  lies in U . We have
+
+w(t) := ((t), (t)) - ((t),  (t)) = ((t + 0/2)v0, v0).
+
+Since u is dominated,
+
+^0
+
+u(x)  u((-0/2)) +
+
+L((t), (t))ds
+
+-0/2
+
+and since  is calibrated,
+
+^0
+
+u(x) = u((-0/2)) +
+
+L((t),  (t))dt,
+
+-0/2
+
+whence ^0
+u(x) - u(x) 
+
+L((t), (t)) - L((t),  (t)) dt
+
+^-00/2
+
+=
+
+dL|((t), (t)) · w(t) + O(|w(t)|2) dt
+
+-0/2
+
+^0
+
+L
+
+L
+
+=
+
+-0/2
+
+(t + 0/2) · x
+
++
+((t), (t))
+
+v
+
+((t), (t))
+
+dt · v0 + O
+
+|x - x|2 0
+
+where we write L = L(x, v) for (x, v)  U  × Rn = T U . Since  is calibrated, it is an extremal and thus satisfies the Euler-Lagrange equation (2.1.3). Substituting (2.1.3) into the first summand in the integrand and then integrating it by parts, we obtain
+
+u(x) - u(x)
+
+
+
+0 2
+
+·
+
+L v
+
+((0), (0))
+
+· v0 + O
+
+|x - x|2 0
+
+L =
+
+· (x - x) + O
+
+v (x, (0))
+
+|x - x|2 0
+
+.
+
+Since u is differentiable at x, and the first term is linear in x and vanishes when x = x, it must equal (du|x)(x-x). The remainder term is O(|x-x|2) with a constant depending only on 0 and on second derivatives of L on a compact set independent of x and x, which is bounded away from the zero section; indeed, since E( )  0, the straight line s   (t) + s(t + 0/2)v0 joining  (t) to (t) is bounded away from zero independently of x, x and t, provided that U  is
+sufficiently small.
+
+A similar analysis on the interval [0, 0/2] gives the bound in the other direction.
+
+Lemma 4.2.4. For every x0  M and every k  1 there exists a neighborhood Ux0,k  x0 and a C1,1 function ux0,k : Ux0,k  R such that
+
+ux0,k = u
+
+and
+
+dux0,k = du
+
+on Ux0,k  Sk.
+
+(4.2.1)
+
+Proof. Fix k  1 and x0  M and let Ux0, Cx0 be as in the conclusion of Lemma 4.2.3; then
+
+|u(x) - u(x) - (du|x)(x - x)|  Cx0,k · |x - x|2
+
+ x, x  Ux0,k  Sk,
+
+(4.2.2)
+
+where we view Ux0,k as a subset of Rn using a fixed coordinate chart depending only on x0. Since u is locally Lipschitz, we can also assume that
+
+|u|  Cx0,k
+
+and
+
+|du|  Cx0,k
+
+on Ux0,k  Sk.
+
+(4.2.3)
+
+42
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Inequality (4.2.2) also implies that, by replacing Cx0,k by a larger constant, we can guarantee
+
+that
+
+|du|x - du|x|  Cx0,k · |x - x|  x, x  Ux0,k  Sk.
+
+(4.2.4)
+
+Indeed, this is the content of [46, Lemma 3.8]; the proof is simple so we repeat it. Let x, x  Ux0,k  Sk and choose x  Ux0,k with
+
+|x - x|  min{|x - x|, |x - x|}.
+
+(4.2.5)
+
+Then
+|du|x - du|x| · |x - x| = |(du|x)(x - x) + (du|x)(x - x) - (du|x)(x - x)|  |(du|x)(x - x) + u(x) - u(x)| + |(du|x)(x - x) - u(x) + u(x)|
++ |u(x) - u(x) - (du|x)(x - x)|  Cx0,k · |x - x|2 + |x - x|2 + |x - x|2  5Cx0,k · |x - x| · |x - x|,
+where in the penultimate passage we used (4.2.2), and in the last passage we used the triangle inequality and (4.2.5).
+It now follows from (4.2.2), (4.2.3), (4.2.4) and Whitney's extension theorem (see [89, Chapter VI] or [62, Section 2.2]) that there exists a C1,1 function ux0,k : Ux0,k  R satisfying (4.2.1).
+
+Proof of Theorem 4.2.2. Let k  1. Lemma 4.2.4 provides us with a cover {Ux,k}xM of M . Extracting a locally finite refinement, we obtain a countable collection {Uj,k, uj,k}j=1 such that M = j Uj,k and such that each uj,k is C1,1 on Uj,k and satisfies
+uj,k = u and duj,k = du on Uj,k  Sk.
+Let {j,k}k1 be a partition of unity subordinate to {Uj,k}, i.e. each j,k is smooth and compactly supported on Uj,k and j j,k  1 on M . Set
+
+uk := j,kuj,k.
+j=1
+Then uk is C1,1, and since {j,k} is a partition of unity, uk  u and duk  du on Sk.
+
+4.3 Ray clusters
+
+Our next task is to divide the strain set S into countably many ray clusters, which are transport
+sets admitting a convenient parametrization. The section loosely follows Chapter 3 of [62]. Let {uk} be a sequence of C1,1 functions on M satisfying
+
+uk  u and duk  du on Sk;
+
+(4.3.1)
+
+such a sequence exists by Theorem 4.2.2.
+
+4.3. RAY CLUSTERS
+
+43
+
+Figure 4.2: A ray cluster.
+Definition 4.3.1 (Twice differentiable function). A differentiable function  : M  R will be called differentiable twice at a point x  M if the map d : M  T M is differentiable at x, and moreover the exterior derivative of the one-form d vanishes at x:
+dd|x = 0.
+Equivalently, the tangent space to the graph of d at the point p := d|x exists and is a Lagrangian subspace of TpT M . Lemma 4.3.2 ([62, Corollary 3.13]). Let  : M  R be a C1,1 function. Then  is differentiable twice almost everywhere.
+Here and below, the term almost everywhere is understood with respect to some, hence any, choice of density on the manifold M .
+Definition 4.3.3 (Ray Clusters). A compact set R0  S will be called a seed of a ray cluster if there exist an open, connected, bounded set 0  Rn-1, a smooth embedding F0 : 0  M , and k0  1 such that:
+(i) Every transport ray intersects the set R0 at most once.
+(ii) The hypersurface F0(0) is transverse to the vector field uk0. (iii) The functions a and b defined in (4.1.4) are continuous on the set R0.
+(iv) The function uk0 is differentiable twice on the set R0. (v) R0  F0(0)  Sk0. A ray cluster is a Borel set R  M satisfying
+R = R^  R^0
+where R0 is a seed of a ray cluster. Thus a ray cluster is a transport set contained in the saturation of some seed of a ray cluster. See Figure 4.2.
+Remark. Our definition of a ray cluster is different from the one given in [62].
+
+44
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Figure 4.3: A ray cluster and its parametrization.
+
+Immediately from the definition we get:
+
+Lemma 4.3.4. A transport set contained in a ray cluster is itself a ray cluster.
+
+We now show that each ray cluster admits a locally-Lipschitz parametrization. The Jacobian determinant of a function F : Rn  M at a point of differentiability y = (y1, . . . , yn)  Rn is defined by
+detµ dF |y := (dF |y(/y1), . . . , dF |z(/yn)),
+where  is the density of µ.
+
+Proposition 4.3.5 (Lipschitz parametrization of ray clusters, cf. [62, Proposition 3.5]). Let R be a ray cluster. There exist a Borel set B  Rn-1 × R and a locally-Lipschitz, one-to-one map F : B  R with the following properties:
+
+(i) The set B takes the form
+
+B = {(y, t)  Rn-1 × R | y  B0, t  (ay, by)},
+
+(4.3.2)
+
+where B0  Rn-1 is a compact set and -  ay < by   are continuous functions of y. See Figure 4.3.
+
+(ii) For every y  B0, the curve t  F (y, t) is calibrated, and its image is the relative interior of a transport ray.
+
+(iii) For every Lebesgue density point y  B0 and every t  (ay, by), the point F (y, t) is a Lebesgue density point of the ray cluster R, the map F is differentiable at (y, t), and the Jacobian J(y, t) := detµ dF |(y,t), (y, t)  B
+
+is positive, continuously differentiable in the t variable, and for sufficiently large k satis-
+
+fies
+
+J(y, t) J(y, t) = Luk(F (y, t))
+
+for all t  (ay + 2-k, by - 2-k),
+
+where dot denotes differentiation with respect to t.
+
+4.3. RAY CLUSTERS
+
+(iv) We have the change of variables formula
+
+^
+
+^ ^ by
+
+hdµ =
+
+h(F (y, t)) · J(y, t) dt dy
+
+R
+
+B0 ay
+
+for every Borel function h : M  R. In particular,
+
+µ (R \ F (B)) = 0.
+
+45 (4.3.3) (4.3.4)
+
+Remark. Since the function F is defined on the set B which is not open, by differentiable at (y, t) we mean that some locally-Lipschitz extension of F to an open set containing B is differentiable at (y, t), and that the differential is uniquely determined by the values of F on the set B (this is true when (y, t) is a Lebesgue density point of B). We do not dwell on this technical point here; the details are treated carefully in [62, Chapter 3].
+
+Before proving Proposition 4.3.5, let us establish some preliminary lemmas (and in particular, justify the expression Luk appearing in Proposition 4.3.5, as uk is only C1,1). For x  S set
+Ix,k := Ix  x-1(Sk-1) = a(x) + 2-k+1, b(x) - 2-k+1 ,
+with the understanding that Ix,k =  if a(x) + 2-k+1  b(x) - 2-k+1.
+
+Lemma 4.3.6. For t  R and k  1, set
+
+Atk := {x  Sk | t  Ix}.
+
+The map
+
+Gkt : Ukt  M
+
+Gkt (x) := (tH (duk|x))
+
+is defined and locally-Lipschitz on an open set Ukt  Atk, and
+
+Gkt (x) = x(t)
+
+for all x  Atk.
+
+Lemma 4.3.7. Let R be a ray cluster and let R0 and k0 be as in Definition 4.3.3. The functions a, b are continuous on the set R  Sk for all k  k0.
+
+Lemma 4.3.8 (Regularity of Gtk and uk on ray clusters). Let R0  S be a seed of a ray cluster and let R be a ray cluster satisfying R = R^  R^0. Let x  R0 be a Lebesgue density point of the ray cluster R, let k0 be as in Definition 4.3.3 and let k  k0. For every t  Ix,k the following hold:
+
+(i) The point x(t) is a Lebesgue density point of the set R  Sk.
+(ii) The map Gtk is defined and differentiable at x, and its differential is invertible and depends C1-smoothly on t.
+
+(iii) The map duk : M  T M is differentiable at x(t) and its differential depends C1smoothly on t. In particular, the function Luk  x is well defined and continuous on Ix,k .
+
+46
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Proof of Lemma 4.3.6. Since duk is locally Lipschitz and the Hamiltonian flow Ht is C1, general existence and smoothness theorems for ordinary differential equations imply that the map Gkt is defined and locally-Lipschitz on an open set Ukt  M .
+Let x  Atk. Then du|x = duk|x by (4.3.1). Therefore, by (4.1.5) and the fact that x is an extremal,
+Gtk(x) =  tH (duk|x) =  Ht (du|x) =  tL(u|x) =  Lt (x(0)) = x(t),
+and in particular Gtk is defined at x, i.e x  Ukt.
+
+Proof of Lemma 4.3.7. Since R = R^  R^0, for each x  R  Sk there exist x0  R0 and t0  Ix0,k+1 such that x = x0(t0), and then we have
+
+a(x) = a(x0) - t0 and b(x) = b(x0) - t0.
+
+Thus, since a and b are continuous on R0, it suffices to show that x0 and t0 depend continuously on x, i.e. that if xi is a sequence of points in R0 and ti  Ixi,k+1 is a sequence of real numbers such that
+xi(ti)  x0(t0)  Sk,
+then lim xi = x0 and lim ti = t0. By compactness of R0, we may assume that the sequence xi converges to some x0  R0  Sk0  Sk. We may also assume that ti converge to some t0, since they are uniformly bounded by Lemma 2.3.3. Note that t0  Ix0 by continuity of the functions a, b on R0. By (4.3.1) and the continuity of uk,
+
+lim  xi(0) = lim u|xi = lim uk|xi = uk|x0 .
+
+It follows that
+
+x0 (t0)
+
+=
+
+x
+
+=
+
+lim i
+
+xi (ti)
+
+=
+
+lim i
+
+(tLi( xi(0)))
+
+=
+
+(Lt0 (uk|x0 ))
+
+=
+
+Gt0 k
+
+(x0 )
+
+=
+
+x0 (t0 )
+
+by Lemma 4.3.6. But then it follows that the point x lies both on a transport ray through x0 and
+on a transport ray through x0; by Proposition 4.0.3, the two transport rays coincide, so since each transport ray intersects R0 at most once, x0 = x0 and t0 = t0 = lim ti.
+
+Proof of Lemma 4.3.8. Fix t  Ix,k. Since x  R0  Sk0  Sk, Lemma 4.3.6 implies that there exists a neighborhood U  x which is contained in the domain Ukt of the function Gtk. By
+Lemma 4.3.7, the neighborhood U can be chosen such that
+
+Ix,k  Ix,k+1
+
+for all x  U  R.
+
+It follows that
+
+x(Ix,k)  x(Ix,k+1) = x(a(x)+2-k, b(x)-2-k)  Sk for all x  U R. (4.3.5)
+
+4.3. RAY CLUSTERS
+
+47
+
+It follows from (4.3.1), Lemma 4.3.6 and Proposition 4.0.3(d) that whenever x  U  R,
+
+duk|Gtk(x) = Ht (duk|x )
+
+for all t  Ix,k.
+
+(4.3.6)
+
+Since x  R0, the function uk is differentiable twice at x, whence Gkt =   tH  duk is differentiable at x, with its derivative given by the chain rule:
+
+(dGtk)|x = d  dtH  (T duk)|x.
+
+Here and below we denote by
+
+(T duk)|x : TxM  Tduk|xT M
+
+the differential of the map duk : M  T M at the point x, so as not to confuse it with the
+exterior derivative dduk. Since the Hamiltonian vector field XH is C1, the differential dtH of its flow is C1 with respect to t. Therefore the differential of Gtk at x is C1 with respect to t.
+
+Write
+
+z := Gtk(x) = x(t).
+
+Let x  U  R and let z := Gtk(x). By (4.3.6),
+
+x = (  duk)(x) = (  H-t  tH  duk)(x) = (  -Ht  duk  Gkt )(x) = (  -Ht  duk)(z).
+
+For the rest of the proof fix some Riemannian metric on U . Since duk is locally-Lipschitz and H-t is C1, it follows that
+d(x, x) = O(d(z, z)).
+As x is an arbitrary point in U  R and x is a Lebesgue density point of R, this proves that the differential of the map Gkt is invertible at x. Moreover, since x is a Lebesgue point of R and z  R  Sk by (4.3.5), it also follows that z is a Lebesgue density point of R  Sk. Thus (i) and (ii) are proved.
+Let v  TzM and let w  TxM satisfy
+
+dGtk|x(w) = v.
+Let  be a curve satisfying (0) = v and let rj > 0 be any sequence converging to zero. Since x is a Lebesgue density point of R, there exists a sequence xj  U  R converging to x such that
+d(xj, expx(rj · w)) = o(rj),
+where exp is the exponential map of the auxiliary Riemannian metric. Write
+
+zj := Gtk(xj).
+In the following computation we abuse notation by writing p = p + o(rj) for p, p  T M to indicate that limj rj-1d(p, p)  0, where the distance is measured using, say, the Sasaki metric on T M . By (4.3.6) and local Lipschitz continuity of duk and Ht ,
+duk|zj = (duk  Gtk)(xj) = (tH  duk)(xj) = (tH  duk)(expx(rjw)) + o(rj).
+
+48
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Thus, by second order differentiability of uk at x,
+
+duk|zj = Ht (duk|x) + rj · (dHt  T duk|x)(w) + o(rj) = duk|z + rj · dtH  T duk|x  (dGtk|x)-1 (v) + o(rj),
+
+where in the second passage we used (4.3.6) and the definition of w. On the other hand, by local Lipschitz continuity of Gkt and the fact that dGkt (w) = v = (0),
+duk|zj = (duk  Gkt )(xj) = (duk  Gkt )(expx(rj · w)) + o(rj) = duk|(rj) + o(rj).
+
+Putting the last two computations together we get
+
+duk|(rj) = duk|z + rj · dHt  T duk|x  (dGkt |x)-1 (v) + o(rj).
+
+Recall that  is an arbitrary curve emanating from z = x(t) with initial velocity v  TzM .
+
+Hence the above formula implies the existence of the differential T duk|x(t) and establishes the
+
+formula
+
+T duk|x(t) = dtH |duk|x  T duk|x  (dGkt |x)-1,
+
+t  Ix,k.
+
+The maps (dGkt |x)-1 and dHt |duk|x are continuously differentiable in t, whence the differential T du|x(t) is continuously differentiable in t for t  Ix,k.
+
+We are now ready to prove Proposition 4.3.5.
+
+Proof of Proposition 4.3.5. By the definition of a ray cluster, there exists a seed of a ray cluster R0 such that R = R^  R^0. Let F0 : 0  M and k0 be as in Definition 4.3.3. Set
+B0 := F0-1(R0).
+
+Since the map F0 is a smooth embedding, the set B0 is compact, and since R0  F0(0),
+
+F0(B0) = R0.
+
+Let y  B0, and write
+
+x := F0(y)
+
+Set ay := a(x) and by := b(x),
+
+and define
+
+F (y, t) := x(t). t  (ay, by).
+
+(4.3.7)
+
+Then F is defined on the set B  Rn-1 × R given by (4.3.2), and for every y  B0 the curve F (y, ·) = x is calibrated by the definition of x. The functions ay, by are continuous on B0 by Definition 4.3.3. Thus (i) and (ii) are proved.
+
+Suppose that y is a Lebesgue density point of B0. Then x is a Lebesgue density point of the ray cluster R. Indeed, since the functions a, b are continuous at the point x, there exists  > 0 and a neighborhood U  x such that (-, )  Ix for every x  R0  U . It follows that for sufficiently small r > 0, the ray cluster R contains the set
+
+Ar := {x(t) | x = F0(y), y  B0, |y - y| < r, -r < t < r},
+
+4.3. RAY CLUSTERS
+
+49
+
+whose measure, since y is a Lebesgue density point of B0, is µ(Ar) = (dF0(/x1), . . . , dF0(/xn-1), u|x) · cn-1rn-1 · 2r + o(rn-1) = (1 + o(1))µ(Vr) as r  0,
+where cn-1 is the volume of the unit ball in Rn-1, and Vr := {x(t) | x = F0(y), y  0, |y - y| < r, -r < t < r}.
+
+Since F (0) is a smooth embedded hypersurface transverse to u, the sets Vr shrink nicely to x (see [52, Section 3.4]); so since Ar  R, it follows that x is a Lebesgue density point of R. By Lemma 4.3.8, the point x(t) is a Lebesgue density point of R for all t  Ix,k.
+Let k  k0. Since F0(y) = x  R0  Sk0  Sk, Lemma 4.3.6 implies that
+F (y, t) = Gtk(F0(y)). for all t  Ix,k.
+
+In particular, by Lemma 4.3.6, the function F extends to a locally-Lipschitz function on an open set containing B0 × {0}, namely F~(y, t) := Gkt (F0(t)). By Lemma 4.3.8, the function Gtk is differentiable at x for all t  Ix, with an invertible derivative which is continuously
+differentiable with respect to t. Furthermore,
+
+dF |(x,t)(/t) =  x(t) = uk|x(t) = tL(uk|x)
+
+for all t  Ix,k.
+
+(4.3.8)
+
+Thus, the fact that the image of F0 is transverse to u = uk at x implies that F is differentiable at (y, t) with an invertible differential depending C1-smoothly on t, for all t  Ix,k. Since this last statement is true for every k  k0 and Ix = kk0 Ix,k, we conclude that it is true on the entire interval Ix = (ay, by).
+Since the differential of F is invertible at (y, t) for all t  (ay, by), the function J = detµ dF does not change sign on the line {y} × (ay, by). But the set F (B0 × {0}) = R0 is contained in the hypersurface F0(0), which is smooth and transverse to uk0, so the sign of J is constant on B0 × {0}. We can therefore take the Jacobian determinant J to be positive at (y, t) for every Lebesgue point y  B0 and every t  (ay, by).
+Since dF is C1 with respect to t, the vector fields dF (/yi) are C1 along x. By (4.3.8) and the definition of the Jacobian determinant, on Ix,k we have
+
+J
+
+=
+
+d dt (dF (/y1), . . . , dF (/yn-1), dF (/t))
+
+= (Luk)(dF (/y1), . . . , dF (/yn-1), dF (/t))
+
+= (Luk  F ) · (dF (/y1), . . . , dF (/yn-1), dF (/t))
+
+= (Luk  F ) · J.
+
+This finishes the proof of (iii).
+
+A standard change of variables formula for Lipschitz maps (see [45, Theorem 3.9] and the
+
+discussion at the end of the proof of [62, Proposition 3.5]) implies that for every Borel function
+
+f : B  R,
+
+^ ^ by
+
+^
+
+f (y, t) · J(y, t) dt dy =
+
+f (F -1(x))dµ(x).
+
+B0 ay
+
+F (B)
+
+50
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Figure 4.4: Proof of Lemma 4.3.9
+
+If h : M  R is a Borel function, then applying the above change of variables formula to f := h  F gives
+
+^ ^ by
+
+^
+
+h(F (y, t)) · J(y, t) dt dy =
+
+h(x)dµ(x).
+
+B0 ay
+
+F (B)
+
+Thus, in order to prove formula (4.3.3), it remains to show (4.3.4). The definition (4.3.7) of F implies that F (B) consists of relative interiors of transport rays intersecting the set R0 = F (B0); on the other hand, R consists of the full transport rays, i.e. R = R^0 = F (B0). Thus R \ F (B) consists of initial and final points of transport rays intersecting R0, whence (4.3.4) follows from Lemma 4.1.5.
+
+After having established the desired properties of ray clusters, let us show that the strain set can be decomposed into ray clusters, up to a null set.
+
+Lemma 4.3.9. For every k  1 and every x0  Sk, there exists a neighborhood U  x0 such that the set U  Sk-1 is contained, up to measure zero, in a countable collection of ray clusters.
+Proof. Let k  1 and x0  Sk. Fix 0 <  < 2-k and  > 0 small, to be specified later. Let
+0 := (-, )n-1  Rn-1
+
+and let
+
+ : 0 × (-, )  U0  M
+
+be a diffeomorphism onto an open set U0 containing x0, such that for every c  (-, ) the hypersurface  (0 × {c}) is transverse to the vector field uk (this is possible for small enough , , since the vector field uk is locally-Lipschitz and does not vanish at x0). See Figure 4.4. It is also possible to choose  which extends continuously to 0 × [-, ].
+
+By Lemma 4.3.2, the function uk is differentiable twice almost everywhere, so we can
+choose the map  such that uk is differentiable at (y, 0) for every y in a set 0  0 of full measure. We can furthermore take -1(x0) to be arbitrarily close to 0.
+
+Set F0(y) := (y, 0) y  0
+
+and R~0 := F0(0 )  Sk.
+
+4.3. RAY CLUSTERS
+
+51
+
+Properties (ii),(iv) and (v) of Definition 4.3.3 hold for R~0 by construction, with k0 = k. We claim that if  is small enough then property (i) holds, i.e., every transport ray intersects the set R~0 at most once.
+Indeed, otherwise there exists a sequence {i}i=1 of transport rays and sequences si < ti such that for each i  1, the points zi := i(si) and wi := i(ti) belong to R~0, and both converge to x0 as i  . By reparametrization, we may assume that si = 0 for all i. Since R~0  Sk, we have
+
+ i(0) = u|zi = uk|zi
+
+and
+
+ i(ti) = u|wi = uk|wi.
+
+By continuity of the vector field uk, it follows that
+
+lim i(0) i
+
+=
+
+lim i
+
+ i(ti)
+
+=
+
+uk |x0
+
+=
+
+u|x0
+
+=
+
+ x0(0).
+
+Lemma 2.3.3 implies that ti are uniformly bounded, so by passing to a further subsequence we can assume that ti  T > 0 (the limit is positive since i(0) converge to a nonzero vector). It follows that the sequence i|[0,ti] converges to a closed transport ray, which is impossible since a transport ray is a minimizing extremal by Lemma 4.1.2, and supercriticality implies that
+minimizing extremals cannot be closed. This finishes the proof of property (i) in Definition 4.3.3, provided that  is chosen sufficiently small.
+We need to show that we can replace R~0 by a set R0 which is compact and verifies (iii), i.e. the functions a, b are continuous on R0. While this may not be the case for R~0, we claim that it is true for a countable collection of subsets R0j  R~0 which cover R~0 up to measure zero. Indeed, since the functions a(x), b(x) are Borel measurable, Lusin's theorem implies that there exists a sequence 10  20  · · ·  0 of compact sets such that the functions a(x), b(x) are continuous on F0(j0) for each j, and the union
+
+0 := 0j
+j
+
+has full measure in 0 . Our construction guarantees that for every j  1, the set
+
+R0j := F0(0j )  Sk
+
+is a seed of a ray cluster. Finally, we need to find a neighborhood U  x0 such that the set U  Sk-1 is contained, up
+to measure zero, in the union of the ray clusters
+Rj := R^0j .
+
+Set U := {Gkt (F0(y)) | y  0, t  (-, )}.
+Then U is an open neighborhood of x0, since the hypersurface F0(0) is transverse to uk and the point x0 was taken to be close to F0(0). Since 0 has full measure in 0, the set
+U  := {Gkt (F0(y)) | y  0, t  (-, )}
+has full measure in U if  is sufficiently small; thus it suffices to prove that
+
+U   Sk-1  Rj.
+j
+
+52
+
+CHAPTER 4. DOMINATED FUNCTIONS
+
+Let x  U   Sk-1. By the definition of U , we may write
+
+x = Gkt (x) = x(t),
+
+where
+
+x = F0(y) for some y  0j and some t  (-, ).
+
+Since |t| <  < 2-k and x(t) = x  Sk-1, necessarily x  Sk, whence x  R0j by the definition of R0j . Since x lies on a transport ray through x, it follows that x  R^0j = Rj. This finishes the proof of the lemma.
+
+Lemma 4.3.10 (cf. [62, Lemma 3.15]). The saturation S^ of the strain set S can be covered, up to a set of zero measure, by a countable collection of pairwise-disjoint ray clusters.
+
+Proof. Let k  1. By Lemma 4.3.9, the set Sk can be covered by a collection {Ux}xSk of open sets, such that the intersection Ux  Sk is contained, up to measure zero, in the union of
+countably many ray clusters. Extracting a countable subcover of {Ux}xSk, we see that Sk can be covered, up to measure zero, by countably many ray clusters. Since S = k Sk, there exists a countable collection {R~j}j=1 of ray clusters such that
+
+
+µ S \ R~j
+j=1
+
+= 0.
+
+But ray clusters are transport sets; hence
+
+
+µ S^ \ R~k = 0.
+j=1
+
+Setting
+
+R1 := R~1,
+
+j-1
+Rj := R~j \ R~i,
+i=1
+
+and using Lemma 4.3.4 we obtain the desired cover.
+
+j2
+
+Chapter 5 Optimal transport
+
+In this chapter we discuss optimal transport with the cost c. Most of the results below are either known, or follow from a straightforward modification of the arguments in the Riemannian case. For more on optimal transport with Lagrangian costs see [13, 14, 47, 50, 92]. Our main goals are to prove the needle decomposition theorem, Theorem 5 (restated below as Theorem 5.3.3), and to establish the equivalence (ii)  (iii) in Theorem 1.
+
+5.1 The Monge-Kantorovich problem
+
+Set
+
+P1(L) :=
+
+Absolute´ly continuous Borel probability measures µ0 on M such that (|c(x0, ·)| + |c(·, x0)|)dµ0 <  for some x0  M
+
+.
+
+As before, absolute continuity is with respect to any measure on M with a smooth, positive
+
+density (in particular, with respect to µ). For µ0, µ1  P1(L), define ^
+
+C(µ0, µ1) := inf
+
+c(x0, x1) d(x0, x1),
+
+ M ×M
+
+(5.1.1)
+
+where the infimum is over all couplings  between µ0 and µ1, i.e. measures on M × M such
+
+that
+
+(0) = µ0
+
+and
+
+(1) = µ1,
+
+where i : M × M  M denote the projections onto the individual factors.
+
+A classical observation due to Kantorovich [61, Chapter VIII] is that the minimization
+
+problem (5.1.1) admits a dual formulation. Fix a reference measure µ on M with a smooth
+
+density. For a measurable function f : M  R define ^
+
+K[f ] := sup uf dµ,
+uM
+
+(5.1.2)
+
+where the supremum is over all dominated functions u : M  R (we will soon add conditions on f which ensure that this is well-defined). A minimizer in (5.1.1) is called an optimal coupling between µ0 and µ1, and a maximizer in (5.1.2) is called a Kantorovich potential for the function f .
+
+Theorem 5.1.1 (Kantorovich Duality [92, Theorem 5.10]). For every µ0 = f0µ, µ1 = f1µ  P1(L),
+C(µ0, µ1) = K[f1 - f0].
+
+53
+
+54
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+Furthermore, for every coupling  between µ0 and µ1 and every dominated function u, the following are equivalent:
+(i) The coupling  is an optimal coupling between µ0 and µ1 and the function u is a Kantorovich potential for f1 - f0.
+(ii) For -a.e. (x0, x1)  M × M ,
+u(x1) - u(x0) = c(x0, x1).
+
+Lemma 5.1.2 (cf. [13, Proposition 4]). Let f : M  R be a µ-integrable function satisfying ^
+
+(|c(x0, ·)| + |c(·, x0)|) |f | dµ < 
+M
+
+(5.1.3)
+
+and
+
+^
+
+f dµ = 0.
+M
+
+Then the supremum in (5.1.2) is attained, i.e., there exists a Kantorovich potential for the function f .
+
+Lemma 5.1.3. The family of dominated functions is equicontinuous on every compact subset of M .
+
+Proof. Let A  M be a compact subset and let g be a Riemannian metric on M . The function c is continuous on A × A hence uniformly continuous, and it vanishes on the diagonal. Thus the function
+w(r) := max{|c(x, y)| | x, y  A, dg(x, y)  r}
+is increasing, tends to 0 as r  0, and vanishes at 0. Here dg is the distance function induced by g. By definition, every dominated function satisfies
+
+|u(x) - u(y)|  max{|c(x, y)|, |c(y, x)|}|  w(dg(x, y)).
+
+Hence the class of dominated functions admits the function w as a common modulus of continuity on the set A, and is therefore equicontinuous on A .
+
+Proof of Lemma 5.1.2. By Lemma 5.1´.3, the collection of dominated functions is equicontinuous on compact subsets of M . Since f dµ = 0, there is no loss of generality in minimizing only over dominated functions which vanish at some fixed x0  M ; this is a closed set in the uniform topology, all of whose members are pointwise smaller in absolute value than the function |c(·, x0)| + |c(x0, ·)|. By the Arze´la-Ascoli theorem, a maximizing sequence in the optimization problem (5.1.2) will have a subsequence converging uniformly on compact sets to a dominated function u which, by (5.1.3) and the dominated convergence theorem, will be a maximizer.
+The construction of the optimal coupling from the Kantorovich potential was carried out in the Riemannian setting in [43, 25, 49] and in the Lagrangian setting in [13, 50, 47]; we will describe it in Section 5.4.
+
+5.2. MASS BALANCE
+
+55
+
+5.2 Mass balance
+
+Let f : M  R be a function satisfying the assumptions of Lemma 5.1.2 and let u be a Kantorovich potential for f . The following properties of u can be found in the Riemannian case in [43, 49, 62]. The proof in the Lagrangian case requires only slight modifications, and we include it here mainly for the sake of completeness.
+
+Lemma 5.2.1 (Mass balance on upper transport sets, c.f. [43, Lemma 5.1] and [62, Lemma 4.4]). Let A  M be an upper transport set. Then
+^ f dµ  0.
+A
+
+Lemma 5.2.2 (cf. [62, Lemma 4.3]). Let A  M be a compact set. For  > 0 define u :
+
+M  R by
+
+u(x) := inf [u(y) + c(y, x) -  · A(y)] . yM
+
+(5.2.1)
+
+Then
+
+1. u is dominated.
+
+2. 0  u - u  .
+
+3. Set
+
+v (x)
+
+:=
+
+u(x)
+
+- 
+
+u(x) ,
+
+There exists a function v : M  [0, 1] such that
+
+x  M.
+
+(5.2.2)
+
+ 0 
+lim v(x) = v(x)
+0
+1
+
+x  M \ A+ A+ \ A x  A.
+
+(5.2.3)
+
+Proof.
+
+1. Let x, x  M , let  > 0 and let y  M satisfy
+u(x)  u(y) + c(y, x) -  · A(y) - .
+Then
+u(x) - u(x)  inf [u(y) + c(y, x) -  · A(y)] - u(y) - c(y, x) +  · A(y) +  yM  u(y) + c(y, x) -  · A(y) - u(y) - c(y, x) +  · A(y) +   c(x, x) + 
+using the triangle inequality. Since  is arbitrary, this proves that u is dominated.
+2. By setting y = x in (5.2.1) we see that u(x)  u(x) -  · A(x)  u(x). Since u is dominated, u(y) + c(y, x)  u(x) for every y  M , whence u(x)  u(x) - .
+
+56
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+3. Rewriting v as
+
+u(x) - u(y) - c(y, x)
+
+v(x) = sup
+yM
+
+
+
++ A(y)
+
+(5.2.4)
+
+and observing that since u is dominated, the first summand in (5.2.4) is nonpositive, we see that v(x) is increasing in  for all x  M , whence the limit exists, and lies in the interval [0, 1] by the previous claim. If x  A then by setting y = x in (5.2.4) we see that v(x) = 1 for all  > 0.
+
+In order to finish the proof of the lemma, we show that if x / A+ then v = 0 for all sufficiently small . Suppose that vj > 0 for a sequence j  0. Then there exists a sequence yj  M such that
+
+u(x)
+
+-
+
+u(yj ) j
+
+-
+
+c(yj ,
+
+x)
+
++
+
+A (yj )
+
+>
+
+0.
+
+Since the first summand in nonpositive, necessarily yj  A, and
+
+u(x) - u(yj) - c(yj, x) > -j.
+
+Since A is compact, we may pass to a subsequence and assume that yj  y  A whence
+
+u(x) - u(y) - c(y, x)  0.
+
+Since u is dominated, equality holds, whence x and y lie on a common transport ray. In
+fact, x lies on an upper transport ray whose initial point is y; since y  A, we conclude that x  A+.
+
+Proof of Lemma 5.2.1. First suppose that A is any compact set and define u by (5.2.1). By Lemma 5.2.2, the function u is dominated and 0  v  1, where v is defined in (5.2.2).
+
+Since u is a maximizer in (5.1.2) and u is dominated,
+
+^
+
+^
+
+1
+
+M vf dµ = 
+
+(u - u) · f dµ  0.
+M
+
+Let v be as in (5.2.3). Then by the dominated convergence theorem,
+
+^
+
+^
+
+^
+
+^
+
+^
+
+0  lim v · f dµ =
+
+vf dµ + f dµ 
+
+|f |dµ + f dµ.
+
+A
+
+A+\A
+
+A
+
+A+\A
+
+A
+
+(5.2.5)
+
+Now assume that A is an upper transport set. By regularity of the measure µ, there exists a sequence of compact sets Aj  A such that
+^
+|f |dµ  0.
+A\Aj
+
+Since A is an upper transport set containing Aj,
+
+A \ Aj  A+j \ Aj
+
+for all j  1.
+
+It now follows from (5.2.5) that
+
+^
+
+^
+
+^
+
+^
+
+^
+
+0
+
+|f |dµ + f dµ  2
+
+|f |dµ + f dµ  f dµ.
+
+A\Aj
+
+Aj
+
+A\Aj
+
+A
+
+A
+
+This finishes the proof of the lemma.
+
+5.3. NEEDLE DECOMPOSITION
+
+57
+
+Corollary 5.2.3. Let R  M be a transport set. Then ^
+f dµ = 0.
+R
+
+Proof. Let Rinit be the set of initial points of transport rays contained in R. By Lemma 4.1.5,
+
+this is a set of measure zero. Since the set R \ Rinit is an upper transport set, it thus follows
+
+from Lemma 5.2.1 that
+
+^
+
+f dµ  0.
+R
+
+Consider the Lagrangian
+
+L~(v) := L(-v), v  T M.
+
+It is easy to see that a function u~ is L~-dominated if and only if -u~ is dominated. Therefore the function -u is a Kantorovich potential for the function -f with respect to the Lagrangian L~. Transport sets for u and for -u with respect to the Lagrangians L and L~, respectively coincide,
+since the condition (4.1.1) is symmetric. Applying Lemma 5.2.1 to -u and -f then gives the
+reverse inequality.
+
+5.3 Needle decomposition
+
+The goal of this section is to prove Theorem 5. In order to restate the theorem in a more detailed form, let us introduce the notion of a needle.
+Definition 5.3.1.
+· Needles: A needle is a Borel measure on M of the form
+m
+where  : I  M is a C2 curve defined on a open interval I  R, and m is an absolutely continuous measure on I with a positive, C2 density  : I  (0, ) with respect to the Lebesgue measure.
+· Upper ends: An upper end of the needle is a measure of the form
+
+ m|[t,)
+for some t  R.
+· Curvature-dimension: Let N  (-, ] \ {1} and K  R. The needle will be called a CD(K, N )-needle if the function
+
+ := - log 
+
+satisfies the differential inequality
+
+-¨ + 2 + K  0. N -1
+
+(5.3.1)
+
+Equivalently, the needle is a CD(K, N )-needle if the pair (m, l) satisfies CD(K, N ) in the sense of Definition 3.4.2, where l is the Lagrangian l = (dt2 + 1)/2.
+
+58
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+· Jacobi needles: The needle will be called a (µ, L)-Jacobi needle if for every t  I there exists a C3 solution u to the Hamilton-Jacobi equation H(du) = 0 defined in a neighbor-
+hood U  (t), such that
+
+ = u and  = -Lu on -1(U ).
+
+(5.3.2)
+
+Recall that we say that the pair (µ, L) satisfies CD(K, N ) if every local solution u to the Hamilton-Jacobi equation H(du) = 0 satisfies
+
+(Lu)2
+
+(dLu)(u) +
+
++ K  0.
+
+N -1
+
+We will always take u to be at least C3, which is possible by Lemma 2.1.2.
+
+(5.3.3)
+
+Lemma 5.3.2. Let K  R and N  (-, ]\[1, n). The following conditions are equivalent:
+
+(i) The pair (µ, L) satisfies CD(K, N ).
+
+(ii) Every (µ, L)-Jacobi needle is a CD(K, N )-needle.
+
+Proof. This is an immediate consequence of Definitions 3.4.2 and 5.3.1. If the pair (µ, L) satisfies CD(K, N ) and m is a (µ, L)-Jacobi needle with the density of m given by  = e-, then (5.3.1) follows from (5.3.2) and (5.3.3). Conversely, if every (µ, L)-Jacobi needle is a CD(K, N )-needle, and u is a local solution of the Hamilton-Jacobi equation, then every measure of the form m, where  is an integral curve of u and the measure m has density  = e- for a function  satisfying  = -L  , is a (µ, L)-Jacobi needle, so (5.3.1) implies (5.3.3).
+
+We can now state the main result of this section which, together with Lemma 5.3.2, implies Theorem 5.
+
+Theorem 5.3.3 (Needle decomposition). Let u : M  R be a dominated function. There exists a collection {µ}A of Borel measures on M and a measure  on the set A such that the following hold:
+
+(i) The collection A is a disjoint union
+
+A = N  D,
+
+where for each   D the measure µ is a Dirac measure at a point x  M , and for each   N the measure µ is a (µ, L)-Jacobi needle:
+
+µ = ()m,
+
+where
+
+ : I  M
+
+is a calibrated curve of u and m is a measure on I = (a, b). For µ-a.e. strain point x of the function u, there exists   N , depending measurably on x, such that the curve  passes through x.
+
+5.3. NEEDLE DECOMPOSITION
+
+59
+
+(ii) The measure µ disintegrates as
+
+^
+
+µ = µ d()
+
+A
+
+´
+
+in the following sense: for every Borel function h : M  R, the function   M hdµ
+
+is -measurable, and ^
+
+^^
+
+h dµ =
+
+hdµ d().
+
+M
+
+AM
+
+(5.3.4)
+
+Suppose further that u is a Kantorovich potential for some function f satisfying the hypotheses of Lemma 5.1.2. Then
+
+(iii) For -almost every   A , and for -almost every   N ,
+
+^ f dµ = 0,
+M
+^ f dµ,t  0
+M
+
+(5.3.5) (5.3.6)
+
+for every upper end µ,t = () m|[t,) of the needle µ. (iv) µ-almost every x in the support of f is a strain point of u.
+
+Proof. The idea of the proof is as follows. The needles in the decomposition will be supported on transport rays of the function u. Each such transport ray is contained in some ray cluster, and the density of the corresponding needle will be determined by the Jacobian of the parametrization constructed in Proposition 4.3.5. Points outside the strain set will be assigned Dirac measures. In case u is a Kantorovich potential, The mass balance conditions (5.3.5) and (5.3.6) will follow from the results of Section 5.2. We now proceed with the proof.
+By Lemma 4.3.10, the saturation S^ of the strain set S is covered, up to a set of measure zero, by a countable collection {Rj}j=1 of disjoint ray clusters. By Proposition 4.3.5, we can parametrize each ray cluster Rj by a locally-Lipschitz, one-to-one map F j : Bj  Rj where Bj  Rn-1 × R takes the form
+Bj = {(y, t)  Rn-1 × R | y  B0j, t  (ay, by)}.
+We can also assume that F j is onto, since replacing Rj by F j(Bj) only changes it by a null set, see (4.3.4). Moreover, every point in the complement
+D := M \ S^
+
+constitutes a degenerate ray cluster. Thus, if we denote by A the collection of transport rays which are either degenerate, or are contained in one of the ray clusters {Rj}, then almost every
+point in M lies in some transport ray   A :
+
+µ M\
+
+
+ = µ M \ Rj  D = 0.
+
+A
+
+j=1
+
+In particular, µ-almost every x  S lies on  for some   N .
+
+(5.3.7)
+
+60
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+For each transport ray   A we now define a measure µ supported on . If  is degenerate, i.e.  = {x} for some x  M , then we define µ to be a Dirac measure at the point x:
+
+µ = x.
+
+(5.3.8)
+
+Suppose now that  is nondegenerate, in which case it is contained in some ray cluster Rj. There exists a unique y  B0j such that the relative interior of the transport ray  is the image
+of the calibrated curve
+
+(t) := F j(y, t), t  I := (ay, by).
+
+We define the measure µ to be
+
+µ := ()m,
+
+where m is the measure on the interval I whose density is
+
+(t) := detµ dF j(y, t), t  I,
+
+(5.3.9)
+
+with the Jacobian detµ dF j defined as in Proposition 4.3.5. Thus, for every Borel measurable function h : M  R,
+
+^
+
+^ by
+
+h dµ := h(F j(y, t)) · detµ dF j(y, t) dt.
+
+M
+
+ay
+
+(5.3.10)
+
+Let N and D denote the nondegenerate and degenerate transport rays in A , respectively. For each j  1 define a map
+j : B0j  N
+assigning to each y  B0j the transport ray j(y) = F j(y, ·)  N . Moreover, define
+
+0 : D  D
+
+by assigning to each x  D the degenerate transport ray 0(x) := {x}  D. In other words, 0(x) =  for all   D. The measure  is then defined by
+
+ := (j) Voln-1|B0j + (0) (µ|D) ,
+j=1
+
+where Voln-1 denotes the Lebesgue measure on Rn-1. In more detail: the measure  is defined on the -algebra of sets whose preimage under j is Borel measurable for every j  0 (in Rn-1
+if j  1, or in M if j = 0); and for every -measurable function  : A  R we set
+
+^
+
+^
+
+^
+
+ d :=
+
+(  j) dVoln-1 + (  0) dµ.
+
+A
+
+j=1 B0j
+
+D
+
+(5.3.11)
+
+Note that, since each B0j is bounded, the measures Voln-1|B0j are finite. Note also that by construction the maps j are measurable. By (5.3.7), (5.3.8), (5.3.10), (5.3.11) and the change
+
+5.3. NEEDLE DECOMPOSITION
+
+61
+
+of variables formula (4.3.3), for every Borel function h : M  R,
+
+^
+
+^
+
+^
+
+hdµ =
+
+h dµ + h dµ
+
+M
+
+j=1 Rj
+
+D
+
+ ^ ^ by
+
+^
+
+=
+
+h(F j(y, t)) · detµ dF j(y, t) dt dy + h(x) dµ(x)
+
+j=1 B0j ay
+
+D
+
+^ ^
+
+^^
+
+= ^j=1 ^B0j
+
+hdµj(y) dy +
+
+M
+
+D
+
+hdµ0(x) dµ(x)
+M
+
+=
+
+hdµ d(),
+
+AM
+
+which proves (5.3.4).
+
+Lemma 5.3.4. For -almost every   N , the measure µ is a (µ, L)-Jacobi needle.
+
+Proof. By (5.3.9) and Proposition 4.3.5, for almost every   N , if we write
+
+ = e-
+
+then
+
+ = -(Luk)  
+
+and
+
+  = uk on I,k
+
+(5.3.12)
+
+for all k sufficiently large. Recall that I = k I,k. It thus remains to show that for every t0  I,k, the function uk can be replaced by a locally defined C3 solution u~ to the Hamilton-Jacobi equation in such a way that (5.3.12) still holds on -1(U ) for some neighborhood U  (t0). By Lemma 2.1.2, there exists a local C3 solution u~ : U  R to the Hamilton-Jacobi equation
+with the second-order data (5.3.12) at the point
+
+x0 := (t0)  U. The graph of u~ is a C2 Lagrangian submanifold S~  SM passing through the covector
+
+p0 := duk|x0
+
+and satisfying
+
+Tp0 S = Tp0S~
+
+where S  SM is the graph of the one-form duk. Recall that for every x  Sk-1  U ,
+
+duk|x(t) = tH duk|x,
+
+t  (-2-k, 2-k).
+
+Since x0 is a Lebesgue density point of Sk-1, and duk is differentiable at (t) for all t  (-2-k, 2-k), it follows that
+
+TptS = (dt) (Tp0S) ,
+
+t  (-2-k, 2-k),
+
+where
+
+pt := Ht (p0).
+
+Since u~ solves the Hamilton-Jacobi equation, the integral curves of u~ are extremals. Thus, applying the same analysis to du~, we conclude that pt  S~ for all t  (-2-k, 2-k), and
+
+TptS~ = (dt)(Tp0S~) = (dt)(Tp0S) = TptS t  (-2-k, 2-k),
+
+that is, the graphs of du~ and duk are tangent at pt. This implies that
+
+(Lu~)((t)) = (Luk)((t)) for all t  (-2-k, 2-k)
+
+and completes the proof of the lemma.
+
+62
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+Remark. Observe that, in particular, we have improved the smoothness of the density  of the needle µ from C1 to C2.
+
+We have established clauses (i) and (ii) of Theorem 5.3.3. Assume now that u is a Kan-
+
+torovich potential for the function f . Let A   A be a -measurable set. Then, being a Borel
+
+measurable union of transport rays, the set A = A   is a transport set. Lemma 5.2.1 and Corollary 5.2.3 together with the disintegration formula (5.3.4) imply that
+
+^^
+
+^
+
+f dµ d() = f dµ = 0.
+
+A
+
+M
+
+A
+
+Since A  is an arbitrary -measurable subset of A , this proves (5.3.5).
+
+By the definition of the measures µ and , in order to prove (5.3.6), it suffices to show that for every j  1, almost every y  B0j satisfies
+^ by f (F (y, t)) detµ dF (y, t)dt  0 for all t  (ay, by).
+t
+
+Suppose that some set Y  B0j violates this condition, i.e., for every y  Y there exists
+
+ty  (ay, by) such that
+
+^ by
+
+f (F (y, t)) detµ dF (y, t)dt < 0.
+
+(5.3.13)
+
+ty
+
+We can take ty to depend measurably on y, and then the set
+
+R+ := {F (y, t) | y  Y, t  (ty, by)}
+
+is an upper transport set, since each set {F (y, t) | t  (ty, by)} is an upper transport ray. Lemma (5.2.1) and the change of variables formula (4.3.3) imply that
+
+^ ^ by
+
+^
+
+f (F (y, t))detµ dF (y, t)dt = f dµ  0.
+
+Y ty
+
+R+
+
+It follows from (5.3.13) that the set Y has measure zero. This proves (5.3.6).
+It remains to prove (iv). Since µ(S^ \ S) = 0 by Lemma 4.1.5, it suffices to prove that f = 0 almost everywhere on M \ S^. But every x  M \ S^ takes the form x = x for some degenerate transport ray   D, and then by the mass-balance condition (5.3.5),
+^
+0 = f dµ = f (x).
+M
+
+The proof of Theorem 5.3.3 is complete.
+
+5.4 Displacement interpolations
+Displacement interpolations are cost-minimizing paths in the space of probability measures. When the cost is defined using a fixed time interval, the displacement interpolation is unique [92, Chapter 7]. The cost we use here, in contrast, allows for a free time interval, and the resulting theory extends optimal transport theory with distance cost (rather that squared distance, or distance to the power q for q > 1), in which displacement interpolations are not unique. This
+
+5.4. DISPLACEMENT INTERPOLATIONS
+
+63
+
+non-uniqueness is, however, of a simple kind - it stems from the fact that the one-dimensional transport problem on each needle may admit multiple solutions. Once a certain monotonicity is imposed on the solution, the displacement interpolation becomes unique. We single out the displacement interpolation satisfying this monotonicity property, as was done in [49]. In the next section, in analogy with the metric theory, we will prove that the CD(K, N ) condition is characterized by convexity properties of the entropy functional SN along this interpolation.
+
+Recall that
+
+SM ×0 [0, ) := SM × [0, )
+
+where (v, 0)  (v, 0) whenever (v) = (v). For   [0, 1], define
+
+Exp : SM ×0 [0, )  M, Exp(v, ) =  Lv ,
+where tL is the Euler-Lagrange flow. Thus Exp(v, ) = (), where  : [0, ]  M is a zero-energy extremal satisfying  (0) = v. Note that Exp respects the equivalence relation; in fact,
+Exp(v, 0) = Exp0(v, ) = (v), v  SM,   0,   [0, 1].
+If the Euler-Lagrange flow is not complete then we take Exp to be defined on a maximal open subset of SM ×0 [0, ).
+
+Definition 5.4.1 (Transport plans and displacement interpolations). A transport plan is a finite
+
+Borel probability measure on SM ×0[0, ). A family {µ}01 of Borel probability measures on M will be called a displacement interpolation between µ0 and µ1 if there exists a transport plan  such that
+
+µ = (Exp),   [0, 1],
+
+(5.4.1)
+
+and if for every 0      1, the measure
+
+, := (Exp × Exp)
+
+(5.4.2)
+
+on M × M is an optimal coupling between µ and µ.
+
+Thus a transport plan is a random choice of initial velocity v and time interval  of a minimizing extremal , and a family {µ}[0,1] is a displacement interpolation if the law of the random point () is the measure µ and the resulting coupling between µ and µ is optimal for all 0      1.
+The following lemma, regarding uniqueness of a monotone optimal coupling between measures on the real line, is well-known, see [73], [6, Section 3], [49, Theorem 28] or [86, Chapter 2].
+
+Lemma 5.4.2 (Monotone displacement interpolations on the real line). Let m0, m1 be absolutely continuous measures on the real line satisfying
+
+m0(R) = m1(R) < .
+
+(5.4.3)
+
+There is a unique coupling  between m0 and m1 which is monotone in the sense that (t0 - t0)(t1 - t1)  0 for   -almost every ((t0, t1), (t0 , t1 ))  (R × R) × (R × R).
+
+It is given by
+
+ = (Id × T)m0
+
+64
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+where is an increasing map satisfying
+
+T : supp m0  supp m1
+
+m0([t, )) = m1([T(t), )) for all t  supp µ0.
+
+(5.4.4)
+
+If we define
+
+T(t) := (1 - )t + T(t), t  supp m0,   [0, 1],
+
+(5.4.5)
+
+then the family
+
+{m = (T)m0}[0,1]
+
+is a displacement interpolation between m0 and m1 with respect to the Euclidean squared distance cost, and m is absolutely continuous for all 0    1.
+
+If, in addition, the measures m0, m1 satisfy
+
+m0([t, ))  m1([t, )) for all t  R,
+
+Then the coupling  also satisfies
+
+t0  t1 for -almost every (t0, t1)  R × R.
+Definition 5.4.3. The coupling  will be called the monotone coupling between m0 and m1, and the family m will be called the monotone displacement interpolation between m0 and m1.
+Remark. In Lemma 5.4.2 we allow the measures mi to have mass different from 1, since in Proposition 5.4.4 below we can only guarantee that the measures m,i on the needles have the same (finite) mass, but not that they are probability measures. All the definitions and basic facts about one-dimensional optimal transport extend to this setting in an obvious way.
+
+Proposition 5.4.4 (Distinguished displacement interpolations). Let µ0 = f0µ, µ´1 = f1µ  P1(L), let u be a Kantorovich potential for the function f = f1 - f0, and let µ = A µd() be the corresponding disintegration of measure provided by Theorem 5.3.3. There exists a displacement interpolation {µ}01 between µ0 and µ1 with the following properties:
+· The measure µ is absolutely continuous for all   [0, 1]:
+µ = fµ.
+
+· For every   N , the family
+m, := (f  )m
+is the monotone displacement interpolation between the measures m,0 and m,1 on the interval I.
+´ · For every   D, the function   M f dµ = f(x) is constant.
+Remark. Since µ0, µ1  P1(L), the function f = f1 - f0 satisfies the moment condition (5.1.3), so a Kantorovich potential u indeed exists.
+
+5.4. DISPLACEMENT INTERPOLATIONS
+
+65
+
+Proof. We use the notation of Theorem 5.3.3. For every   N , the curve  is calibrated, i.e.
+
+u((t)) - u((t)) = c((t), (t)), a < t  t < b.
+
+(5.4.6)
+
+We also have mass balance: for every   N , ^ b (f1   - f0  )dm  0,
+t
+with equality when t = b, and for every   D,
+
+t  (a, b),
+
+f0(x) = f1(x).
+
+(5.4.7)
+
+For every   N , let
+
+m,0 = (f0  )m
+
+and
+
+m,1 = (f1  )m.
+
+The mass balance condition implies that hypothesis (5.4.3) in Lemma 5.4.2 is satisfied. Let
+
+ = (Id × T)m,0
+
+and
+
+m, := (T,)m,0   [0, 1]
+
+be the monotone coupling and the monotone displacement interpolation between the measures m0, and m1,, respectively. The measure m, is absolutely continuous for all 0    1, i.e. there exists a Borel function f, : I  R such that
+
+m, = f,m.
+
+For   D, we trivially define the map T, : {0}  {0} by T,(0) := 0 for all 0    1 and the coupling  by  := (0,0).
+
+Define a transport plan  by
+
+^
+
+ :=  dµ(),
+A
+
+where  is the pushforward of  via the map (t, t)  ((t), t - t)  SM ×0 [0, ). That
+
+is, for every measurable function  on SM ×0 [0, ),
+
+^
+
+^^
+
+(v, ) d(v, ) :=
+
+((t), t - t) d(t, t) d()
+
+SM ×0[0,)
+
+A
+
+I×I
+
+(5.4.8)
+
+(with the understanding that  = 0 if   D). Define measures µ by (5.4.1) and couplings , by (5.4.2):
+
+µ = (Exp),
+
+and
+
+, := (Exp × Exp),
+
+0      1.
+
+By clauses (iv) and (i) in Theorem 5.3.3, almost every x  M is contained in the image of a unique transport ray , and  depends measurably on x. Thus there exist µ-a.e.-defined measurable functions f : M  R such that
+
+f((t)) = f,(t),   N , t  I,   [0, 1].
+
+(5.4.9)
+
+If   D then we set f(x) = f0(x) for all 0    1, which is consistent with (5.4.7). Since each  is an extremal, for every   N and every a < t  t < b,
+
+Exp((t), t - t) = (t + (t - t)),   [0, 1].
+
+(5.4.10)
+
+66
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+Thus, for every Borel set A  M ,
+
+^
+
+µ(A) = (Exp-1(A)) =
+
+A(Exp(v, )) d(v, )
+
+^S M ×^0 [0,)
+
+=
+
+A((t + (t - t))) d(t, t)
+
+^A ^I×I
+
+d()
+
+=
+
+A((t + (T(t) - t))) dm,0(t) d()
+
+^A ^I
+
+=
+
+A((T,(t))) dm,0(t) d()
+
+^A ^I
+
+=
+
+A((t)) dm,(t) d()
+
+^A ^I
+
+=
+
+A((t))f,(t) dm(t) d()
+
+^A ^I
+
+=
+
+A((t))f((t)) dm(t) d()
+
+^A ^I
+
+= ^A
+
+fdµ d()
+A
+
+= f dµ.
+A
+
+Here A is the indicator set of A. In particular, µ is absolutely continuous for all 0    1, and the measures µ0 and µ1 are indeed f0µ and f1µ respectively.
+It remains to prove that for every 0      1, the coupling , between µ and µ is optimal. By Theorem 5.1.1, it suffices to prove that
+
+u(x) - u(x) = c(x, x)
+
+for ,-a.e. (x, x)  M × M .
+
+By (5.4.10) and the definitions of , and , this is equivalent to
+
+u((t + (t - t))) - u((t + (t - t))) = c((t + (t - t)), (t + (t - t)))
+
+for -a.e. (t, t)  I × I, for -a.e.   N . But this is true by (5.4.6) and the fact that t  t for -a.e.(t, t)  I × I.
+
+5.5 Displacement convexity of entropy
+
+In this section we prove the equivalence (ii)  (iii) in Theorem 1. Recall that for µ0 = f0µ 
+
+P1(L) we set
+
+^
+
+^
+
+SN [µ0|µ] = - f0-1/N dµ0
+
+and
+
+S[µ0|µ] = log f0 dµ0.
+
+M
+
+M
+
+Definition 5.5.1 (Distortion coefficients, see [39, 91, 92]). For K  R, N > 1,   0 and t  [0, 1], define the distortion coefficients
+
+tK,N , tK,N , tK,N : [0, )  [0, )
+
+5.5. DISPLACEMENT CONVEXITY OF ENTROPY
+
+67
+
+by:
+
+sin t tK,N () :=
+sin 
+
+K N -1
+K N -1
+
+tK,N () := t1/N · tK,N ()1-1/N
+
+and
+
+tK,N () := t1-N · tK,N ()N-1
+
+with the following conventions: · If K > 0 and  K/(N - 1)   then tK,N () =  for all t  [0, 1].
+
+· If K = 0 then we set t0,N  t0,N  t and t0,N  1.
+
+
+
+
+
+· If K < 0 we understand sin( -1 · r) = -1 · sinh(r) (note that the sign ambiguity is
+
+cancelled out).
+
+·
+
+If N
+
+=  then we set tK,
+
+ tK,
+
+
+
+1
+
+and
+
+tK,()
+
+=
+
+exp(
+
+K 6
+
+(1
+
+-
+
+t2)2).
+
+· tK,N (0) = tK,N (0) = t and tK,N (0) = 1 for every K, t and N . We also view tK,N as a function on SM ×0 [0, ) by setting
+
+tK,N (v, ) = tK,N (),
+
+(v, )  SM ×0 [0, ).
+
+Theorem 5.5.2 (Displacement convexity). Let K  R and let N  [n, ]. The following conditions are equivalent:
+
+(i) The pair (µ, L) satisfies CD(K, N ) in the sense of Definition 3.4.2.
+
+(ii) For every µ0 = f0µ, µ1 = f1µ  P1(L) there exists a displacement interpolation µ =
+
+(Exp) between µ0 and µ1 such that for every   [0, 1],
+
+´
+ 
+
+1K-,N ·
+
+-f0-1/N  Exp0
+
++ K,N ·
+
+-f1-1/N  Exp1
+
+d
+
+SN [µ|µ] 
+
+´
+
+(1
+
+-
+
+)
+
+·
+
+S[µ0|µ]
+
++
+
+
+
+·
+
+S[µ1|µ]
+
+-
+
+K 2
+
+·
+
+
+
+·
+
+(1
+
+-
+
+)
+
+·
+
+2d
+
+N < N =
+
+for all   [0, 1]. Here  : SM ×0 [0, )  [0, ) denotes the second variable.
+
+The one-dimensional Euclidean version of Theorem 5.5.2 is well known [91, 92, 27]. Here and in the sequel, for a measure m and a measurable set A of positive measure, the measure m|A denotes the normalized probability measure m|A := m(A)-1m(A  (·)).
+Lemma 5.5.3 (Displacement convexity on the real line). Let m be a measure on an interval I  R with a smooth density and let K  R and N  (1, ]. The following are equivalent:
+(i) The pair (m, l) satisfies CD(K, N ), where l is the Euclidean Lagrangian l = (dt2 + 1)/2.
+
+(ii) For every pair m0 = f0m, m1 = f1m of absolutely continuous measures on I of equal
+
+mass, if  and {m}[0,1] are the monotone coupling and the monotone displacement
+
+interpolation between m0 and m1, respectively, then
+
+´ -
+
+1K-,N (|t - t|) · f0(t)-1/N + K,N (|t - t|) · f1(t)-1/N
+
+d(t, t)
+
+SN [m|m]
+
+
+
+(1
+
+-
+
+)
+
+·
+
+S[m0|m]
+
++
+
+
+
+·
+
+S[m1|m]
+
+-
+
+K (1-) 2
+
+·
+
+´
+
+(t
+
+-
+
+t)2d(t,
+
+t)
+
+N < , N =
+
+for every   [0, 1].
+
+68
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+(iii) The conclusion of statement (ii) holds when m0 = m|I0 and m1 = m|I1, where I0, I1  I are intervals satisfying sup I0 < inf I1.
+
+Proof. We give a sketch of the proof; details can be found in [91, 92, 19] and [40, Theorem 3.17]. Let T and T be defined by (5.4.4) and (5.4.5). Differentiation gives
+
+(t)f0(t) = (T(t))f1(T(t))T(t) and
+
+T (t)
+
+=
+
+(1
+
+-
+
+)
+
++
+
+T(t)
+
+=
+
+(t)f0(t) (T(t))f(T(t))
+
+(5.5.1)
+
+for all t  supp f0 (the function T is increasing hence differentiable outside a countable set).
+
+Suppose that the pair (m, l) satisfies CD(K, N ). Then the density  = e- of the measure
+
+m satisfies
+
+¨ - 2  K, N -1
+
+see Example 3.4.5. Integrating this inequality (see e.g. [92, Chapter 14]) gives
+
+((1 - ) t +  t)  M 1 N -1
+
+1K-,N (t - t) · (t), K,N (t - t) · (t); 
+
+(5.5.2)
+
+for all t  t  I, where M is the generalized mean defined in Section 6.1. In particular,
+
+(T(t))  M 1 N -1
+
+1K-,N (T(t) - t) · (t), K,N (T(t) - t) · (T(t)); 
+
+(5.5.3)
+
+for all t  I (note that t  T(t) by Lemma 5.4.2). Ho¨lder's inequality implies that for every q, q1, q2  [0, ] satisfying 1/q1 + 1/q2 = 1/q and every a1, a2, b1, b2  0,
+
+Mq1(a1, b1; ) · Mq2(a2, b2; )  Mq(a1a2, b1b2; )
+
+Combining
+
+(5.5.1),
+
+(5.5.3)
+
+and
+
+(5.5.4)
+
+with
+
+q1
+
+=
+
+1
+
+and
+
+q2
+
+=
+
+1 N -1
+
+we
+
+obtain
+
+(5.5.4)
+
+(T(t))T(t)
+
+
+
+M
+
+1 N
+
+= M1 N
+
+1K-,N (T(t) - t)(t), K,N (T(t) - t)(T(t))T(t); 
+
+1K-,N (T(t)
+
+-
+
+t)(t),
+
+K,N (T(t)
+
+-
+
+t)
+
+·
+
+(t)f0(t) ; f1(T(t))
+
+
+
+.
+
+(5.5.5)
+
+Suppose first that N < . Using the definitions of , , SN and , the condition in (ii) can be
+
+written as
+
+^
+
+^
+
+f(t)1-1/N (t)dt  (1 - ) f0(t)1-1/N 1K-,N (T(t) - t)1/N (t)dt
+
+I
+
+^I
+
+(5.5.6)
+
++  f1(t)1-1/N K,N (t - T-1(t))1/N (t)dt.
+I
+
+In order to prove (5.5.6) we begin by making a change of variables via the map T:
+
+^
+
+^
+
+f(t)1-1/N (t)dt = f(T(t))1-1/N (T(t))T(t)dt
+
+I
+
+^I
+
+= (t)1-1/N f0(t)1-1/N (T(t))1/N T(t)1/N dt,
+I
+
+5.5. DISPLACEMENT CONVEXITY OF ENTROPY
+
+69
+
+where in the second passage we used (5.5.1). Applying (5.5.5) and then using the definition of
+
+M 1 , we get N ^
+
+f(t)1-1/N (t)dt I^
+
+ (t)1-1/N f0(t)1-1/N M 1
+
+I
+
+^
+
+N
+
+1K-,N (T(t)
+
+-
+
+t)(t),
+
+K,N (T(t)
+
+-
+
+t)
+
+·
+
+(t)f0(t) ; f1(T(t))
+
+
+
+1/N
+dt
+
+= (1 - ) (t)f0(t)1-1/N 1K-,M (T(t) - t)1/N dt ^I
+
++  (t)f0(t)f1(t)-1/N K,M (T(t) - t)1/N dt I^
+
+= (1 - ) (t)f0(t)1-1/N 1K-,M (T(t) - t)1/N dt ^I
+
++  (T(t))f1(T(t))1-1/N T(t)K,M (T(t) - t)1/N dt,
+I
+
+where in the last passage we used (5.5.1) again. By changing variables via the map T in the second integral we obtain (5.5.6).
+
+If N =  then (5.5.5) reads
+
+(T(t))T (t) 
+
+1K-, (T(t) - t)(t) 1-
+
+K,(T(t)
+
+-
+
+t)
+
+(t)f0(t) f1(T(t))
+
+
+,
+
+t  supp f0.
+
+Recalling that tK,() = exp
+
+K 6
+
+(1
+
+-
+
+t2)2
+
+, we get
+
+(T(t))T (t)
+
+
+
+(t)e
+
+K 2
+
+(1-)(T(t)-t)2
+
+f0(t)
+
+
+,
+
+f1(T(t))
+
+t  supp f0,
+
+whence by (5.5.1)
+
+log
+
+f0(t)
+
+
+
+K (1
+
+-
+
+)(T(t)
+
+-
+
+t)2
+
++
+
+ log
+
+f0(t)
+
+.
+
+f(T(t))
+
+2
+
+f1(T(t))
+
+Upon rearrangement this becomes
+
+log(f(T(t)))
+
+
+
+(1
+
+-
+
+)
+
+log(f0(t))
+
++
+
+
+
+log(f1(T(t)))
+
+-
+
+K 2
+
+(1
+
+-
+
+)(T(t)
+
+-
+
+t)2.
+
+Thus
+
+^
+
+^
+
+f(t) log(f(t))(t)dt = f(T(t)) log(f(T(t)))(T(t))T(t)dt
+
+I
+
+^I
+
+= f0(t)(t) log(f(T(t)))dt ^I
+
+ f0(t)(t) (1 - ) log(f0(t)) +  log(f1(T(t)))
+I
+- K (1 - )(T(t) - t)2 dt 2
+
+which, by the definition of S and , amounts to the desired inequality.
+
+70
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+The implication (ii) = (iii) is trivial. The implication (iii) = (i) can be found in e.g.
+[27, Proposition 3.4]; see also [40, Theorem 3.17] for a similar argument. The idea is to assume by contradiction that inequality (5.5.2) does not hold for some t < t, and take the intervals I0 and I1 to be t + 0 and t + 1, respectively, where i are small positive numbers, chosen so that equality holds in (5.5.4).
+
+Proof of Theorem 5.5.2. Let N  [n, ) and assume that Ricµ,N  K. Let
+
+µi = fiµ  P1(L), i = 0, 1. ´
+Choose a Kantorovich potential u for the function f1 - f0, let µ = A µ d() be the disintegration of measure provided by Theorem 5.3.3 and let µ = fµ = (Exp) be the displacement interpolation provided by Proposition 5.4.4.
+In order to unify below the notation for the classes N and D, for   D we set
+
+I = {0},  : {0}  M, (0) = x,
+
+as well as
+
+m := 0
+
+and
+
+m, = f(x)m = f(x)0,
+
+(where 0 is a Dirac probability measure at zero) and
+
+SN [m,|m] =
+
+-f(x)1-1/N f(x) log f(x)
+
+N < N =
+
+(5.5.7)
+
+for all 0    1. By (5.3.4), (5.4.9), (5.5.7) and the definition of SN , ^
+
+SN [µ|µ] = SN [m,|m] d(),
+A
+
+  [0, 1].
+
+(5.5.8)
+
+For every   N the family m, is a displacement interpolation between m0, and m1,, and the pair (m, (dt2 + 1)/2) satisfies CD(K, N ) since the measure µ is a CD(K, N )-needle
+
+by Lemma 5.3.2. Hence, by Lemma 5.5.3 and by (5.4.10),
+
+^
+
+SN [m,|µ]  -
+
+1K-,N (t - t) · f0((t))-1/N + K,N (t - t) · f1((t))-1/N d(t, t)
+
+^I×I
+
+=-
+
+1K-,N (t - t) · f0(Exp0( (t), t - t))-1/N
+
+I×I
+
++K,N (t - t) · f1(Exp1( (t), t - t))-1/N d(t, t).
+
+Note that we have used the fact that -almost surely t  t. The same inequality holds trivially when   D , since 1K-,N (0) = 1 -  and K,N (0) = , and f(x) = f0(x) for all   [0, 1] while  = (0,0), so both sides equal f0(x)1-1/N .
+
+Integrating with respect to  and using (5.4.8) we see that
+
+^
+
+^
+
+SN [m,|µ] d()  -
+
+1K-,N () · f0(Exp0(v, ))-1/N
+
+A
+
+SM ×0[0,)
+
++ K,N () · f1(Exp1(v, ))-1/N d(v, ),
+
+5.5. DISPLACEMENT CONVEXITY OF ENTROPY
+
+71
+
+which combines with (5.5.8) to give the desired inequality when N < . The proof for N =  is similar.
+
+Assume now that µ does not satisfy CD(K, N ). Then there exists an open set U  M and a C3 solution u : U  R to the Hamilton Jacobi equation such that
+
+(Lu)2
+
+(dLu)(u) +
+
++K >0
+
+N -1
+
+(5.5.9)
+
+at some x0  U . Without loss of generality, the set U is the domain of a C3 coordinate chart
+
+(x1, . . . , xn) -  < xi < 
+
+for some  > 0, such that in this coordinate chart x0 = 0 and
+u = xn. Since u is C3, we may also assume that (5.5.9) holds on all of U . Extend u to a dominated function on all of M , for instance by the formula
+
+u(z) := sup[ inf u(x) + c(x, y) - c(z, y)], yM xU
+
+z  M.
+
+Since H(du) = 0 on the set U , it is contained in the strain set of the extended u, and in particular
+
+u(x^(t)) - u(x^(t)) = c(x^(t), x^(t)), x^  (-, )n-1, - < t  t < , (5.5.10)
+
+where Write the density  in coordinates as
+
+x^(t) := (x^, t).
+
+ = J dx1  · · ·  dxn.
+
+Then
+
+(xnJ ) dx1  · · ·  dxn = Lxn (J dx1  · · ·  dxn) = Lxn  = (divµxn) ·  = (divµu)  = Lu · J dx1  · · ·  dxn,
+
+whence Inequality (5.5.9) thus becomes
+
+Lu = xn log J.
+
+x2n
+
+log
+
+J
+
++
+
+(xn log J )2 N -1
+
++
+
+K
+
+>
+
+0.
+
+In other words, for every x^ = (x1, . . . , xn-1)  (-, )n-1, the measure mx^ on the interval (-, ) given by
+dmx^ = J(x^, t)dt
+
+72
+
+CHAPTER 5. OPTIMAL TRANSPORT
+
+does not satisfy CD(K, N ) with respect to the Euclidean cost (see Example 3.4.5). By Lemma 5.5.3, for every x^  (-, )n-1 there exist
+
+- < t0 < s0 < t1 < s1 < 
+
+such that, if x^ and {mx^, = fx^,mx^}[0,1] are the monotone coupling and the monotone displacement interpolation between the measures mx^|[t0,s0] and mx^|[s1,t1], then
+
+´ -
+
+1K-,N (|t - t|) · fx^,0(t)-1/N + K,N (|t - t|) · fx^,1(t)-1/N
+
+dx^(t, t)
+
+SN [mx^,|mx^]
+
+>
+
+(1
+
+-
+
+)
+
+·
+
+S[mx^,0|mx^]
+
++
+
+
+
+·
+
+S[mx^,1|mx^]
+
+-
+
+K (1-) 2
+
+·
+
+´
+
+(t
+
+-
+
+t)2dx^(t,
+
+t)
+
+N < , N = .
+
+Define a measure µ on (-, )n by ^
+
+µ :=
+
+mx^,dx^,
+
+(-,)n-1
+
+  [0, 1],
+
+where the integration is with respect to the Lebesgue measure on (-, )n-1. We can view µ as a measure on M by identifying (-, )n with the set U . As in the proof of Proposition 5.4.4,
+
+if  is the transport plan satisfying
+
+^
+
+^
+
+^
+
+(v, ) d(v, ) :=
+
+(x^(t), t - t) dx^(t, t) dx^
+
+SM ×0[0,)
+
+(-,)n-1 (-,)2
+
+for every Borel function  : SM ×0 [0, )  R, then since each x^ is a minimizing extremal,
+
+µ = (Exp),   [0, 1].
+
+It follows from (5.5.10) and Theorem 5.1.1 that µ is a displacement interpolation between µ0 and µ1. In fact, it is the only displacement interpolation between µ0 and µ1, since there is a unique solution to the Monge problem on the real line when the supports of both measures are
+intervals (this follows from cyclic monotonicity, see e.g. [6, Section 3]). It also follows from
+the definitions that ^
+
+SN [µ|µ] =
+
+SN [mx^,|mx^] dx^,   [0, 1].
+
+(-,)n-1
+
+Thus, by integrating our lower bound on SN [mx^,|mx^] over x^ we conclude that condition (ii) does not hold.
+
+Chapter 6
+Consequences of the curvature-dimension condition
+
+6.1 The Brunn-Minkowski inequality
+
+For a detailed survey of the classical Brunn-Minkowski inequality see [54]; the results we present here are modeled after the distorted Brunn-Minkowski and Borell-Brascamp-Lieb inequalities for Riemannian manifolds and metric measure spaces [39, 91, 92, 30, 79]. BrunnMinkowski inequalities for sub-Riemannian manifolds were proved in [11, 16, 15], and for Lorentzian manifolds in [31].
+Let A0, A1  M and let 0 <  < 1. Let A denote the set of -midpoints of minimizing extremals joining A0 and A1:
+A := {() |  : [0, ]  M is a minimizing extremal, (0)  A0, ()  A1}.
+
+For a, b  0, 0 <  < 1 and q  [-, ] define the generalized mean M by:
+
+
+      
+Mq(a, b; ) =
+      
+
+(1 - )aq + bq 1/q a1-b
+max{a, b} min{a, b}
+
+q  R \ {0} q=0
+q = + q = -
+
+0
+
+ab > 0 ab = 0.
+
+Let us restate Theorem 2, which is the main result of this section:
+
+Theorem 6.1.1. Suppose that the pair (µ, L) satisfies CD(K, N ) for some K  R and some N  [n, ]. Then for every pair A0, A1  M of Borel sets and every 0 <  < 1,
+
+µ(A)  M 1 N
+
+1K-,N (A0, A1) · µ(A0), K,N (A0, A1) · µ(A1);  ,
+
+(6.1.1)
+
+where
+
+tK,N (A0, A1) := inf tK,N ()  a minimizing extremal  : [0, ]  M joining A0 to A1 .
+
+For the definition of the distortion coefficients tK,N see Definition 5.5.1. In the case K = 0 and N = , the distortion coefficients are identically 1 and inequality (6.1.1) takes the familiar
+form (1.2.3).
+
+73
+
+74 CHAPTER 6. CONSEQUENCES OF THE CURVATURE-DIMENSION CONDITION
+
+Remark 6.1.2. When the sets A0, A1 are Borel, the set A is Lebesgue. Indeed, it is well
+known that images of Borel sets under continuous maps are Lebesgue, and the set A is the image of the Borel set (Exp0)-1(A0)  (Exp1)-1(A1)  SM ×0 [0, ) under the continuous map Exp.
+
+Theorem 6.1.1 can be obtained from Theorem 5.5.2 by taking µi = µ|Ai. We will prove a more general, functional version of Theorem 6.1.1, due in the Riemannian case to CorderoErausquin, McCann and Schmuckenschla¨ger [39]:
+
+Theorem 6.1.3 (The Borell-Brascamp-Lieb inequality). Suppose that the pair (µ, L) satisfies CD(K, N ) for some K  R and some N  [n, ]. Let q  [-1/N, ], let 0 <  < 1 and let f0, f, f1 be nonnegative µ-integrable functions. Suppose that for every minimizing extremal  : [0, ]  M ,
+
+f(())  Mq
+
+f0((0)) 1K-,N ()
+
+,
+
+f1(()) K,N ()
+
+;
+
+
+
+.
+
+(6.1.2)
+
+Then
+
+^
+
+^
+
+^
+
+fdµ  Mq
+
+f0dµ, f1dµ;  ,
+
+M
+
+M
+
+M
+
+(6.1.3)
+
+where
+
+q = q 1 + qN
+
+and we interpret q = - if q = -1/N , q = 1/N if q = , and q = 0 if N = .
+
+Theorem 6.1.1 follows from Theorem 6.1.3 by taking
+
+f0 = 1K-,N (A0, A1) · A0 ,
+
+f1 = K,N (A0, A1) · A1
+
+and
+
+f = A
+
+and setting q = .
+
+Proof of Theorem 6.1.3. By inner regularity of t´he meas´ure µ, we may assume that f0, f1 are compactly supported. We may also assume that f0dµ, f1dµ > 0, since otherwise the right hand side of (6.1.3) is zero by definition. Set
+
+f := ´ f1 - ´ f0 . f1dµ f0dµ
+
+(6.1.4)
+
+´ Let µ = A µ d() be the disintegration of measure provided by Theorem 5. By (6.1.4) and the mass-balance properties (1.3.3) and (1.3.4),
+
+´
+
+´
+
+´M f0dµ = ´M f1dµ ,
+
+M f0dµ
+
+M f1dµ
+
+for -a.e   A
+
+(6.1.5)
+
+and where
+
+´
+
+´
+
+´M f0dµ,t  ´M f1dµ,t
+
+M f0dµ
+
+M f1dµ
+
+for -a.e.   N and t  R,
+
+µ,t := ()(m|[t,)),
+
+t  R.
+
+(6.1.6)
+
+We will prove below that inequality (6.1.3) holds for each needle µ:
+
+6.1. THE BRUNN-MINKOWSKI INEQUALITY
+
+Lemma 6.1.4. For -almost every   A ,
+
+^
+
+^
+
+^
+
+fdµ  Mq
+
+f0dµ, f1dµ;  .
+
+M
+
+M
+
+M
+
+By (1.3.2), (6.1.5), (6.1.7) and the homogeneity of M,
+
+^
+
+^^
+
+fdµ = ^A
+
+fdµ d()
+
+^
+
+^
+
+ Mq f0dµ, f1dµ;  d()
+
+^A ^
+
+´
+
+= ^A
+
+f0dµ · Mq ^
+
+1, ´ f1dµ ;  ´ f0dµ
+
+= ^A
+
+f0dµ · Mq ´
+
+1, ´ f1dµ ;  f0dµ
+
+=
+
+f0dµ ^
+
+·
+
+Mq
+
+1, ^
+
+´
+
+f1dµ ;  f0dµ
+
+d() d()
+
+= Mq f0dµ, f1dµ;  .
+
+This concludes the proof of the Theorem 6.1.3 given Lemma 6.1.4.
+
+75 (6.1.7)
+
+Proof of Lemma 6.1.4. Suppose first that   D, i.e. µ is a Dirac measure at some point x  M . Taking the geodesic  in (6.1.2) to be a constant curve   x and recalling that tK,N (0) = 1, we obtain
+^
+
+fdµ = f(x)  Mq (f0(x), f1(x); )  Mq (f0(x), f1(x); )
+
+^
+
+^
+
+= Mq f0dµ, f1dµ; 
+
+where in the second passage we used q  q and Ho¨lder's inequality. Now assume that   N . Then µ is a CD(K, N )-needle, i.e. it takes the form
+
+µ = ()m,
+
+where  : (a, b)  M is a minimizing extremal and m is an absolutely continuous measure on (a, b) satisfying CD(K, N ) with respect to the Euclidean metric on R.
+Let a < t0  t1 < b. Applying (6.1.2) to the minimizing extremal |[t0,t1] we see that
+
+f(((1 - )t0 + t1))  Mq
+
+f0((t0)) 1K-,N (t1 - t0)
+
+,
+
+f1((t1)) K,N (t1 - t0)
+
+;
+
+
+
+(6.1.8)
+
+Since µ is a CD(K, N )-needle, the density  = e- of the measure m with respect to the Lebesgue measure satisfies
+
+¨
+
+
+
+K
+
++
+
+2 N-
+
+1
+
+on [t0, t1].
+
+76 CHAPTER 6. CONSEQUENCES OF THE CURVATURE-DIMENSION CONDITION
+
+as in (5.5.2), this implies
+
+((1 - ) t0 +  t1)  M 1 N -1
+
+1K-,N (t1 - t0) · (t0), 1K-,N (t1 - t0) · (t1); 
+
+for all a < t0  t1 < b. Set
+
+(6.1.9)
+
+h,i :=  · (fi  ), i = 0, , 1.
+
+By (6.1.8), (6.1.9) and (5.5.4),
+
+h,((1 - ) t0 + t1)  M 1 (h,0(t0), h,1(t1); ) , N -1+1/q
+
+a < t0  t1 < b. (6.1.10)
+
+By (6.1.5),
+
+´ab´h,0(t)dt
+
+=
+
+´ b
+a
+
+f0(´(t))(t)dt
+
+=
+
+´ b
+a
+
+f1(´(t))(t)dt
+
+=
+
+´ab´h,1(t)dt
+
+f0dµ
+
+f0dµ
+
+f1dµ
+
+f1dµ
+
+and similarly, by (6.1.6), for every t  (a, b),
+
+´ b ´tb
+a
+
+h,0(t)dt h,0(t)dt
+
+
+
+´ b ´tb
+a
+
+h,1(t)dt h,1(t)dt
+
+(6.1.11)
+
+We now apply the following oriented version of the one-dimensional Borell-Brascamp-Lieb inequality, proved in [8]:
+
+Lemma 6.1.5 ([8, Lemma 3.8]). Let q  [-1, ]. Let h0, h1 be non-negative, integrable functions on an interval (a, b)  R satisfying
+
+´b ´tb
+a
+
+h0 h0
+
+
+
+´b ´tb
+a
+
+h1 h1
+
+for every t  (a, b).
+
+Let h be a non-negative integrable function satisfying
+
+h((1 - )t0 + t1)  Mq(h0(t0), h1(t1); )
+
+for every a < t0  t1 < b. Then
+
+^b
+
+^b ^b
+
+h
+
+
+
+Mq q+1
+
+a
+
+h0, h1;  .
+
+a
+
+a
+
+It follows from (6.1.10), (6.1.11) and Lemma 6.1.5 that
+
+^ b
+
+h,(t)dt
+
+
+
+Mq 1+qN
+
+a
+
+^ b
+
+^ b
+
+h,0(t)dt, h,1(t)dt; 
+
+a
+
+a
+
+which, by the definitions of h,0, h,1, h, and q implies (6.1.7).
+
+6.2. THE BONNET-MYERS THEOREM
+
+77
+
+6.2 The Bonnet-Myers theorem
+
+The following standard lemma is proved exactly as in the Riemannian case, see [33, Lemma 5.2].
+
+Lemma 6.2.1. Let  : [0, T ]  M be a minimizing extremal. For every t  (0, T ), the extremal |[0,t] is uniquely minimizing.
+
+Proof. Let t  (0, T ), let ~ : [0, T~]  M be a minimizing extremal joining (0) to (t) and assume by contradiction that ~ = |[0,t]. Pick t~  (0, T~) such that ~(t~) does not lie on , and let ¯ be a minimizing extremal joining ~(t~) to (T ). Since minimizing extremals are
+
+differentiable, the concatenation of ~|[t~,T~] with |[t,T ] is not minimizing, i.e.
+
+^
+
+^
+
+^
+
+L<
+
+L+
+
+L,
+
+¯
+
+~|[t~,T~]
+
+|[t,T ]
+
+whence ^
+
+^
+
+^
+
+^
+
+^
+
+^
+
+^
+
+L+ L<
+
+L+
+
+L=
+
+L+
+
+L = L.
+
+~|[0,t~]
+
+¯
+
+~|[0,t]
+
+|[t,T ]
+
+ |[0,t]
+
+|[t,T ]
+
+
+
+Thus, by concatenating ¯ to ~|[0,t~] we obtain a curve joining (0) to (T ) with action strictly smaller than that of , contradicting the assumption that  is minimizing.
+
+The next lemma is also standard, see e.g. [91, Corollary 2.6] or [92, Theorem 14.12]. We state it without proof.
+Lemma 6.2.2. Let K  0 and 1 < N <  and let m be a measure on R with a smooth density which is supported on an interval I  R and satisfies CD(K, N ) with respect to the Euclidean metric.
+1. If K > 0 then the length of I is at most  · (N - 1)/K.
+2. If K = 0 and I = R then the density of m is constant.
+Recall that the diameter diam(A) of a set A  M is the supremum over all  > 0 such that there exists a minimizing extremal  : [0, ]  M whose endpoints lie in A.
+Theorem 6.2.3 (Bonnet-Myers [33, Theorem 1.31], Sturm [91, Corollary 2.6], cf. Agrachev & Gamkrelidze [3, Section 4]). Suppose that the pair (µ, L) satisfies CD(K, N ) for some K > 0 and 1 < N < . Then diam(M )   · (N - 1)/K. If, in addition, the Euler-Lagrange flow is complete, then M is compact.
+Proof. Assume by contradiction that there exists a minimizing extremal  which is defined on an interval of length  >  · (N - 1)/K. By Lemma 6.2.1, we may assume that  is the uniquely minimizing, for otherwise we can replace  by - for some small . Let f = f1 -f0, where f0 (resp. f1) is a nonnegative function defined on a small neighborhood of (0) (resp. ()) whose total integral is 1, and apply Theorem 5. By the mass balance condition, there must exist a CD(K, N )-needle µ which is supported on an interval of length >  · (N - 1)/K, but this is not possible by Lemma 6.2.2. If the Euler-Lagrange flow is complete, then M is compact by Lemma 2.3.3.
+
+78 CHAPTER 6. CONSEQUENCES OF THE CURVATURE-DIMENSION CONDITION
+
+6.3 The Bishop-Gromov inequality
+
+The Bishop-Gromov inequality (see e.g. [85, Chapter 7]) compares the volume growth of a Riemannian manifold with Ricci curvature bounded from below to the volume growth of a model space of constant curvature. The generalization of the Bishop-Gromov inequality to metric measure spaces was proved in Sturm [91] using the Brunn-Minkowski inequality.
+
+For x0  M and r > 0 denote by Br(x0) the forward ball of radius r centered at x0:
+
+Br(x0) := {(t) |  is a minimizing extremal with (0) = x0, 0  t < r}
+
+Theorem 6.3.1 (The Bishop-Gromov inequality). Let K  R and 1 < N < . Suppose that the pair (µ, L) satisfies CD(K, N ). Let x0  M and define
+
+V (r) := µ(Br(x0)), r > 0.
+
+Then
+
+V (r)  VK,N (r) , V (R) VK,N (R)
+
+where
+
+^r
+
+N -1
+
+VK,N (r) :=
+
+sin t K/(N - 1) dt
+
+.
+
+0
+
+Proof. Let x0  M and let
+
+u(x) := c(x0, x),
+
+x  M. ´
+
+Then u is dominated, and we may apply Theorem 5.3.3; let µ = A µ d() be the resulting
+
+disintegration of measure (in fact, in this case the disintegration of measure is just a Lagrangian
+
+analogue of polar normal coordinates). The transport rays of u are precisely minimizing ex-
+
+tremals starting at x0. Hence for every   N ,
+
+-1(Br(x0)) = (a, min{a + r, b}),
+
+whence
+
+µ(Br(x0)) = m((a, a + r)).
+
+For -almost every   N the measure µ is a CD(K, N )-needle, so the measure m satisfies the CD(K, N ) condition with respect to the Euclidean metric on the interval (a, b). Hence the measure m satisfies the corresponding Bishop-Gromov inequality, i.e.
+
+m((a, a + r))  VK,N (r) m((a, a + R)) VK,N (R)
+
+for every 0 < r < R, see [91, Theorem 2.3]. It follows that, for every 0 < r < R, ^
+
+V (r) = µ(Br(x0))d() ^A
+
+= m((a, a + r))d()
+
+^A
+
+
+
+A
+
+VK,N (r) VK,N (R^)
+
+· m((a, a + R))d()
+
+= VK,N (r) · VK,N (R)
+
+µ(BR(x0))d()
+A
+
+= VK,N (r) · V (R), VK,N (R)
+
+and the theorem is proved.
+
+6.4. THE ISOPERIMETRIC INEQUALITY
+
+79
+
+6.4 The isoperimetric inequality
+
+Suppose that µ is a probability measure:
+
+µ(M ) = 1.
+
+For A  M and  > 0, let [A] denote the -neighborhood of the set A:
+
+[A] : = {(t) |  is a minimizing extremal with (0)  A, = B(a),
+aA
+and let µ+(A) denote the upper minkowski content of A:
+
+0  t < }
+
+µ+(A)
+
+:=
+
+lim
+
+inf
+
+µ([A])
+
+-
+
+µ(A) .
+
+0
+
+
+
+The isoperimetric profile of the pair (L, µ) is defined by
+
+IL,µ(s) := inf µ+(A) | A  M, µ(A) = s , s  [0, 1].
+For every K  R, N  (-, ] \ {1} and D > 0, we define a one-sided model isoperimetric profile IK+,N,D : [0, 1]  [0, ] by
+
+IK+,N,D(s) := inf m+(A)
+
+m  N(K, N, D),
+
+A  R, m(A) = s, m|(a,)(A)  s a  R
+
+,
+
+where N(K, N, D) is the set of all CD(K, N )-needles on R with support contained in [0, D] and total mass 1 (i.e., absolutely-continuous probability measure on [0, D] with a C2 density
+satisfying CD(K, N ) with respect to the Euclidean metric), and
+
+m+(A)
+
+:=
+
+lim
+
+inf
+
+m(A
+
++
+
+[0,
+
+))
+
+-
+
+m(A) .
+
+0
+
+
+
+Note that the neighborhood of A in the definition of m+(A) is one-sided. The condition m|(a,)(A)  m(A) for all a  R in the definition of IK+,N,D is therefore needed in order to exclude trivial minimizers of the form A = [a0, ) for some a0  (0, D). For a detailed
+description of the standard (i.e. two-sided) model isoperimetric profiles, see [75].
+
+The proof of the following theorem follows the proof of [62, Proposition 5.4].
+
+Theorem 6.4.1. Suppose that the pair (µ, L) satisfies CD(K, N ) for some K  0 and some N  (-, ] \ [1, n), and that diam(M ) = D < . Then
+
+IL,µ  IK+,N,D. Proof. Let A  M , write s = µ(A), define a function f : M  R by
+
+f := s - A,
+
+´ and let µ = A µ d() be the disintegration of measure provided by Theorem 5. Then for -almost every   A ,
+
+µ(A) = s · µ(M ),
+
+(6.4.1)
+
+80 CHAPTER 6. CONSEQUENCES OF THE CURVATURE-DIMENSION CONDITION
+
+and for -almost every   N ,
+
+µ+(A)  s · µ,t(M ).
+
+(6.4.2)
+
+for every upper end µ,t of the needle µ.
+
+By the disintegration formula (1.3.2), for every  > 0, ^
+
+µ([A]) - µ(A) = [µ([A]) - µ(A)]d() ^A
+
+=
+
+m(-1([A])) - m(-1(A)) d()
+
+^A
+
+ m(-1(A) + [0, )) - m(-1(A)) d()
+
+^A
+= m(R) ·
+A
+
+m(-1(A) + [0, )) - m(-1(A))
+
+m(R)
+
+m(R)
+
+d(),
+
+where the inequality holds true since, by the definition of [A] and the fact that each  is a minimizing extremal,
+
+-1([A])  -1(A) + [0, ) for -a.e.   A .
+
+If  is a Dirac measure then the integrand vanishes. If   N , then by (6.4.1) and (6.4.2),
+
+the set -1(A) satisfies the conditions in the definition of IK+,N,D with respect to the probability measure m/m(R) on R, which is a CD(K, N )-needle with total measure 1. Thus by Fatou's
+
+Lemma and by (6.4.1):
+
+^
+
+lim inf 0
+
+µ([A]) - 
+
+µ(A)
+
+
+
+^A
+
+m(R)
+
+·
+
+IK+,N,D
+
+= µ(M ) · IK+,N,D
+
+A
+
+^
+
+m(-1(A)) d() m(R)
+µ(A) d() µ(M )
+
+= IK+,N,D(s) · µ(M ) d()
+A
+= IK+,N,D(s) · µ(M )
+
+= IK+,N,D(s).
+
+Taking infimum over A gives the desired result.
+
+6.5 Functional inequalities
+
+In this section we prove analogues of the Poincare´ and log-Sobolev inequalities under the curvature-dimension condition. Recall that SxM = SM  TxM = {v  TxM | E(v) = 0} for all x  M . Define
+
+E : T M  [0, ),
+
+E(p) := max |p|, SxM
+
+p  TxM, x  M.
+
+Theorem 6.5.1 (Poincare´ inequality, cf. [84, 67, 95, 62]). Suppose that the pair (µ, L) satisfies
+
+´CD(0, ) and that diam(M ) = D < . Then for every f  L1(µ)  L2(µ)  C1 such that
+
+f dµ = 0,
+
+^ f 2dµ  D2 ^ E(df )2 dµ.
+
+M
+
+2 M
+
+(6.5.1)
+
+6.5. FUNCTIONAL INEQUALITIES
+
+81
+
+Proof. By a truncation argument we may assume that f is compactly-supported. Applying
+
+Theorem 5 to the function f , we obtain a disintegration of µ such that for -almost every
+
+A,
+
+^
+
+f dµ = 0.
+M
+
+For -a.e.   N , the measure µ is a CD(0, ), i.e. the density of m with respect to the Lebesgue measure on I is log-concave (see Example 3.4.5). The one-dimensional Poincare´ inequality in [84] (see also [10, Section 4.5.2]) then implies that for -almost every   A ,
+
+writing f := f  ,
+
+^
+
+^ b
+
+f 2dµ =
+
+f2 dm
+
+M
+
+ 
+
+a
+(b
+D2 2
+
+- a)2 2 ^ b
+
+^ b
+a
+
+f2
+
+dm
+
+f2 dm,
+
+a
+
+where the last inequality holds true by the definition of diameter, since  is a minimizing extremal. Since f = df () and   SM , we conclude that
+
+^
+M
+
+f 2dµ
+
+
+
+D2 2
+
+^
+M
+
+E(df )2dµ
+
+for -a.e.   A
+
+(the ´inequality holds trivially f´or   D, since the mass balance condition (5.3.5) implies that M f 2dµ = f (x)2 = ( M f dµ)2 = 0). Integrating with respect to  and using the disintegration formula (1.3.2) we arrive at (6.5.1).
+
+Theorem 6.5.2 (Log-Sobolev inequality, cf. [10, Proposition 5.7.1], [81]). Suppose that µ is
+
+a probability measure and that the pair´(µ, L) satisfies CD(K, ) for some K > 0. Let f  (L2 log L2)(µ)  L2(µ)  C1 satisfy f 2dµ = 1. Then
+
+^
+
+^
+
+f 2 log f 2 dµ  2 E(df )2 dµ.
+
+M
+
+KM
+
+Proof. Again, we may assume that f is compactly-supported. Apply Theorem 5 to the function
+
+f2 - 1
+
+to obtain a disintegration of µ such that for -almost every   A we have ^ f 2dµ = 1,
+M
+
+and such that -almost every   N is a CD(K, )-needle. It then follows from (1.3.2) and
+
+the 1-dimensional log-Sobolev inequality (see e.g. [10, Section 5.7]) that
+
+^ b
+a
+
+f ((t))2
+
+log f ((t))2
+
+dm(t)
+
+ 
+
+2 K 2 K
+
+^ b ((f  )(t))2 dm(t)
+^a b (E(df )((t)))2 dm(t),
+a
+
+82 CHAPTER 6. CONSEQUENCES OF THE CURVATURE-DIMENSION CONDITION
+
+using in the second passage the fact that E()  0. Thus, for -almost every   A ,
+
+^
+
+^
+
+M
+
+f 2 log f 2 dµ
+
+
+
+2 K
+
+E(df )2 dµ,
+M
+
+where again the inequality holds trivially for   D, since the mass balance condition (5.3.5) implies that f (x)2 = 1 so the left hand side vanishes. We complete the proof by integrating
+over  and using the disintegration formula (1.3.2).
+
+Chapter 7 Examples
+
+7.1 Classical Lagrangians
+
+In this section we consider the case where the Lagrangian takes the form:
+
+L(v) = |v|2g + U (x) - (v), 2
+
+v  TxM, x  M,
+
+where g is a Riemannian metric, U is a smooth, positive function on M , and  is a one-form.
+
+Note that our sign convention is the opposite of that used in classical mechanics. We leave the
+
+verification of some of the facts below as an exercise to the reader. The Hamiltonian associated
+
+to L is
+
+H(p) = |p + |g2 - U (x), 2
+
+p  TxM, x  M,
+
+The Legendre transform is
+
+Lp = p + ,
+
+p  TM,
+
+where  : T M  T M is the musical isomorphism, and the energy is
+
+E(v) = |v|g2 - U (x), 2
+The operators  and L are given by
+
+v  TxM, x  M.
+
+(7.1.1)
+
+u = gu +  and Lu = gu - ,
+
+where g and g are the Riemannian gradient and Laplacian, respectively, and  is the codifferential. The Euler-Lagrange equation is
+
+g  = Y + gU,
+
+(7.1.2)
+
+where g is the Levi-Civita connection and Y = (d) is the (1, 1)-tensor defined by the relation
+ := d = Y · , · g .
+
+We now derive an explicit formula for the weighted Ricci curvature of the Lagrangian L. First, let us identify some of the objects introduced in Sections 3.1 and 3.2. Let kij denote the Christoffel symbols of the metric g. Then, by (7.1.2), the coefficients of the Euler-Lagrange
+semispray are
+
+k = -ikjvivj + Ykivi + (gU )k = kg + Ykivi + (gU )k,
+
+1  k  n, (7.1.3)
+
+83
+
+84
+
+CHAPTER 7. EXAMPLES
+
+where g is the geodesic spray of g, and the connection coefficients are
+
+ij
+
+=
+
+jik v k
+
+-
+
+1 2
+
+Yj
+
+i
+
+,
+
+1  i, j  n.
+
+The vector field  is given by
+
+j
+
+=
+
+1 2
+
+Yj
+
+i
+
+vi
+
++
+
+(gU )j,
+
+and the vector fields Ei are given by
+
+1jn
+
+(7.1.4)
+
+Ei = xi -
+
+ijk v k
+
+-
+
+1 2
+
+Yj
+
+i
+
+vj
+
+=
+
+Eig
+
++
+
+1 2
+
+Yj
+
+ivi
+
+,
+
+(7.1.5)
+
+where Eig are the corresponding vector fields for the Lagrangian g. Finally, observe that Lvivj = gij, i.e. the coefficients gij of the metric g coincide with the coefficients gij = Lvivj defined in
+Section 3.2.
+
+Lemma 7.1.1. The Ricci curvature of the Lagrangian L is given by
+
+Ric
+
+=
+
+Ricg
+
+-
+
+divg Y
+
++
+
+1 4
+
+|Y|g2
+
+-
+
+g U,
+
+where the one-form divgY = Tr(gY) is viewed as a function on T M , and the functions
+
+|Y|g, gU on M are viewed as functions on T M which are constant on each fiber.
+
+Proof. In the following computation, a comma followed by an index i denotes differentiation with respect to xi. Objects with g superscripts or subscripts are taken with respect to the Riemannian Lagrangian (g + 1)/2 instead of L. We denote U j := (gU )j. By (7.1.3) and
+(7.1.5),
+
+[Ei, ] =[Eig, g] +
+
+1 2
+
+Yj
+
+ivj
+
+,
+
+g
+
++ Eig, (Yjkvk + U j)vj
+
++
+
+1 2
+
+Yj
+
+ivj
+
+,
+
+(Yj k vk
+
++
+
+U j)vj
+
+=[Eig ,
+
+g ]
+
++
+
+1 2
+
+Yj
+
+i
+
+xj
+
+-
+
+Ykikj vvj
+
+-
+
+1 2
+
+vk
+
+Yj
+
+i,k
+
+vj
+
++
+
+(Yj k,ivk
+
++
+
+U j ,i)vj
+
+-
+
+ikvkYj vj
+
++
+
+(Yj k vk
+
++
+
+U j )ij v
+
++
+
+1 2
+
+Yk
+
+iYj
+
+k
+
+vj
+
+=[Eig ,
+
+g ]
+
++
+
+1 2
+
+Yj
+
+i
+
+xj
+
++
+
+-
+
+Yk i jk v 
+
+-
+
+1 2
+
+vk
+
+Yj
+
+i,k
+
++
+
+vkYj k,i
+
+-
+
+vkikYj 
+
++
+
+v k Y k ji
+
++
+
+1 2
+
+Yk
+
+i
+
+Yj
+
+k
+
++
+
+U j ,i
+
++
+
+U kijk
+
+vj .
+
+Recall
+
+that
+
+i
+
+=
+
+dvi
+
++
+
+ki dxk
+
+=
+
+gi
+
+-
+
+1 2
+
+Yi
+
+kdxk.
+
+Thus
+
+by
+
+(3.1.5),
+
+-Ric
+
+=
+
+i([Ei,
+
+])
+
+=gi ([Ei,
+
+])
+
+-
+
+1 2
+
+Yik
+
+dxk
+
+([Ei,
+
+])
+
+=gi ([Ei,
+
+])
+
+-
+
+1 2
+
+Yik
+
+dxk
+
+[Eig, g]
+
++
+
+1 2
+
+Yj
+
+i
+
+xj
+
+=gi ([Eig,
+
+g ])
+
++
+
+1 2
+
+Ykiki 
+
+v
+
++
+
+1 2
+
+Yj
+
+iji k
+
+vk
+
+-
+
+1 4
+
+Yi
+
+kYk
+
+i
+
+-
+
+Ykiki v
+
+-
+
+1 2
+
+vk
+
+Yii,k
+
++
+
+v k Yi k,i
+
+-
+
+v k ik Yi 
+
++
+
+v k Y k ii
+
++
+
+1 2
+
+Yk
+
+i
+
+Yik
+
++ U i,i + U kiik
+
+= - Ricg + vk
+
+Yik,i - ikYi + iiYk
+
++
+
+1 4
+
+Yk
+
+i
+
+Yik
+
++
+
+U i,i
+
++
+
+U kiik
+
+=
+
+-
+
+Ricg
+
++
+
+(divY)kvk
+
+-
+
+1 4
+
+|Y|2g
+
++
+
+g U,
+
+7.1. CLASSICAL LAGRANGIANS
+
+85
+
+where the identity YkiYik = -|Y|g2 holds since Y is skew-symmetric.
+
+Combining Lemma 7.1.1, identity (7.1.4) and Definition 3.3.1 with   0, we get:
+
+Corollary 7.1.2. The weighted Ricci curvature of the Lagrangian L with respect to the Riemannian volume measure is given by
+
+RicVolg ,N
+
+=
+
+Ricg
+
+-
+
+divg Y
+
++
+
+1 4
+
+|Y|2g
+
+-
+
+g U
+
++
+
+22
+
++
+
+1 1-
+N -n
+
+2
+
+where
+
+v, gU 
+
+(v) =
+
+, |v|2
+
+and
+
+2 (v) =
+
+1 2
+
+Yv
+
++
+
+g U
+
+-
+
+|v|-2
+
+v, gU  v
+
+2
+,
+
+|v|2
+
+v  T M \0.
+
+Corollary 7.1.3. Suppose that M is a Ka¨hler manifold of complex dimension d = n/2, and
+
+that
+
+1
+
+U
+
+and Y = c · J,
+
+2
+
+where J is the complex structure and c  R is a constant. Then
+
+RicVolg ,n
+
+=
+
+Ricg
+
++
+
+c2
+
+·
+
+d
+
++ 2
+
+1 .
+
+Proof. The complex structure J is a parallel isometry and   0. Thus the result follows from Corollary 7.1.2.
+
+The following lemma is easy to verify; see e.g. [23, Lemma 2.3].
+
+Lemma 7.1.4. The cost associated with L is given by
+
+^
+
+^
+
+c(x, y) = inf
+
+2U · |d| -  ,
+
+
+
+
+
+
+
+where the infimum is taken over piecewise-C1 curves joining x to y. A curve attaining the infimum satisfies | | = 2U . In particular, if U  1/2 then
+
+^
+
+c(x, y) = inf Leng[] -  ,
+
+
+
+
+
+where Leng[] denotes length with respect to the metric g, and the infimum is attained by a unit-speed curve.
+
+Horocycles in complex hyperbolic space
+
+An noteworthy special case is the Lagrangian on the hyperbolic plane whose Euler-Lagrange
+
+flow on the unit tangent bundle is the horocycle flow. Let H denote the hyperbolic plane, and
+
+let L be the Lagrangian
+
+g+1
+
+L=
+
+- ,
+
+2
+
+(7.1.6)
+
+86
+
+CHAPTER 7. EXAMPLES
+
+where g is the hyperbolic metric and  is any primitive of the hyperbolic area form; for instance, in the upper half plane model one can take
+
+dx2 + dy2 1 dx
+
+L=
+
++- .
+
+2y2
+
+2y
+
+A Brunn-Minkowski inequality for this Lagrangian was obtained in [8]. We will now give a proof of Theorem 3, which generalizes this result to complex hyperbolic space of arbitrary dimension.
+Let CHd denote the unique simply connected Ka¨hler manifold of complex dimension d and constant holomorphic sectional curvature -1. When d = 1 then CH1 = H is the hyperbolic plane. Facts about the complex hyperbolic geometry can be found in [55]. We define an oriented horocycle to be a solution to the differential equation
+
+  = J , | |  1,
+
+(7.1.7)
+
+where J is the complex structure on CHd. Equivalently, an oriented horocycle is a unit-speed curve of geodesic curvature 1 contained in a totally geodesic copy of the hyperbolic plane (a complex geodesic) and oriented according to the induced complex structure.
+
+Let  be any one-form satisfying d = , where  is the Ka¨hler form of CHd (an explicit choice is written below). Since  = J, equations (7.1.1) and (7.1.2) with U  1/2 imply that
+
+zero-energy extremals are solutions to (7.1.7). Thus every minimizing extremal is an oriented
+
+horocycle.
+
+The
+
+Riemannian
+
+Ricci
+
+curvature
+
+of
+
+CHd
+
+is
+
+-
+
+d+1 2
+
+·
+
+g
+
+(see
+
+e.g.
+
+[63,
+
+Theorem
+
+7.5]).
+
+Hence by Corollary 7.1.3, the weighted Ricci curvature of the Lagrangian L with respect to the
+
+hyperbolic volume measure vanishes identically on the unit tangent bundle:
+
+Ricµ,n  0
+
+on SCHd,
+
+where n = 2d is the real dimension of Hd.
+
+Let us verify conditions (I)-(III) from Section 2.3. Clearly L is Tonelli and 0 is a regular value of the energy. Every pair of points in CHd lies on a unique common complex geodesic, which contains a unique oriented horocycle joining them. Thus, in order to verify condition (II), it suffices to show that every oriented horocycle is uniquely minimizing. Note that this notion is independent of the choice of . It is convenient to work in the Siegel model, which is the domain
+z  Cd | zd + z¯d - r2 > 0 ,
+
+where r :=
+
+d-1 j=1
+
+|zj
+
+|2,
+
+endowed
+
+with
+
+the
+
+metric
+
+4
+
+d-1
+
+g= (zd + z¯d - r2)2
+
+dzd - z¯jdzj
+j=1
+
+d-1
+dz¯d - zjdz¯j
+j=1
+
+4
+
+d-1
+
++ zd + z¯d - r2 j=1 dzjdz¯j.
+
+The one form
+
+dzd - dz¯d +  = i·
+
+d-1 j=1
+
+zj dz¯j
+
+-
+
+z¯j dzj
+
+.
+
+zd + z¯d - r2
+
+7.1. CLASSICAL LAGRANGIANS
+
+87
+
+is a primitive of the Ka¨hler form  = -4i¯ log(zd + z¯d - r2). With these expressions for g and , it is easy to verify that ||g = 1, and that this norm is achieved at the unit vector field
+
+V
+
+:=
+
+zd + z¯d - r2 2i
+
+(zd
+
+- z¯d ) .
+
+Thus, for every piecewise-C1 curve  on CHd, ^
+Len[] -   0,
+
+
+with equality if and only if  is an integral curve of V . In particular, closed curves have positive action, so L is supercritical. The integral curves of V lying on the complex geodesic r = 0 are oriented horocycles since, when restricted to this complex geodesic, the vector field V becomes xy in real coordinates on the right half-plane. It follows by symmetry that every oriented horocycle is uniquely minimizing. Condition (III) holds because the length of an oriented horocycle joining two points is a smooth function of the distance between them. Theorem 3 now follows from Theorem 2.
+
+Contact magnetic geodesics on odd-dimensional spheres
+
+Let S2d+1 := z  Cd+1 | |z| = 1
+denote the unit sphere in Cn+1 with the round metric
+
+g(v, w) = Re v, wCd+1 ,
+
+v, w  TzS2d+1, z  S2d+1.
+
+It carries a natural contact structure, namely, the one-form
+
+|z
+
+:=
+
+Re iz, ·Cd+1
+
+=
+
+i 2
+
+n+1
+
+z j dz¯j
+
+-
+
+z¯j dz j ,
+
+j=1
+
+z  S2d+1.
+
+The Reeb vector field is given by
+
+n+1
+R|z := |z = i zjzj - z¯jz¯j ,
+j=1
+
+z  S2d+1.
+
+The two-form  = d is given by
+
+d+1
+ = i dzj  dz¯j,
+j=1
+
+which is twice the standard symplectic form on Cd+1, and so the (1, 1)-tensor Y =  is
+
+Y = 2iker,
+
+where ker is the orthogonal projection onto the kernel of . Equivalently, Yv = 2i · v - 2i · (v) · R, v  TzS2d+1, z  S2d+1.
+
+88
+
+CHAPTER 7. EXAMPLES
+
+The extremals of the Lagrangian
+
+g+1 Ls = 2 - s · 
+
+(7.1.8)
+
+for s > 0 were studied in detail in a recent paper [5], see also [78] (note that the one-form used
+
+in [5] is  = /2, and subsequently, in the formulae below s becomes s/2). For each s > 0,
+
+they include all integral curves of the Reeb vector field R, which are the fibers of the Hopf
+
+fibration
+
+Hopf : S2d+1  CPd (z1, . . . , zd)  [z1 : · · · : zd].
+
+In addition, each geodesic of the sub-Riemannian manifold (S2d+1, g, ker) is an extremal of
+
+Ls for some value of s.
+
+Definition 7.1.5 (Contact magnetic geodesics). Minimizing extremals of the Lagrangian Ls will be called contact magnetic geodesics of strength s.
+
+Remark. Due to different normalization, strength s here corresponds to strength s/2 in [5].
+
+Remark. The above construction can be carried out on more general Sasakian manifolds, see [24, 42, 78].
+
+From the expression for Y one readily verifies that
+
+|Y|g2 = 8d
+
+and that
+
+|Yv|2 = 4|v|2 - 4(v)2, v  T S2n+1.
+
+Moreover, the formula (V (iker ))W = g(V, W ) · R - (W )V for every pair of vector fields V, W (this is the statement that S2d+1 is Sasakian, see e.g. [17]) shows that
+
+divY = -(4d).
+
+The Ricci curvature of S2n+1 is
+
+Ricg = 2d · g.
+
+Plugging the above formulae into Corollary 7.1.2, we get:
+
+Proposition 7.1.6. Let 0  s < 1. The weighted Ricci curvature of the Lagrangian Ls with respect to the Riemannian volume measure is given by
+
+RicVolg,n(v) = 2d · |v|2 + 4sd · (v) + 2s2
+
+(v)2 d + 1 - |v|2
+
+,
+
+v  T M \ 0,
+
+where
+
+n := 2d + 1.
+
+Hence
+
+RicVolg,n = 2d(s2 + 2s + 1) + 2s2(1 - 2)
+
+on S(S2d+1) = {v  T S2d+1 | |v|g = 1}.
+
+Since |(v)|  1 for all v  S(S2d+1), with equality when v = ±R, it follows that the pair (Volg, Ls) satisfies CD(K, n) if and only if
+
+2d(s - 1)2  K.
+
+In particular, the pair (Volg, Ls) satisfies CD(0, n) for all 0  s < 1.
+
+7.1. CLASSICAL LAGRANGIANS
+
+89
+
+The Lagrangian Ls is supercritical if and only if |s| < 1, see [5, Section 2] and Example 2.3.1. In this case, conditions (II) and (III) are satisfied by supercriticality and compactness of S2d+1 (a systematic treatment of condition (II) for all values of s is the main objective of [5]). Thus Theorem 4 follows from Theorem 2 with N = n and K = 0.
+Remark. Let us comment on the case s = 1. A pair of points z0, z1  S2d+1 can be joined by an extremal of L1 if and only if z0, z1 = 0, see [5]. With a bit of extra work, one can show that for every z0, z1  S2d+1 there exists a sequence of extremals of L1 joining z0 to z1 whose action tends to 0. Since the Lagrangian L1 is non-negative, and vanishes only on the Reeb vector field, this implies that unless z0 and z1 lie on a common Reeb trajectory, there exists no minimizing extremal of L1 joining z1 to z0. In other words, in the sense of Definition 7.1.5, contact magnetic geodesics of strength 1 do not exist, except between points lying on the same Reeb trajectory.
+
+Mechanical Lagrangians
+
+Consider the case   0, i.e.
+
+L(v) = |v|2g + U (x), 2
+
+v  TxM, x  M.
+
+(7.1.9)
+
+By Corollary 7.1.2, for every N  (-, ] \ [1, n) and every v  T M \ 0, the weighted Ricci curvature of the Lagrangian L with respect to the Riemannian measure at the vector v is given by
+
+gU - v, v-1 gU, v v 2
+
+1
+
+RicVolg,N (v) = Ricg(v) - gU + 2 ·
+
+|v|2
+
++ 1- N -n
+
+|gU |2
+
+1
+
+v, gU 2
+
+= Ricg(v) - gU + 2 ·
+
+|v|2
+
+-
+
+1+ N -n
+
+·
+
+|v|4
+
+.
+
+v, gU 2 ·
+|v|4
+
+Recall that
+
+ SM = v  T M | |v| = 2U .
+
+Hence, if v  SM then
+
+RicVolg,N (v)
+
+=
+
+Ricg(v) -
+
+g U 2U
+
+· |v|2
+
++
+
+|gU |2 2U 2
+
+· |v|2
+
+-
+
+1 1+
+N -n
+
+v, gU 2 · 4U 2 .
+
+Since the right hand side is now fiberwise 2-homogeneous, this proves:
+
+Proposition 7.1.7. For every K  R and every N  (-, ] \ [1, n), the pair (Volg, L) satisfies CD(K, N ) if and only if
+
+Ricg 
+
+K + gU - |gU |2
+
+2U
+
+2U 2
+
+g+
+
+1 1+
+N -n
+
+(dU )2 4U 2
+
+as quadratic forms. In particular, the pair (Volg, L) satisfies CD(0, ) if and only if
+
+(gV ) g - (dV )2 + Ricg  0,
+
+where
+
+e-2V := U.
+
+(7.1.10)
+
+Remark. Zero-energy extremals of the Lagrangian (7.1.9) coincide, up to reparametrization, with unit-speed geodesics of the Riemannian metric (2U )-1 · g. Because of the difference in parametrization, the Ricci curvature of L is not equal to the Ricci curvature of this conformal metric.
+
+90
+
+CHAPTER 7. EXAMPLES
+
+Remark 7.1.8. Suppose that Ricg  0. Then, since
+
+(dV )2  |dV |2 · g = |dU |2 · g 4U 2
+
+and
+
+g V
+
+= - gU 2U
+
++
+
+|dU |2 ,
+2U 2
+
+inequality (7.1.10) holds when U is superharmonic, i.e. when
+
+gU  0.
+
+Example 7.1.9 (Classical many-body Lagrangian). Let d  3 and k  2, let
+
+M := x = (x1, . . . , xk)  (Rd)k | xi = xj  i = j ,
+
+and consider the following k-body Lagrangian :
+
+L
+
+=
+
+1 2
+
+k i=1
+
+mi
+
+d
+(dxi)2
+=1
+
++
+
+1 2
+
++
+
+k i=1
+
+k j=i+1
+
+Gmimj , |xi - xj|
+
+where G and mi are positive constants representing the gravitational constant and the masses of the bodies, and xi = (x1i , . . . , xid) is the position of the i-th body. Thus in this case
+
+1k U= +
+
+k Gmimj ,
+
+2 i=1 j=i+1 |xi - xj |
+
+whence
+
+dU
+
+=
+
+k i=1
+
+d =1
+
+j= i
+
+Gmimj(xj - |xi - xj|3
+
+xi )
+
+dxi
+
+and
+
+g U
+
+=
+
+(3 - d) · G ·
+
+k i=1
+
+k j=i+1
+
+mi + mj |xi - xj|3
+
+
+
+0,
+
+where g is the (flat) metric
+
+k
+
+d
+
+g = mi (dxi )2.
+
+i=1
+
+=1
+
+By Remark 7.1.8, the pair (Vol, L) satisfies CD(0, ), where Vol is the Lebesgue measure on (Rd)k (which differs by a constant from the measure Volg). Note that the energy level SM is characterized by the relation
+
+1 2
+
+k i=1
+
+mi
+
+d
+(dxi)2
+=1
+
+=
+
+k i=1
+
+k Gmimj j=i+1 |xi - xj|
+
++
+
+1 .
+2
+
+Remark. The Lagrangian L does not satisfy the global assumptions (II) and (III) from Section 2.3 on the full manifold M .
+
+7.2. ISOTROPIC LAGRANGIANS
+
+91
+
+7.2 Isotropic Lagrangians
+
+Let (M, g) be a Riemannian manifold. Let l : M × [0, )  (0, )
+
+be a smooth function which is strictly convex and superlinear in the second variable with l(x, 0) = 0 x  M.
+
+Here and below, for functions on M × [0, ), prime () will denote differentiation with respect to the second variable, while gradients (g) and differentials (d) are taken with resepct to the
+first variable. Let L be the Tonelli Lagrangian
+
+L(v) = l(x, |v|g), v  TxM, x  M.
+
+(7.2.1)
+
+The corresponding Hamiltonian is given by
+
+H(p) = h(x, |p|g), p  TxM, x  M,
+
+where
+
+h(x, ·) = l(x, ·)
+
+is the Legendre conjugate of l(x, ·), i.e
+
+h(0) = -l(0) and h(x, l(x, t)) = t, x  M, t  0.
+
+(7.2.2)
+
+Set
+
+l(x, t)
+
+h(x, t)
+
+(x, t) =
+
+and (x, t) =
+
+,
+
+t
+
+t
+
+Note that ,  > 0. The Legendre transform is then
+
+x  M, t  0.
+
+Lp = (x, |p|g) · p p  TxM, x  M.
+
+In particular, the gradient of a function u is
+
+u|x =  x, du|x g · gu|x,
+
+x  M.
+
+The Euler-Lagrange equation is
+
+g ((, | |g) ·  ) = gl.
+
+(7.2.3)
+
+For instance, if l(x, t) = t2/2 + U (x) for some function U : M  R, then we arrive at the mechanical Lagrangian from the previous section, and since   1 and gl = gU we recover (7.1.2).
+Define functions w, b : M  (0, ) by
+
+h(x, w(x)) = 0 and b(x) := (x, w(x)), x  M.
+
+Our assumptions on l imply that h(0) < 0 and that h is strictly increasing and tends to infinity, so w is well-defined. The Hamilton-Jacobi equation is therefore
+
+|du|g = w.
+
+(7.2.4)
+
+92
+
+CHAPTER 7. EXAMPLES
+
+Let µ = e-Volg
+be a measure on M with a smooth density and, as before, set L := divµ( · ). Let u be a locally-defined solution to the Hamilton-Jacobi equation (7.2.4). Then
+
+u = b · gu
+
+(7.2.5)
+
+and
+Lu = divµ(b · gu) = b · (gu - g, gu) + gb, gu = b · gu + g, u ,
+
+where in the last passage we set and used (7.2.5). Thus
+
+ = log b - 
+
+(dLu)(u) = gb, u · gu + b2 gu, ggu + Hessg(u) + g, g uu .
+
+By (7.2.4) and the Riemannian Bochner formula,
+
+gu, ggu = g(w2/2) - |g2u|2 - Ricg(gu).
+
+Using (7.2.5) again we get
+
+(dLu)(u) = gb, u · gu + b2g(w2/2) - b2|g2u|2 - Ricg(u) + Hessg(u) + g, guu .
+
+(7.2.6)
+
+By (7.2.4) and (7.2.5),
+
+|u|g = b · |gu|g = b · |du|g = b · w.
+
+(7.2.7)
+
+Since u satisfies the Hamilton-Jacobi equation, the integral curves of u solve (7.2.3), so
+
+gl = g u(au) = da(u) · u + a · guu,
+
+(7.2.8)
+
+where
+
+a(x) := (x, b(x)w(x)), x  M.
+
+It follows from (7.2.2) and the definitions of a and b that
+
+ab  1.
+
+(7.2.9)
+
+Substituting (7.2.8) into (7.2.6) and using (7.2.9) we get (dLu)(u) = gb, u · gu + b2g(w2/2) - b2|g2u|2 - Ricg(u) + Hessg(u) + b g, gl + g, (d log b)(u) · u .
+By (7.2.5), (7.2.8) and (7.2.9), (2gu)(u) = g ugu = gu(b-1u) = g u(au) = gl.
+
+(7.2.10)
+
+7.2. ISOTROPIC LAGRANGIANS
+
+93
+
+As in Section 3.3, we separate the self-adjoint operator g2u into its orthogonal and tangential components with respect to u and the apply the Cauchy-Schwarz inequality:
+
+|g2u|2
+
+
+
+2|g l|2 |u|2
+
+-
+
+gl, u2 |u|4
+
++
+
+(g u
+
+-
+
+gl, u /|u|2)2 n-1
+
+=
+
+2|g l|2 b2w2
+
+-
+
+gl, u2 b4w4
+
++
+
+(g u
+
+-
+
+gl, u /b2w2)2 ,
+n-1
+
+where in the second passage we used (7.2.7). Equality holds if and only if the restriction of 2gu to the orthogonal complement of u is scalar. We use this last inequality to bound the first and third terms on the right hand side of (7.2.10):
+
+gb, u gu - b2|g2u|2
+
+ gb, u gu
+
+-
+
+b2
+
+(g u
+
+-
+
+gl, u /b2w2)2 n-1
+
+-
+
+2|g l|2 w2
+
++
+
+gl, u2 b2w4
+
+2
+b2 gu - gl, u /b2w2 - (n - 1) gb, u /2b2 =-
+n-1
+
++ n - 1 · gb, u2 + gb, u gl, u - 2|gl|2 + gl, u2
+
+4b2
+
+b2w2
+
+w2
+
+b2w4
+
+
+
+n
+
+-
+
+1
+
+·
+
+g
+
+log b, u2
+
++
+
+gb, u gl, u
+
+-
+
+2|g l|2
+
++
+
+gl, u2 .
+
+4
+
+b2w2
+
+w2
+
+b2w4
+
+Plugging this estimate into (7.2.10) and recalling that  = log b -  and |u| = bw, we obtain (dLu)(u) + A · |u|2 + Q(u)  0,
+
+where A : M  R is the function
+
+A := -w-2g(w2/2) - b-2w-2 gb, gl + b-1w-2 g, gl + 2b-2w-4|gl|2,
+
+and Q : T M  R is the quadratic form
+
+Q
+
+:=
+
+Ricg
+
++
+
+Hessg(
+
+-
+
+log b)
+
++
+
+d log b
+
+·
+
+d
+
+-
+
+n
+
++ 4
+
+3 (d log b)2
+
+-
+
+db · dl b2w2
+
+-
+
+(dl)2 b2w4 .
+
+Recall that the differentials of b and l are with respect to the manifold variable. Equality holds if and only if
+
+g2u
+
+=
+
+(u)
+
+
+
+gl + (gl) u, u
+
+
+
+u
+
+-
+
+gl, u u, u
+
+·
+
+(u)  u u, u
+
++
+
+c0
+
+·
+
+(u) ,
+
+where (u) denotes orthogonal projection onto the orthogonal complement of u, and
+
+gb, u
+
+c0 :=
+
+. 2b2
+
+Thus we have proven:
+
+Proposition 7.2.1. The pair (e-Volg, L) satisfies CD(K, ), where L is the Lagrangian given
+in (7.2.1), if and only if Q + A · g  b-2w-2K · g.
+
+94
+
+CHAPTER 7. EXAMPLES
+
+Homogeneous Lagrangians with variable exponent
+
+Consider the case where
+
+tq(x) + q(x) - 2 + c
+
+l(x, t) =
+
+,
+
+q(x)
+
+x  M, t  0
+
+for some smooth function q : M  (1, ) and some constant c  1. Then
+
+tq(x) - c
+
+h(x, t) =
+
+,
+
+q(x)
+
+where q(x) is the Ho¨lder conjugate of q(x) for every x  M . One easily verifies that
+
+(x, t) = tq(x)-2,
+
+(x, t) = tq(x)-2,
+
+1
+w(x) = c q(x)
+
+and
+
+b(x)
+
+=
+
+c2 q(x)
+
+-1
+
+for all x  M and t  0. The Hamilton-Jacobi equation is therefore
+
+|du|qg = c.
+
+The energy is Thus
+
+E(v)
+
+=
+
+|v|qg(x)
+
+-
+
+c ,
+
+q(x)
+
+v  TxM, x  M.
+
+SM = v  T M | |v|g = c1/q .
+
+A (tedious, but straightforward) computation shows that
+
+A = (log c)gr + 2 log2 c - 6(log c)(1 - 1/c) + 4(1 - 1/c)2 |dr|2
+
+and where
+
+Q = Ricg - 2(log c)Hessr - (n + 2) log2 c + 4(1 - 1/c)2 (dr)2, r := 1/q.
+
+Thus we get from Proposition 7.2.1:
+
+Proposition 7.2.2. The pair (Volg, L), where L is the Lagrangian
+
+L(v)
+
+=
+
+|v|gq(x)
+
++
+
+q(x)
+
+-
+
+2
+
++
+
+c ,
+
+q(x)
+
+v  TxM x  M,
+
+satisfies CD(K, ) if and only if Ricg - 2(log c)Hessr - (n + 2) log2 c + 4(1 - 1/c)2 (dr)2  c-2rK - (log c)gr - 2 log2 c - 6(log c)(1 - 1/c) + 4(1 - 1/c)2 |dr|2 · g.
+Remark. Suppose that M is compa´ct and let H be the Hamiltonian associated to L. The class of functions u : M  R for which M H(du) <  is known as the variable exponent Sobolev space W 1,q(·), see [41].
+
+7.2. ISOTROPIC LAGRANGIANS
+
+95
+
+Convex functions of Finsler metrics
+Let (M, F ) be a Finsler manifold and let  : [0, )  (0, ) be a smooth, strictly convex, superlinear function satisfying (0) = 0. Let L be the Lagrangian
+
+L(v) = (F (v)), v  T M.
+
+The corresponding Hamiltonian is H(p) = (F (p)),
+
+p  TM,
+
+where  is the Legendre conjugate of  and F  is the dual norm to F . From the perspective of curvature-dimension theory, such Lagrangians were considered in [80], where some of the facts mentioned below can be found. The Legendre transform is
+
+()-1(F (p)) Lp = F (p) · LF p,
+
+(7.2.11)
+
+where LF is the Legendre transform associated to the Finsler metric F . The energy is given by
+
+E(v) = ((F (v))), v  T M. Thus minimizing extremals have constant speed
+s := ()-1()-1(0).
+
+Their action will therefore be proportional to their length; hence, minimizing extremals are Finsler geodesics with speed s.
+Let us parse the CD(K, ) condition for the Lagrangian L. A function u is a solution to the Hamilton-Jacobi equation precisely when
+F (du) = w := ()-1(0).
+
+If we set then by (7.2.11),
+
+()-1(w) s
+
+b :=
+
+= > 0,
+
+w
+
+w
+
+u = b · F u and Lu = b · LF u,
+
+where the superscripts F indicate that the corresponding operators with respect to the Finsler metric F . Thus
+
+(dLu)(u) = b2 · (dLF u)(F u).
+
+Since SM = {v  T M | F (v) = s = bw}, it follows that
+
+Ricµ,  K on SM
+
+
+
+RicFµ,  s-2 · K · F 2.
+
+(7.2.12)
+
+The following proposition, sometimes called a Phi-entropy inequality, goes back to Bakry and E´ mery; see [32], [18] or [10, Proposition 7.6.1].
+
+96
+
+CHAPTER 7. EXAMPLES
+
+Proposition 7.2.3 (Phi-entropy inequalities on the real line). Let m be a probability measure on an interval I  R with a smooth ´density e- satisfying ¨  K > 0. Then for every positive function f  L1(m)  C1 such that |(f )|dm < ,
+
+^
+
+^
+
+^
+
+(f )dm - 
+
+1 f dm 
+
+(f ) · |f |2dm.
+
+I
+
+I
+
+2K I
+
+In fact, the above result holds for any Markov semigroup satisfying CD(K, N ) in the sense of Bakry and E´ mery, and in particular for weighted Riemannian manifolds. Since the Finslerian Laplacian is nonlinear, the following theorem does not fit directly into the Bakry-E´ mery
+framework. For proofs of functional inequalities on Finsler manifolds using semigroup tech-
+niques, see [83, Chapter 16]. A Finsler manifold is called reversible if F (v) = F (-v) for
+every v  T M .
+
+Theorem 7.2.4 (Phi-entropy inequalities for reversible Finsler manifolds). Let (M, F ) be a
+
+geodesically convex, reversible Finsler manifold and let µ be a measure on M with a smooth density. Suppose that RicFµ,  KF 2 > 0, where RicFµ, is the we´ighted Finslerian Ricci curvature. Then for every positive function f  L1(µ)  C1 such that |(f )|dµ < ,
+
+^
+
+^
+
+^
+
+(f )dµ - 
+
+1 f dµ 
+
+(f ) · F (df )2dµ.
+
+M
+
+M
+
+2K M
+
+Remark. Since minimizing extremals of L are geodesics with speed s, Theorem 7.2.4 can be proved using the Finslerian needle decomposition theorem [82] for the Finsler metric s-1 · F .
+Still, since we did not find it elsewhere, we include it here.
+
+Proof. Apply Theorem 5 to the function ^
+
+f - f dµ,
+
+M
+´ and let µ = µ d() be the resulting disintegration of measure. Then for every   A ,
+
+^
+
+^
+
+f dµ = µ(M ) · f dµ.
+
+M
+
+M
+
+(7.2.13)
+
+Each curve  is a minimizing geodesic of the Finsler metric F , with speed s = ()-1()-1(0).
+
+Thus
+
+|(f  )| = |df ()|  F () · F (df ) = s · F (df ).
+
+(7.2.14)
+
+This is where we use the fact that F is reversible, because otherwise the middle inequality may
+
+not hold. By (7.2.12) and the assumption RicFµ,  K, the pair (µ, L) satisfies CD(s2K, ) with respect to the Lagrangian L. Hence, for -almost every   N , the measure µ is a CD(s2K, )-needle, i.e. the den´sity e- of the measure m satisfies ¨  s2K. The disintegration formula implies that |(f )|dµ <  for -almost every   A . Applying
+
+Proposition 7.2.3 and using (7.2.14), we see that for -almost every   N ,
+
+^ µ(M )-1 (f )dµ - 
+M
+
+^ µ(M )-1 f dµ
+M
+
+
+
+µ(M )-1 2K
+
+^
+M
+
+(f )
+
+·
+
+F (df )2dµ.
+
+By (7.2.13), this implies
+
+´
+
+^
+
+´ M f dµ · M f dµ
+
+(f )dµ - 
+M
+
+^
+f dµ
+M
+
+´
+
+´
+
+ 1 · M f dµ · M´(f ) · F (df )2dµ .
+
+2K
+
+M f dµ
+
+7.2. ISOTROPIC LAGRANGIANS
+
+97
+
+The inequality also holds true trivially for   D, ´i.e. when µ is a Dirac measure, since the left hand side vanishes by (7.2.13). Multiplying by M f dµ and integrating over , we obtain the desired inequality.
+
+As a corollary, we recover (in the reversible case) the Finslerian Beckner's inequality [83, Corollary 16.11]:
+
+Corollary 7.2.5 (Beckner's inequality for reversible Finsler manifolds). Let (M, F ) be a geodesi-
+cally convex, reversible Finsler manifold and let µ be a probability measure on M with a smooth density. Suppose that RicµF,  KF 2 > 0, where RicµF, is the weighted Finslerian Ricci curvature. Then for every positive function f  L2(µ)  C1 and every q  [1, 2),
+
+^
+
+f 2dµ -
+
+^
+
+f qdµ
+
+2/q
+
+^ 2-q
+
+
+
+F (df )2dµ.
+
+M
+
+M
+
+KM
+
+Proof. Set and apply Theorem 7.2.4 to f q.
+
+t2/q + 2/q - 1 (t) =
+2/q
+
+Remark. Taking q  2 in Beckner's inequality gives the logarithmic Sobolev inequality.
+
+98
+
+CHAPTER 7. EXAMPLES
+
+Bibliography
+[1] Agrachev, A. A. The curvature and hyperbolicity of Hamiltonian systems. Proc. Steklov Inst. Math. 256, 26­46 (2007), no. 1, 26­46.
+[2] Agrachev, A. A. Geometry of optimal control problems and Hamiltonian systems. Nonlinear and optimal control theory, 1­59. Lecture Notes in Math., 1932. Springer-Verlag, Berlin, 2008.
+[3] Agrachev, A. A.; Gamkrelidze, R. V. Feedback-invariant optimal control theory and differential geometry--I. Regular extremals. Journal of Dynamical and Control Systems 3, 343­389 (1997).
+[4] Akdemir, Afiny; Colinet, Andrew; McCann, Robert; Cavalletti, Fabio; Santarcangelo, Flavia. Independence of synthetic curvature dimension conditions on transport distance exponent. Trans. Amer. Math. Soc. 374 (2021), no. 8, 5877­5923.
+[5] Albers, Peter; Benedetti, Gabriele; Maier, Levin. The Hopf-Rinow theorem and the Man~e´ critical value for magnetic geodesics on odd-dimensional spheres. arXiv:2503.02406.
+[6] Ambrosio, Luigi. Lecture notes on optimal transport problems. Mathematical aspects of evolving interfaces (Funchal, 2000), 1­52. Lecture Notes in Math., 1812. Springer-Verlag, Berlin, 2003.
+[7] Assenza, Valerio. Magnetic curvature and existence of closed magnetic geodesics on low energy levels. Int. Math. Res. Not. IMRN 2024, no. 21, 13586­13610.
+[8] Assouline, Rotem; Klartag, Bo'az. Horocyclic Brunn-Minkowski inequality. Adv. Math. 436 (2024), Paper No. 109381, 39 pp.
+[9] Bai, Pengfei; Adachi, Toshiaki. An estimate of the spread of trajectories for Ka¨hler magnetic fields. Hokkaido Math. J. 42 (2013), no.3, 445­462.
+[10] Bakry, Dominique; Gentil, Ivan; Ledoux, Michel. Analysis and geometry of Markov diffusion operators. Grundlehren Math. Wiss., 348 [Fundamental Principles of Mathematical Sciences] Springer, Cham, 2014. xx+552 pp.
+[11] Barilari, Davide; Rizzi, Luca. Sub-Riemannian interpolation inequalities. Invent. Math. 215 (2019), no. 3, 977­1038.
+[12] Bernard, Patrick Existence of C1,1 critical sub-solutions of the Hamilton-Jacobi equation on compact manifolds. Ann. Sci. E´ cole Norm. Sup. (4) 40 (2007), no.3, 445­452.
+[13] Bernard, Patrick; Buffoni, Boris. The Monge problem for supercritical Man~e´ potentials on compact manifolds. Adv. Math.207(2006), no.2, 691­706.
+99
+
+100
+
+BIBLIOGRAPHY
+
+[14] Bernard, Patrick; Buffoni, Boris Optimal mass transportation and Mather theory. J. Eur. Math. Soc. (JEMS) 9 (2007), no. 1, 85­121.
+[15] Balogh, Zolta´n M.; Krista´ly, Alexandru; Sipos, Kinga. Geometric inequalities on Heisenberg groups. Calc. Var. 57, 61 (2018).
+[16] Barilari, Davide; Mondino, Andrea; Rizzi, Luca. Unified synthetic Ricci curvature lower bounds for Riemannian and sub-Riemannian structures. arXiv:2211.07762.
+[17] Blair, David E. Riemannian geometry of contact and symplectic manifolds. Second edition. Progr. Math., 203. Birkha¨user Boston, Ltd., Boston, MA, 2010. xvi+343 pp.
+[18] Bolley, Franc¸ois; Gentil, Ivan. Phi-entropy inequalities and Fokker-Planck equations. Progress in analysis and its applications, 463­469. World Scientific Publishing Co. Pte. Ltd., Hackensack, NJ, 2010.
+[19] Borell, C. Convex set functions in d-space. Period. Math. Hungar. 6 (1975), no.2, 111­136.
+[20] Braun, Mathias. Exact d'Alembertian for Lorentz distance functions. arXiv:2408.16525.
+[21] Bucataru, Ioan; Miron, Radu Finsler-Lagrange geometry. Applications to dynamical systems. Editura Academiei Roma^ne, Bucharest, 2007. xviii+252 pp.
+[22] Braun, Mathias; McCann, Robert J. Causal convergence conditions through variable timelike Ricci curvature bounds arXiv:2312.17158.
+[23] Burns, Keith; Paternain, Gabriel P. Anosov magnetic flows, critical values and topological entropy. Nonlinearity 15 (2002), no.2, 281­314.
+[24] Cabrerizo, J. L.; Ferna´ndez, M.; Go´mez, J. S.The contact magnetic flow in 3D Sasakian manifolds. J. Phys. A 42 (2009), no. 19, 195201, 10 pp.
+[25] Caffarelli, Luis A.; Feldman, Mikhail; McCann, Robert J. Constructing optimal maps for Monge's transport problem as a limit of strictly convex costs. J. Amer. Math. Soc. 15 (2002), no.1, 1­26.
+[26] Cannarsa, Piermarco; Sinestrari, Carlo. Semiconcave functions, Hamilton-Jacobi equations, and optimal control. Progr. Nonlinear Differential Equations Appl., 58 Birkha¨user Boston, Inc., Boston, MA, 2004. xiv+304 pp.
+[27] Cavalletti, Fabio; Gigli, Nicola; Santarcangelo, Flavia. Displacement convexity of entropy and the distance cost optimal transportation. Ann. Fac. Sci. Toulouse Math. (6) 30 (2021), no. 2, 411­427.
+[28] Cavalletti, Fabio; Milman, Emanuel. The globalization theorem for the curvaturedimension condition. Invent. Math. 226 (2021), no. 1, 1­137.
+[29] Cavalletti, Fabio; Mondino, Andrea Sharp and rigid isoperimetric inequalities in metricmeasure spaces with lower Ricci curvature bounds. Invent. Math.208 (2017), no.3, 803­849.
+[30] Cavalletti, Fabio; Mondino, Andrea Sharp geometric and functional inequalities in metric measure spaces with lower Ricci curvature bounds. Geom. Topol. 21 (2017), no.1, 603­645.
+
+BIBLIOGRAPHY
+
+101
+
+[31] Cavalletti, Fabio; Mondino, Andrea. Optimal transport in Lorentzian synthetic spaces, synthetic timelike Ricci curvature lower bounds and applications. Camb. J. Math. 12 (2024), no.2, 417­534.
+[32] Chafa¨i, Djalil. Entropies, convexity, and functional inequalities: on Phi-entropies and Phi-Sobolev inequalities. J. Math. Kyoto Univ. 44 (2004), no. 2, 325­363.
+[33] Cheeger, Jeff; Ebin, David G. Comparison theorems in Riemannian geometry. AMS Chelsea Publishing, Providence, RI, 2008. x+168 pp.
+[34] Contreras, G. Action potential and weak KAM solutions. Calc. Var. Partial Differential Equations 13 (2001), no.4, 427­458.
+[35] Contreras, Gonzalo; Delgado, Jorge; Iturriaga, Renato. Lagrangian flows: the dynamics of globally minimizing orbits. II. Bol. Soc. Brasil. Mat. (N.S.) 28 (1997), no.2, 155­196.
+[36] Contreras, Gonzalo; Iturriaga, Renato. Global minimizers of autonomous Lagrangians. 22o Colo´q. Bras. Mat. Instituto de Matema´tica Pura e Aplicada (IMPA), Rio de Janeiro, 1999. 148 pp.
+[37] Contreras, G.; Iturriaga, R.; Paternain, G. P.; Paternain, M. Lagrangian graphs, minimizing measures and Man~e´'s critical values. Geom. Funct. Anal. 8 (1998), no.5, 788­809.
+[38] Cordero-Erausquin, Dario. Ine´galite´ de Pre´kopa-Leindler sur la sphe`re. C. R. Acad. Sci. Paris Se´r. I Math. 329 (1999), no. 9, 789­792.
+[39] Cordero-Erausquin, Dario; McCann, Robert J.; Schmuckenschla¨ger, Michael. A Riemannian interpolation inequality a` la Borell, Brascamp and Lieb. Invent. Math. 146 (2001), no.2, 219­257.
+[40] Dharmadhikari, Sudhakar; Joag-Dev, Kumar Unimodality, convexity, and applications. Probab. Math. Statist. Academic Press, Inc., Boston, MA, 1988. xiv+278 pp.
+[41] Diening, Lars; Harjulehto, Petteri; Ha¨sto¨, Peter; Ru°zicka, Michael. Lebesgue and Sobolev spaces with variable exponents. Lecture Notes in Math., 2017. Springer, Heidelberg, 2011. x+509 pp.
+[42] Dru¸ta-Romaniuc, Simona Luiza; Inoguchi, Jun-ichi; Munteanu, Marian Ioan; Nistor, Ana Irina. Magnetic curves in Sasakian manifolds. J. Nonlinear Math. Phys. 22 (2015), no. 3, 428­447.
+[43] Evans, Lawrence C.; Gangbo, Wilfrid. Differential equations methods for the MongeKantorovich mass transfer problem. Mem. Amer. Math. Soc. 137 (1999), no.653, viii+66 pp.
+[44] Evans, Lawrence C. Partial differential equations. Second edition. Grad. Stud. Math., 19. American Mathematical Society, Providence, RI, 2010. xxii+749 pp.
+[45] Evans, Lawrence C.; Gariepy, Ronald F. Measure theory and fine properties of functions. Revised edition. Textb. Math. CRC Press, Boca Raton, FL, 2015. xiv+299 pp.
+[46] Fathi, Albert. Regularity of C1 solutions of the Hamilton-Jacobi equation. Ann. Fac. Sci. Toulouse Math. (6) 12 (2003), no.4, 479­516.
+
+102
+
+BIBLIOGRAPHY
+
+[47] Fathi, Albert; Figalli, Alessio. Optimal transportation on non-compact manifolds. Israel J. Math. 175 (2010), 1­59.
+[48] Fathi, Albert; Maderna, Ezequiel. Weak KAM theorem on non compact manifolds. NoDEA Nonlinear Differential Equations Appl. 14 (2007), no.1-2, 1­27.
+[49] Feldman, Mikhail; McCann, Robert J. Monge's transport problem on a Riemannian manifold. Trans. Amer. Math. Soc.354(2002), no.4, 1667­1697.
+[50] Figalli, Alessio. The Monge problem on non-compact manifolds. Rend. Semin. Mat. Univ. Padova 117 (2007), 147­166.
+
+[51] Fisher, Robert J.; Laquer, H. Turner. Second order tangent vectors in Riemannian geometry. J. Korean Math. Soc. 36 (1999), no. 5, 959­1008.
+
+[52] Folland, Gerald B. Real analysis. Modern techniques and their applications. Second edition. Pure Appl. Math. (N. Y.). Wiley-Intersci. Publ. John Wiley & Sons, Inc., New York, 1999. xvi+386 pp.
+[53] Foulon, Patrick. Ge´ome´trie des e´quations diffe´rentielles du second ordre. Ann. Inst. H. Poincare´ Phys. The´or. 45 (1986), no. 1, 1­28.
+[54] Gardner, R. J. The Brunn-Minkowski inequality. Bull. Amer. Math. Soc. (N.S.) 39 (2002), no.3, 355­405.
+[55] Goldman, William M. Complex hyperbolic geometry. Oxford Math. Monogr. Oxford Sci. Publ. The Clarendon Press, Oxford University Press, New York, 1999. xx+316 pp.
+[56] Gouda, Norio. Magnetic flows of Anosov type. Tohoku Math. J. (2) 49 (1997), no.2, 165­183.
+[57] Grifone, Joseph. Structure presque-tangente et connexions. I. Ann. Inst. Fourier (Grenoble) 22 (1972), no. 1, 287­334.
+[58] Grognet, Ste´phane. Flots magne´tiques en courbure ne´gative. Ergodic Theory Dynam. Systems 19 (1999), no.2, 413­436.
+[59] Gromov, Mikhael; Milman, Vitali D. Generalization of the spherical isoperimetric inequality to uniformly convex Banach spaces. Compositio Math., 62, 3, (1987), 263­282.
+[60] Iturriaga, Renato; Sa´nchez-Morgado, He´ctor Finsler metrics and action potentials. Proc. Amer. Math. Soc. 128 (2000), no. 11, 3311­3316.
+[61] Kantorovich, L. V.; Akilov, G. P. Functional analysis. Translated from the Russian by Howard L. Silcock. Second edition. Pergamon Press, Oxford-Elmsford, N.Y., 1982. xiv+589 pp.
+
+[62] Klartag, Bo'az. Needle decompositions in Riemannian geometry. Mem. Amer. Math. Soc. 249 (2017), no.1180, v+77 pp.
+
+[63] Kobayashi, Shoshichi; Nomizu, Katsumi. Foundations of differential geometry. Vol. II. Interscience Tracts in Pure and Applied Mathematics, No. 15, Vol. II Interscience Publishers John Wiley & Sons, Inc., New York-London-Sydney, 1969. xv+470 pp.
+
+BIBLIOGRAPHY
+
+103
+
+[64] Kola´r, Ivan; Michor, Peter W.; Slova´k, Jan. Natural operations in differential geometry. Springer-Verlag, Berlin, 1993. vi+434 pp.
+[65] Lee, John M. Introduction to smooth manifolds. Second edition. Grad. Texts in Math., 218, Springer, New York, 2013. xvi+708 pp.
+[66] Lee, Paul W. Y. Displacement interpolations from a Hamiltonian point of view. J. Funct. Anal.265 (2013), no.12, 3163­3203.
+
+[67] Li, Peter; Yau, Shing Tung. Estimates of eigenvalues of a compact Riemannian manifold. Geometry of the Laplace operator. Proc. Sympos. Pure Math., XXXVI. American Mathematical Society, Providence, RI, 1980.
+
+[68] Lott, John; Villani, Ce´dric Ricci curvature for metric-measure spaces via optimal transport. Ann. of Math. (2) 169 (2009), no.3, 903­991.
+[69] Lova´sz, La´szlo´; Simonovits, Miklo´s. Random walks in a convex body and an improved volume algorithm. Random Structures Algorithms, 4, 4, (1993), 359­412.
+[70] Magnabosco, Mattia; Portinale, Lorenzo; Rossi, Tommaso. The Brunn-Minkowski inequality implies the CD condition in weighted Riemannian manifolds. Nonlinear Anal. 242 (2024), Paper No. 113502, 13 pp.
+[71] Man~e´, Ricardo. Lagrangian flows: the dynamics of globally minimizing orbits. Bol. Soc. Brasil. Mat. (N.S.) 28 (1997), no.2, 141­153.
+[72] McCann, Robert J. A convexity principle for interacting gases. Adv. Math. 128 (1997), no. 1, 153­179.
+[73] McCann, Robert J. Exact solutions to the transportation problem on the line. R. Soc. Lond. Proc. Ser. A Math. Phys. Eng. Sci. 455 (1999), no. 1984, 1341­1380.
+[74] McCann, Robert J. Displacement convexity of Boltzmann's entropy characterizes the strong energy condition from general relativity. Camb. J. Math. 8 (2020), no. 3, 609­681.
+[75] Milman, Emanuel. Sharp isoperimetric inequalities and model spaces for the curvaturedimension-diameter condition. J. Eur. Math. Soc. (JEMS) 17 (2015), no.5, 1041­1078.
+[76] Miron, Radu; Hrimiuc, Dragos¸; Shimada, Hideo; Sabau, Sorin V. The geometry of Hamilton and Lagrange spaces. Fund. Theories Phys., 118. Kluwer Academic Publishers Group, Dordrecht, 2001. xvi+338 pp.
+
+[77] Mondino, Andrea; Suhr, Stefan. An optimal transport formulation of the Einstein equations of general relativity. J. Eur. Math. Soc. (JEMS) 25 (2023), no. 3, 933­994.
+[78] Munteanu, Marian Ioan; Nistor, Ana Irina. A note on magnetic curves on S2n+1. C. R. Math. Acad. Sci. Paris 352 (2014), no. 5, 447­449.
+[79] Ohta, Shin-ichi. Finsler interpolation inequalities. Calc. Var. Partial Differential Equations 36 (2009), no. 2, 211­249.
+[80] Ohta, Shin-ichi. On the curvature and heat flow on Hamiltonian systems. Anal. Geom. Metr. Spaces 2 (2014), no.1, 81­114.
+
+104
+
+BIBLIOGRAPHY
+
+[81] Ohta, Shin-Ichi. Some functional inequalities on non-reversible Finsler manifolds. Proc. Indian Acad. Sci. Math. Sci. 127 (2017), no. 5, 833­855.
+[82] Ohta, Shin-ichi. Needle decompositions and isoperimetric inequalities in Finsler geometry. J. Math. Soc. Japan 70 (2018), no.2, 651­693.
+[83] Ohta, Shin-ichi. Comparison Finsler geometry. Springer Monogr. Math. Springer, Cham, 2021. xxii+316 pp.
+[84] Payne, L. E.; Weinberger, H. F. An optimal Poincare´ inequality for convex domains. Arch. Rational Mech. Anal. 5 (1960), 286­292.
+[85] Petersen, Peter. Riemannian geometry (Third edition). Grad. Texts in Math., 171. Springer, Cham, 2016. xviii+499 pp.
+[86] Santambrogio, Filippo. Optimal transport for applied mathematicians. Calculus of variations, PDEs, and modeling. Progr. Nonlinear Differential Equations Appl., 87 Birkha¨user/Springer, Cham, 2015. xxvii+353 pp.
+[87] Schachter, Benjamin. An Eulerian Approach to Optimal Transport with Applications to the Otto Calculus (PhD Thesis). University of Toronto (Canada), 2017.
+[88] Shen, Zhongmin, Differential geometry of spray and Finsler spaces. Kluwer Academic Publishers, Dordrecht, 2001.
+[89] Stein, Elias M. Singular integrals and differentiability properties of functions. Princeton Math. Ser., No. 30. Princeton University Press, Princeton, NJ, 1970. xiv+290 pp.
+[90] Sturm, Karl-Theodor. Metric measure spaces and synthetic Ricci bounds: fundamental concepts and recent developments. Proceedings of the 8th European Congress of Mathematics, June 2021. pp. 125­159.
+[91] Sturm, Karl-Theodor. On the geometry of metric measure spaces. II. Acta Math. 196 (2006), no. 1, 133­177.
+[92] Villani, Ce´dric. Optimal transport. Old and new. Grundlehren Math. Wiss., 338, SpringerVerlag, Berlin, 2009. xxii+973 pp.
+[93] Wojtkowski, Maciej P. Magnetic flows and Gaussian thermostats on manifolds of negative curvature. Fund. Math. 163 (2000), no.2, 177­191.
+[94] Yang, Yuchuan. Generalized curvature for the optimal transport problem induced by a Tonelli Lagrangian. Calc. Var. Partial Differential Equations 62 (2023), no. 7, Paper No. 206, 20 pp.
+[95] Zhong, Jia Qing; Yang, Hong Cang On the estimate of the first eigenvalue of a compact Riemannian manifold. Sci. Sinica Ser. A 27 (1984), no. 12, 1265­1273.
+
+

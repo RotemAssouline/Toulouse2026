@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle in Magnetic Field</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Magnetic field parameters
+        const fieldGridSize = 20;
+        let magneticField = [];
+        let particle;
+        
+        function resizeCanvas() {
+            // Set canvas size to window size without CSS scaling
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
+        }
+        
+        class Particle {
+            constructor(x, y, vx, vy, charge = 1) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.charge = charge;
+            }
+            
+            update(dt) {
+                const width = canvas.width;
+                const height = canvas.height;
+                
+                // Get magnetic field at current position
+                const B = getMagneticField(this.x, this.y);
+                
+                // Lorentz force: F = q(v × B)
+                const force = this.charge * B * 1.0;
+                
+                // Calculate acceleration
+                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (speed > 0) {
+                    const ax = -force * this.vy;
+                    const ay = force * this.vx;
+                    
+                    this.vx += ax * dt;
+                    this.vy += ay * dt;
+                }
+                
+                // Update position
+                this.x += this.vx * dt;
+                this.y += this.vy * dt;
+                
+                // Boundary conditions
+                if (this.x < 0 || this.x > width) {
+                    this.vx = -this.vx;
+                    this.x = Math.max(0, Math.min(width, this.x));
+                }
+                if (this.y < 0 || this.y > height) {
+                    this.vy = -this.vy;
+                    this.y = Math.max(0, Math.min(height, this.y));
+                }
+            }
+            
+            draw() {
+                ctx.fillStyle = '#4d6970';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function generateMagneticField() {
+            magneticField = [];
+            for (let i = 0; i < fieldGridSize; i++) {
+                magneticField[i] = [];
+                for (let j = 0; j < fieldGridSize; j++) {
+                    const x = i / fieldGridSize;
+                    const y = j / fieldGridSize;
+                    
+                    const field = Math.sin(x * Math.PI * 3) * Math.cos(y * Math.PI * 2) * 
+                                 Math.exp(-((x - 0.5) ** 2 + (y - 0.3) ** 2) * 3) +
+                                 0.3 * Math.sin(x * Math.PI * 6) * Math.sin(y * Math.PI * 4);
+                    
+                    magneticField[i][j] = field;
+                }
+            }
+        }
+        
+        function getMagneticField(x, y) {
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            const gridX = Math.floor((x / width) * (fieldGridSize - 1));
+            const gridY = Math.floor((y / height) * (fieldGridSize - 1));
+            
+            const safeX = Math.max(0, Math.min(fieldGridSize - 1, gridX));
+            const safeY = Math.max(0, Math.min(fieldGridSize - 1, gridY));
+            
+            return magneticField[safeX][safeY];
+        }
+        
+        function drawMagneticField() {
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            if (width <= 0 || height <= 0) return;
+            
+            const imageData = ctx.createImageData(width, height);
+            const data = imageData.data;
+            
+            let minField = Infinity;
+            let maxField = -Infinity;
+            for (let i = 0; i < fieldGridSize; i++) {
+                for (let j = 0; j < fieldGridSize; j++) {
+                    minField = Math.min(minField, magneticField[i][j]);
+                    maxField = Math.max(maxField, magneticField[i][j]);
+                }
+            }
+            
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const fx = (x / width) * (fieldGridSize - 1);
+                    const fy = (y / height) * (fieldGridSize - 1);
+                    
+                    const x1 = Math.floor(fx);
+                    const x2 = Math.min(x1 + 1, fieldGridSize - 1);
+                    const y1 = Math.floor(fy);
+                    const y2 = Math.min(y1 + 1, fieldGridSize - 1);
+                    
+                    const wx = fx - x1;
+                    const wy = fy - y1;
+                    
+                    const field11 = magneticField[x1][y1];
+                    const field21 = magneticField[x2][y1];
+                    const field12 = magneticField[x1][y2];
+                    const field22 = magneticField[x2][y2];
+                    
+                    const field1 = field11 * (1 - wx) + field21 * wx;
+                    const field2 = field12 * (1 - wx) + field22 * wx;
+                    const field = field1 * (1 - wy) + field2 * wy;
+                    
+                    const normalized = (field - minField) / (maxField - minField);
+                    
+                    const baseColor = {r: 127, g: 174, b: 186};
+                    const intensity = normalized;
+                    
+                    const r = Math.floor(baseColor.r + (255 - baseColor.r) * intensity);
+                    const g = Math.floor(baseColor.g + (255 - baseColor.g) * intensity);
+                    const b = Math.floor(baseColor.b + (255 - baseColor.b) * intensity);
+                    
+                    const index = (y * width + x) * 4;
+                    data[index] = r;
+                    data[index + 1] = g;
+                    data[index + 2] = b;
+                    data[index + 3] = 255;
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+        }
+        
+        function animate() {
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            if (width <= 0 || height <= 0) {
+                requestAnimationFrame(animate);
+                return;
+            }
+            
+            ctx.clearRect(0, 0, width, height);
+            drawMagneticField();
+            particle.update(0.1);
+            particle.draw();
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Initialize everything
+        function init() {
+            resizeCanvas();
+            generateMagneticField();
+            particle = new Particle(canvas.width * 0.25, canvas.height * 0.25, 120, 80, 1);
+            animate();
+        }
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            const oldWidth = canvas.width;
+            const oldHeight = canvas.height;
+            
+            resizeCanvas();
+            
+            if (particle && oldWidth > 0 && oldHeight > 0) {
+                particle.x = (particle.x / oldWidth) * canvas.width;
+                particle.y = (particle.y / oldHeight) * canvas.height;
+            }
+        });
+        
+        // Start when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
