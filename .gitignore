@@ -2,3 +2,6 @@ offline_simulations/flow_field_0_data.json
 offline_simulations/flow_field_data.json
 offline_simulations/flow_field_0_data.json
 offline_simulations/flow_field_data.json
+
+# reveal.js dev dependencies (loaded from CDN in production)
+node_modules/
