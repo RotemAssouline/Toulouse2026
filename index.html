@@ -907,22 +907,23 @@
         \[
             \int_M fu\, d\mathrm{Vol}_g = \inf\left\{\int_M fv \, d\mathrm{Vol}_g \quad \Big\vert \quad v : M \to \mathbb{R}, \,\, |dv + \eta| \le 1\right\}.
         \]
-        <p>
+        <p class="fragment">
             A <em>transport ray</em> of \(u\) is a maximal curve \(\gamma : I \to \mathbb{R}\) with the properties
-        </p>
         \[
             \dot\gamma \equiv \nabla u + \eta^\sharp \qquad \text{ and } \qquad |\dot\gamma| \equiv 1.
         \]
-        <p>
+        </p>
+        <p class="fragment">
         If \(x\) is not contained in such a curve then we say that \(\{x\}\) is a (degenerate) transport ray. 
         </p>
     
-        <p>
+        <p class="fragment">
             For every Borel set \(A\subseteq M\) which is a union of transport rays,
-        </p>
+        
         \[
             \int_A  f \,d\mathrm{Vol}_g = 0 \qquad \text{(Mass balance)}.
         \]
+        </p>
     </div>
 </section>
 
@@ -931,31 +932,31 @@
     <div style="text-align: left; font-size: .6em;">
         <p>
             Let \(\{\gamma_\alpha:I_\alpha \to M\}_{\alpha\in\mathscr{A}}\) be the collection of transport rays. Make a change of variables:
-        </p>
         \[
             \begin{aligned}
                 \mathscr{A}\times\mathbb{R} &\to M\\
                 (\alpha,t) &\mapsto \gamma_\alpha(t).
             \end{aligned}
         \]
-        <p>
-            For every smooth \(\phi : M \to \mathbb{R},\)
         </p>
+        <p class="fragment">
+            For every smooth \(\phi : M \to \mathbb{R},\)
         \[
             \int_M\phi\,d\mathrm{Vol}_g = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))\rho(\alpha,t)dt\,d\alpha.
         \]
-        <p>
+        </p>
+        <p class="fragment">
             How do we determine the ''Jacobian" \(\rho\)? since we have freedom in choosing the measure on \(\mathscr{A},\) we only need to determine \(\rho\) up to a multiplicative constant depending on \(\alpha.\) Thus it suffices to determine
           \(
               \partial_t\log\rho.
           \)
         </p>
-        <p>
+        <p class="fragment">
             But in this coordinate chart \(\partial/\partial t = \dot\gamma_\alpha = \nabla u + \eta^\sharp\)&nbsp;&nbsp; so
-        </p>
         \[
             \partial_t\log\rho = \mathrm{div}(\partial / \partial t) = \mathrm{div}(\nabla u + \eta^\sharp) = \mathrm{div}(\sigma^\sharp) = -\delta\sigma \qquad \text{where \(\sigma = du + \eta\)}.
         \]
+        </p>
     </div>
 </section>
 
@@ -969,26 +970,27 @@
             dm_\alpha(t) = e^{-\psi_\alpha(t)}dt, \qquad \text{ where } \qquad \frac{d\psi_\alpha}{dt} = \delta\sigma \circ\gamma_\alpha.
         \]
         <p>
-            Define a needle \(\mu_\alpha\) by
-        </p>
-        \[
+        Define a needle \(\mu_\alpha\) by
+       
+          \[
             \mu_\alpha = (\gamma_\alpha)_* m_\alpha.
-        \]
-        <p>
-            Then for every smooth \(\phi : M \to \mathbb{R},\)
+          \]
         </p>
-        \[
-            \begin{aligned}
-                \int_M\phi\,d\mathrm{Vol}_g & = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))e^{-\psi_\alpha(t)}dt\,d\nu(\alpha)\\
-                & = \int_{\mathscr{A}}\int\phi d\mu_\alpha\,d\nu(\alpha).
-            \end{aligned}
-        \]
-        <p>
-            By mass balance, for \(\nu\)-almost every \(\alpha \in \mathscr{A},\)
+        <p class="fragment">
+          Then for every smooth \(\phi : M \to \mathbb{R},\)
+          \[
+              \begin{aligned}
+                  \int_M\phi\,d\mathrm{Vol}_g & = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))e^{-\psi_\alpha(t)}dt\,d\nu(\alpha)\\
+                  & = \int_{\mathscr{A}}\int\phi d\mu_\alpha\,d\nu(\alpha).
+              \end{aligned}
+          \]
         </p>
-        \[
-            \int f\, d\mu_\alpha = 0.
-        \]
+        <p class="fragment">
+          By mass balance, for \(\nu\)-almost every \(\alpha \in \mathscr{A},\)
+          \[
+              \int f\, d\mu_\alpha = 0.
+          \]
+        </p>
     </div>
 </section>
 
@@ -1002,23 +1004,21 @@
             \ddot\psi_\alpha \,\ge\, k \,+\, \frac{\dot\psi_\alpha^{\,2}}{n-1}, \qquad \text{where}\qquad dm_\alpha(t) = e^{-\psi_\alpha(t)}dt, \quad \dot\psi_\alpha = \delta\sigma\circ\gamma_\alpha.
         \]
 
-        <p>
+        <p class="fragment">
             Loosely speaking, the one-form \(\sigma = du + \eta\) satisfies \(d\sigma = \Omega\) and \(|\sigma|\equiv 1\) on the set of nondegenerate transport rays.
         </p>
-        <p>
-            Therefore, by the Bochner inequality and the assumption \(\mathrm{Ric}_\Omega \ge k\), on the set of nondegenerate transport rays
+        <p class="fragment">
+          Therefore, by the Bochner inequality and the assumption \(\mathrm{Ric}_\Omega \ge k\), on the set of nondegenerate transport rays
+          \[
+              \langle d\delta\sigma,\sigma\rangle \,\ge\, \frac{(\delta\sigma)^2}{n-1} \,+\, \mathrm{Ric}_\Omega(\sigma^\sharp) \,\ge\, \frac{(\delta\sigma)^2}{n-1} \,+\, k.
+          \]
         </p>
-        \[
-            \langle d\delta\sigma,\sigma\rangle \,\ge\, \frac{(\delta\sigma)^2}{n-1} \,+\, \mathrm{Ric}_\Omega(\sigma^\sharp) \,\ge\, \frac{(\delta\sigma)^2}{n-1} \,+\, k.
-        \]
-        <p>
-            Hence
-        </p>
-        \[
-            \ddot\psi_\alpha = \frac{d}{dt}\left(\delta\sigma\circ\gamma_\alpha\right) = (d\delta\sigma)(\dot\gamma_\alpha) = \langle d\delta\sigma,\sigma\rangle \,\ge\, k \,+\, \frac{\dot\psi_\alpha^{\,2}}{n-1}
-        \]
-        <p>
-            for \(\nu\)-almost \(\alpha\) such that \(\gamma_\alpha\) is nondegenerate.
+        <p class="fragment">
+          Hence
+          \[
+              \ddot\psi_\alpha = \frac{d}{dt}\left(\delta\sigma\circ\gamma_\alpha\right) = (d\delta\sigma)(\dot\gamma_\alpha) = \langle d\delta\sigma,\sigma\rangle \,\ge\, k \,+\, \frac{\dot\psi_\alpha^{\,2}}{n-1}
+          \]
+          for \(\nu\)-almost \(\alpha\) such that \(\gamma_\alpha\) is nondegenerate.
         </p>
     </div>
 </section>
