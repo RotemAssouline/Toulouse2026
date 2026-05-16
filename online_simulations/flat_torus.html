@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Magnetic Geodesic — Flat Torus</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.getElementById('about-overlay'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Crimson+Pro:ital,wght@0,300;1,300&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a10;--panel:#0f0f1a;--border:#1e1e32;
+  --cA:#5eb8ff;--cB:#52e0b4;--cGeo:#ff6b6b;--cMag:#ffd166;
+  --text:#c8c8e0;--muted:#5a5a7a;--accent:#7c6fff;
+}
+body{background:var(--bg);color:var(--text);
+     font-family:'JetBrains Mono',monospace;font-size:12px;
+     height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.header{padding:10px 18px 8px;border-bottom:1px solid var(--border);
+        display:flex;align-items:baseline;gap:14px;flex-shrink:0}
+h1{font-family:'Crimson Pro',serif;font-weight:300;font-style:italic;
+   font-size:1.25rem;color:#e0e0f8}
+.subtitle{font-size:10px;color:var(--muted)}
+.main{display:flex;flex:1;min-height:0}
+
+.pane-right{flex:0 0 310px;border-left:1px solid var(--border);
+            display:flex;flex-direction:column;min-height:0}
+
+.pane-2d{flex:1;position:relative;min-width:0;min-height:0;
+          display:flex;align-items:center;justify-content:center}
+#c2d{aspect-ratio:1;max-width:100%;max-height:100%;display:block;border:1px solid var(--border)}
+
+.pane-ctrl{flex:0 0 auto;display:flex;flex-direction:column;
+           padding:10px 12px;gap:8px;background:var(--panel)}
+.ctrl-label{font-size:9px;color:var(--muted);letter-spacing:.12em;
+            text-transform:uppercase;margin-bottom:5px}
+.eta-disp{font-family:'Crimson Pro',serif;font-style:italic;
+          font-size:1.05rem;color:#e0e0f8;line-height:1.9}
+.val{color:var(--accent);font-style:normal;
+     font-family:'JetBrains Mono',monospace;font-size:.8rem}
+
+#xy-pad{width:110px;height:110px;border:1px solid var(--border);
+        border-radius:3px;cursor:crosshair;position:relative;
+        touch-action:none;background:#08080f}
+#xy-pad canvas{position:absolute;inset:0;width:100%;height:100%}
+
+.legend{display:flex;flex-direction:column;gap:7px}
+.leg-row{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.swatch{width:20px;height:3px;border-radius:1px;flex-shrink:0}
+.dot-swatch{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+.stats{font-size:10px;color:var(--muted);line-height:1.8}
+.kl-badge{display:inline-block;padding:1px 6px;border-radius:2px;
+          background:#1a1a30;color:var(--accent);font-size:10px;
+          font-family:'JetBrains Mono',monospace}
+#computing{position:absolute;inset:0;background:rgba(10,10,16,0.75);
+           display:none;align-items:center;justify-content:center;
+           font-size:11px;color:var(--muted);letter-spacing:.12em;z-index:10;
+           pointer-events:none}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Magnetic Geodesic</h1>
+  <span class="subtitle" style="color:var(--muted);font-size:10px">flat torus $\mathbb{T}^2$</span>
+  <button id="about-btn" onclick="var o=document.getElementById('about-overlay');o.style.display=o.style.display==='none'?'block':'none'"
+    style="margin-left:auto;font-size:9px;font-family:'JetBrains Mono',monospace;
+           color:var(--muted);background:none;border:1px solid var(--border);
+           border-radius:2px;padding:2px 8px;cursor:pointer;letter-spacing:.1em">about</button>
+</div>
+
+<div id="about-overlay"
+  style="display:none;position:fixed;inset:0;z-index:200;overflow-y:auto;
+         background:rgba(8,8,14,0.97);backdrop-filter:blur(4px);
+         padding:40px 12% 60px;font-family:'Crimson Pro',serif;font-size:1rem;
+         line-height:1.75;color:#c8c8e0;">
+  <button onclick="document.getElementById('about-overlay').style.display='none'"
+    style="position:fixed;top:16px;right:24px;font-size:10px;font-family:'JetBrains Mono',monospace;
+           color:var(--muted);background:none;border:1px solid var(--border);
+           border-radius:2px;padding:2px 10px;cursor:pointer;letter-spacing:.1em">close ✕</button>
+
+  <h2 style="font-weight:300;font-style:italic;font-size:1.5rem;color:#e0e0f8;margin-bottom:1.4em">
+    About this simulation</h2>
+
+  <!-- ── Mathematical description ── -->
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Mathematical setup</h3>
+  <p>The simulation lives on the <b>flat torus</b> $\mathbb{T}^2 = \mathbb{R}^2/(2\pi\mathbb{Z})^2$,
+     parametrised by coordinates $(r,\theta)\in[0,2\pi)^2$.  The Riemannian metric is the flat product metric
+     $$ds^2 = dr^2 + d\theta^2,$$
+     i.e.\ the profile function $\varphi(r)\equiv 1$.  The torus has constant zero sectional curvature;
+     each coordinate circle has circumference $2\pi$.  The parameter square is the fundamental domain
+     with opposite edges identified: $r\sim r+2\pi$ and $\theta\sim\theta+2\pi$.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Fundamental group and winding classes</h3>
+  <p>The fundamental group of the torus is $\pi_1(\mathbb{T}^2)=\mathbb{Z}^2$, generated by the two
+     non-contractible loops $\gamma_r: t\mapsto(2\pi t,0)$ and $\gamma_\theta: t\mapsto(0,2\pi t)$.
+     Two points $A=(r_0,\theta_0)$ and $B=(r_1,\theta_1)$ can be joined by paths in infinitely many
+     homotopy classes, each labelled by a <b>winding class</b> $(k,l)\in\mathbb{Z}^2$: the path winds
+     $k$ full turns in the $r$-direction and $l$ full turns in the $\theta$-direction.  In the
+     universal cover $\mathbb{R}^2$, the class-$(k,l)$ path connects $(r_0,\theta_0)$ to the lifted point
+     $(r_1+2\pi k,\;\theta_1+2\pi l)$.  The energy-minimising representative in each class is the
+     straight segment of length
+     $$L_{k,l} = \sqrt{(\Delta r + 2\pi k)^2 + (\Delta\theta + 2\pi l)^2},
+       \quad \Delta r := r_1-r_0,\;\Delta\theta := \theta_1-\theta_0.$$
+     The simulation considers all $(k,l)\in\{-1,0,1\}^2$, giving nine candidate geodesics; the
+     globally shortest one is shown in <b>gray</b>.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Closed 1-forms and the magnetic cost</h3>
+  <p>Every closed 1-form on $\mathbb{T}^2$ can be written $\eta = a\,dr + b\,d\theta$ for
+     constants $a,b\in\mathbb{R}$.  The forms $dr$ and $d\theta$ generate the de Rham cohomology
+     $H^1(\mathbb{T}^2;\mathbb{R})\cong\mathbb{R}^2$; they are closed but not exact — their
+     integrals around the generating loops equal $2\pi$ — so $\eta$ carries genuine topological
+     information whenever $(a,b)\neq(0,0)$.  The parameters $(a,b)$ are chosen via the XY pad.</p>
+  <p>The <b>magnetic cost</b> of a path $\gamma$ from $A$ to $B$ is
+     $$C(\gamma) = L(\gamma) - \int_\gamma \eta.$$
+     Because $\eta$ is closed, its line integral depends only on the homotopy class:
+     $$\int_{\gamma_{k,l}} \eta = a\,(\Delta r+2\pi k) + b\,(\Delta\theta+2\pi l).$$
+     Thus the magnetic cost in class $(k,l)$ is the explicit quantity
+     $$C_{k,l}(a,b) = L_{k,l} - a(\Delta r+2\pi k) - b(\Delta\theta+2\pi l),$$
+     and the <b>magnetic minimiser</b> is the class $(k^*,l^*)$ achieving $\min_{k,l}C_{k,l}(a,b)$.
+     The <b>colored curve</b> is the geodesic in this winding class; its color encodes the class.
+     When $(a,b)=(0,0)$ the magnetic and Riemannian minimisers coincide.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Operator norm and the unit circle</h3>
+  <p>The pointwise cotangent norm of $\eta=a\,dr+b\,d\theta$ at $x\in\mathbb{T}^2$ is
+     $$\|\eta(x)\|^2_{T^*_x} = g^{rr}(x)\,a^2 + g^{\theta\theta}(x)\,b^2
+       = a^2 + \frac{b^2}{\varphi(r)^2}.$$
+     On the flat torus $\varphi\equiv1$, so $\|\eta\|_{op}=\sqrt{a^2+b^2}$ is constant across
+     the torus.  The unit ball $\|\eta\|_{op}=1$ is the circle $a^2+b^2=1$, drawn as the
+     <b>purple ellipse</b> (a circle in this case) on the XY pad.  For $\|\eta\|_{op}<1$, one
+     has $C_{k,l}\geq L_{k,l}(1-\|\eta\|_{op})>0$ for all classes, so the magnetic cost is
+     always positive and the variational problem is well-posed.  The dot on the XY pad turns
+     red when approaching the unit circle as a visual warning.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    The magnetic Brunn–Minkowski inequality</h3>
+  <p>This simulation is a visual tool for studying the <b>magnetic Brunn–Minkowski inequality</b>.
+     Given measurable sets $A,B\subset\mathbb{T}^2$ and a closed 1-form $\eta$ with $\|\eta\|_{op}<1$,
+     define the <b>magnetic midpoint set</b>
+     $$M_\eta(A,B) = \bigl\{\,\gamma_{1/2}^{(a,b)}: a\in A,\; b\in B\,\bigr\},$$
+     where $\gamma^{(a,b)}$ is the magnetic minimiser from $a$ to $b$ and $\gamma_{1/2}^{(a,b)}$
+     is its midpoint (the unique point at half the arc length along $\gamma$).  The classical
+     Brunn–Minkowski inequality on $\mathbb{R}^n$ asserts $|M(A,B)|^{1/n}\geq(|A|^{1/n}+|B|^{1/n})/2$;
+     the magnetic analogue asks whether a lower bound of similar shape holds for
+     $|M_\eta(A,B)|$, with a constant $c(\eta)$ depending on $\eta$ and the geometry.</p>
+  <p>The <b>XY pad phase diagram</b> reveals a key feature: as $(a,b)$ varies, the magnetic
+     minimiser can jump discontinuously to a different winding class.  These <em>phase
+     boundaries</em> are where two winding classes have equal cost:
+     $$C_{k,l}(a,b) = C_{k',l'}(a,b)
+       \;\Longleftrightarrow\;
+       a(2\pi(k-k')) + b(2\pi(l-l')) = L_{k,l} - L_{k',l'},$$
+     which is a family of linear equations in $(a,b)$ — straight lines in the XY pad.  The
+     resulting patchwork of colored regions directly shows which winding class wins at each
+     $\eta$.  On the flat torus all phase boundaries are straight, reflecting the linear
+     dependence of $C_{k,l}$ on $(a,b)$.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Cloud mode and the midpoint map</h3>
+  <p>In <b>cloud mode</b> the single points $A$, $B$ are replaced by small clouds of $N_c=19$
+     sample points distributed over discs of radius $0.25$ around each point (using a
+     sunflower/Fibonacci lattice; see below).  For all $N_c^2=361$ cross-pairs
+     $(a_i,b_j)\in\mathrm{cloudA}\times\mathrm{cloudB}$, the magnetic minimiser and its
+     midpoint are computed.  The <b>gray dots</b> show the Riemannian midpoints (midpoints of
+     the shortest Riemannian geodesics) and the <b>colored dots</b> show the magnetic midpoints,
+     colored by winding class.  Together they approximate $M_\eta(A,B)$, providing a visual
+     estimate of its area and shape as $\eta$ varies on the XY pad.  Observe how the midpoint
+     cloud can split into multiple clusters when $A\times B$ straddles a phase boundary.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    The vector field η♯</h3>
+  <p>Under the metric $ds^2=dr^2+d\theta^2$, the <b>musical sharp isomorphism</b>
+     $\flat^{-1}: T^*\mathbb{T}^2\to T\mathbb{T}^2$ sends $\eta=a\,dr+b\,d\theta$ to
+     $\eta^\sharp = a\,\partial_r + b\,\partial_\theta$.  On the flat torus $\eta^\sharp$ is a
+     constant vector field: all arrows in the 2D plot are parallel and of equal length, pointing
+     in the direction $(b,a)$ in $(\theta,r)$-canvas coordinates.  Arrow length and opacity scale
+     with $\|\eta\|$, vanishing at $\eta=0$.  (On the torus of revolution the arrows vary with
+     $r$ because $\varphi(r)$ is non-constant; here they are uniform.)</p>
+
+  <!-- ── Technical description ── -->
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Technical: geodesic computation</h3>
+  <p>On $\mathbb{T}^2$ with $ds^2=dr^2+d\theta^2$ the geodesic equations are $\ddot r=\ddot\theta=0$,
+     so geodesics are straight lines in $\mathbb{R}^2$.  For each $(k,l)\in\{-1,0,1\}^2$, the
+     code computes the lifted displacement $\mathbf{d}_{k,l}=(\Delta r+2\pi k,\,\Delta\theta+2\pi l)$
+     and sets $L_{k,l}=|\mathbf{d}_{k,l}|$.  The path is sampled at $N+1=61$ equally spaced
+     points $(r_0+t_i d_r,\,\theta_0+t_i d_\theta)$, $t_i=i/N$, $i=0,\ldots,N$.
+     <em>No numerical integration is required.</em>  The geodesic midpoint is the average of
+     the lifted endpoints reduced modulo $2\pi$.  Total operation count per pair: nine
+     square-roots and nine subtractions.</p>
+  <p>The magnetic minimiser is found by evaluating $C_{k,l}=L_{k,l}-a\,d_r-b\,d_\theta$ for all
+     nine classes and taking the minimum — nine multiply-adds.  For the cloud of $361$ pairs
+     the entire computation (geodesics + minimisers) finishes in under 5 ms on a modern
+     browser, running synchronously on the main thread.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Technical: phase diagram</h3>
+  <p>The XY pad shows a $21\times21$ phase diagram precomputed for the current positions of $A$
+     and $B$.  At each grid point $(a_i,b_j)\in[-0.65,0.65]^2$ with step $0.065$, the code
+     evaluates all nine costs $\{C_{k,l}(a_i,b_j)\}$ and records the minimising class as a
+     string key (e.g.\ <code>"-1,0"</code>).  Each of the nine classes is assigned a fixed RGB
+     colour from the <code>classRGB</code> table.  Grid points with $a_i^2+b_j^2\geq0.98$ are
+     masked to stay within the operator-norm unit ball.  The phase cells are drawn as filled
+     rectangles on the XY canvas; the crosshair and dot show the current $(a,b)$.  The diagram
+     is recomputed from scratch on every A/B drag event.  Because the phase boundaries are
+     straight lines on the flat torus, the diagram has a clean linear-Voronoi appearance.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Technical: Fibonacci lattice cloud</h3>
+  <p>The 19-point cloud around a centre $p=(r_0,\theta_0)$ is generated by the
+     <b>sunflower (Fibonacci) lattice</b>:
+     $$p_k = \bigl(r_0 + \rho_k\cos(k\psi),\;\theta_0+\rho_k\sin(k\psi)\bigr)\!\!\pmod{2\pi},
+       \quad k=0,\ldots,18,$$
+     where $\psi=\pi(3-\sqrt{5})\approx2.3998\,\mathrm{rad}$ is the <b>golden angle</b> and
+     $\rho_k=0.25\sqrt{k/18}$ (with $\rho_0=0$ placing one point at the exact centre).
+     The radial spacing $\rho_k\propto\sqrt{k}$ distributes points uniformly in area over the
+     disc of radius $0.25$, and the golden-angle rotation ensures good angular separation,
+     avoiding clustering artefacts common in equal-angle spirals or random placement.  All
+     coordinates are reduced modulo $2\pi$ to stay in the fundamental domain.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Technical: η♯ arrow field</h3>
+  <p>At each point of a $9\times11$ grid in $(r,\theta)$ parameter space the code evaluates
+     $\eta^\sharp=(a,\,b)$ (in canvas coordinates: $u_x=b$, $u_y=-a$), normalises to unit
+     Euclidean length, and draws a centred arrow of half-length $\propto\|\eta\|/\|\eta\|_{\max}$
+     with a small arrowhead (half-angle $0.45$ rad, tip at $+0.5$ shaft).  On the flat torus
+     $\varphi\equiv1$ so all arrows are identical; the variation across $r$-rows seen on the
+     torus of revolution is absent here.</p>
+
+  <h3 style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.15em;
+             text-transform:uppercase;color:var(--accent);margin:1.6em 0 .6em">
+    Technical: rendering</h3>
+  <p><b>2D parameter space</b> uses the <b>Canvas 2D API</b>.  Geodesic paths are stored as
+     lifted (unwrapped) coordinate arrays.  The renderer applies $\bmod\,2\pi$ to each point
+     when computing canvas pixel positions, and detects genuine periodic-boundary crossings by
+     checking whether adjacent modded values differ by more than $\pi$; such jumps issue a
+     <code>moveTo</code> rather than a <code>lineTo</code>, preventing spurious wrap-around
+     lines.  The XY pad is a separate $110\times110$ canvas redrawn on every interaction event.
+     All computation runs synchronously on the main thread — flat-torus geodesic computation
+     is $O(1)$ per pair and the full cloud update takes under 5 ms.</p>
+
+</div>
+
+<style>
+
+</style>
+<div class="main">
+  <div class="pane-2d"><canvas id="c2d" style="cursor:crosshair"></canvas><div id="computing">COMPUTING…</div></div>
+  <div class="pane-right">
+  <div class="pane-ctrl">
+
+    <!-- Row 1: eta display -->
+    <div style="width:100%;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:2px">
+      <div class="ctrl-label"><span style="text-transform:none">η</span> = <span class="val" id="av" style="display:inline-block;width:3.8em;text-align:right">0.000</span> <span style="text-transform:none">dr</span>
+        + <span class="val" id="bv" style="display:inline-block;width:3.8em;text-align:right">0.000</span> <span style="text-transform:none">dθ</span>
+        
+        <br>‖<span style="text-transform:none">η</span>‖<sub>∞</sub> = <span id="norm-val" style="display:inline-block;width:3.8em">0.000</span>
+      </div>
+    </div>
+
+    <!-- Row 2: XY pad + legend + stats side by side -->
+    <div style="display:flex;gap:14px;align-items:flex-start;width:100%">
+
+      <!-- XY pad + toggle -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px">
+        <div class="ctrl-label" style="margin-bottom:0"><span style="text-transform:none">η</span></div>
+        <div id="xy-pad"><canvas id="xyc" width="110" height="110"></canvas></div>
+        <button onclick="update(0,0)" style="width:100%;font-size:9px;font-family:'JetBrains Mono',monospace;
+          color:var(--text);background:rgba(124,111,255,0.12);border:1px solid var(--accent);
+          border-radius:2px;padding:3px 0;cursor:pointer;letter-spacing:.08em">reset <span style="text-transform:none">η</span></button>
+        <!-- point / cloud toggle -->
+        <div style="display:flex;border:1px solid var(--accent);border-radius:3px;overflow:hidden;width:100%">
+          <button id="btn-point" onclick="setCloudMode(false)"
+            style="font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;
+                   padding:3px 0;border:none;cursor:pointer;flex:1;
+                   background:rgba(124,111,255,0.5);color:#fff">point</button><button id="btn-cloud" onclick="setCloudMode(true)"
+            style="font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;
+                   padding:3px 0;border:none;border-left:1px solid var(--accent);cursor:pointer;flex:1;
+                   background:transparent;color:rgba(200,200,200,0.4)">cloud</button>
+        </div>
+      </div>
+
+      <!-- Legend + stats -->
+      <div style="display:flex;flex-direction:column;gap:10px;padding-top:2px">
+
+        <div class="legend">
+          <div class="ctrl-label">legend</div>
+          <div class="leg-row">
+            <svg width="12" height="12" style="flex-shrink:0"><polygon points="6,1 11,11 1,11" fill="#ffffff"/></svg>
+            A &nbsp;
+            <svg width="12" height="12" style="flex-shrink:0"><rect x="1" y="1" width="10" height="10" fill="#ffffff"/></svg>
+            B
+          </div>
+          <div id="legend-geo-mag" class="leg-row"><div class="swatch" style="background:#888899"></div>geo &nbsp;<div class="swatch" id="mag-swatch" style="background:#888"></div>mag</div>
+        </div>
+
+        <div class="stats">
+          <div>geo <span class="kl-badge" id="ref-kl">—</span> &nbsp;mag <span class="kl-badge" id="cur-kl">—</span></div>
+          <div>len   <span id="geo-len">—</span></div>
+          <div>cost <span id="mag-cost">—</span></div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+</div>
+
+<script>
+const PRE={"R": 1.0, "am": 0.0, "phi_min": 1.0, "n_grid": 21, "a_vals": [-0.65, -0.585, -0.52, -0.455, -0.39, -0.325, -0.26, -0.195, -0.13, -0.065, 0.0, 0.065, 0.13, 0.195, 0.26, 0.325, 0.39, 0.455, 0.52, 0.585, 0.65], "b_vals": [-0.65, -0.585, -0.52, -0.455, -0.39, -0.325, -0.26, -0.195, -0.13, -0.065, 0.0, 0.065, 0.13, 0.195, 0.26, 0.325, 0.39, 0.455, 0.52, 0.585, 0.65], "a_max": 0.65, "b_max": 0.65, "pA": [0.4, 0.3], "pB": [2.741592653589793, 3.441592653589793]};
+const TAU = 2*Math.PI;
+const R = PRE.R, am = PRE.am;  // R=1, am=0: flat torus, phi(r)=1
+
+let cloudMode = false;
+
+
+// ── 2D canvas ────────────────────────────────────────────────────────────────
+const c2d=document.getElementById('c2d'), ctx=c2d.getContext('2d');
+
+function resize2d(){
+  const w=c2d.clientWidth*devicePixelRatio|0;
+  const h=c2d.clientHeight*devicePixelRatio|0;
+  if(c2d.width===w && c2d.height===h) return false;
+  c2d.width=w; c2d.height=h;
+  return true;
+}
+
+function toC(r,th,padL,padT,fw,fh){
+  return [padL+th/TAU*fw, padT+fh*(1-r/TAU)];  // r=0 at bottom, r=2π at top
+}
+
+function unwrapArr(arr){
+  const out = new Float64Array(arr.length);
+  out[0] = arr[0];
+  for(let i=1;i<arr.length;i++){
+    let d = arr[i]-out[i-1];
+    while(d >  Math.PI) d -= TAU;
+    while(d < -Math.PI) d += TAU;
+    out[i] = out[i-1]+d;
+  }
+  return out;
+}
+
+function drawPath2d(path_r, path_th, color, opacity, lineWidth, padL,padT,fw,fh,dpr){
+  if(!path_r||path_r.length<2) return;
+  const ur = unwrapArr(path_r);
+  const uth = unwrapArr(path_th);
+  ctx.beginPath();
+  let prev_rm, prev_tm;
+  for(let i=0;i<ur.length;i++){
+    const rm = ((ur[i]%TAU)+TAU)%TAU;
+    const tm = ((uth[i]%TAU)+TAU)%TAU;
+    const [x,y]=toC(rm,tm,padL,padT,fw,fh);
+    if(i===0){ctx.moveTo(x,y);}
+    else if(Math.abs(rm-prev_rm)>Math.PI || Math.abs(tm-prev_tm)>Math.PI){ctx.moveTo(x,y);}
+    else{ctx.lineTo(x,y);}
+    prev_rm=rm; prev_tm=tm;
+  }
+  ctx.strokeStyle=color;
+  ctx.globalAlpha=opacity;
+  ctx.lineWidth=lineWidth*dpr;
+  ctx.stroke();
+  ctx.globalAlpha=1;
+}
+
+function drawDistrib2d(a, b, padL, padT, fw, fh, dpr) {
+  const norm = Math.sqrt(a*a + b*b);
+  if (norm < 1e-6) return;
+  const opacity = Math.min(norm / PRE.a_max, 1) * 0.75;
+  ctx.save();
+  ctx.strokeStyle = 'rgba(136,153,221,1)';
+  ctx.fillStyle   = 'rgba(136,153,221,1)';
+  ctx.globalAlpha = opacity;
+  ctx.lineWidth   = 1.0 * dpr;
+  const Nr = 9, Nth = 11;
+  const scale   = Math.min(norm / PRE.a_max, 1);
+  const arrowPx = scale * 10 * dpr;  // shaft half-length scales with ‖η‖
+  const headPx  = scale * 4 * dpr;   // arrowhead scales too
+  for (let i = 0; i < Nr; i++) {
+    const r = (i + 0.5) / Nr * TAU;
+    const phi2 = 1;
+    // η♯ direction in parameter space: (a, b/φ²), normalised
+    const dr = a, dth = b / phi2;
+    const mag = Math.sqrt(dr*dr + dth*dth);
+    // Canvas coords: x ~ θ, y ~ r (both scaled by fw/TAU, fh/TAU)
+    const dx =  dth / mag * (fw / TAU) * arrowPx / (fw / TAU); // normalised canvas Δx
+    const dy =  dr  / mag * (fh / TAU) * arrowPx / (fh / TAU); // normalised canvas Δy
+    // Recompute properly: unit vector in canvas pixels
+    const ux =  (dth / mag) * arrowPx;
+    const uy = -(dr  / mag) * arrowPx;  // negate: r=0 at bottom → +∂_r = upward in canvas
+    for (let j = 0; j < Nth; j++) {
+      const th = (j + 0.5) / Nth * TAU;
+      const [cx, cy] = toC(r, th, padL, padT, fw, fh);
+      // Shaft
+      ctx.beginPath();
+      ctx.moveTo(cx - ux * 0.5, cy - uy * 0.5);
+      ctx.lineTo(cx + ux * 0.5, cy + uy * 0.5);
+      ctx.stroke();
+      // Arrowhead
+      const angle = Math.atan2(uy, ux);
+      ctx.beginPath();
+      ctx.moveTo(cx + ux * 0.5, cy + uy * 0.5);
+      ctx.lineTo(cx + ux*0.5 - headPx*Math.cos(angle - 0.45),
+                 cy + uy*0.5 - headPx*Math.sin(angle - 0.45));
+      ctx.lineTo(cx + ux*0.5 - headPx*Math.cos(angle + 0.45),
+                 cy + uy*0.5 - headPx*Math.sin(angle + 0.45));
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+
+
+function draw2d(ref_kl, cur_kl, cloudResults){
+  const W=c2d.width,H=c2d.height,dpr=devicePixelRatio;
+  ctx.clearRect(0,0,W,H);
+  const padL=28*dpr,padR=12*dpr,padT=12*dpr,padB=36*dpr;
+  const fw=W-padL-padR, fh=H-padT-padB;
+  const tC=(r,th)=>toC(r,th,padL,padT,fw,fh);
+
+  // Grid
+  ctx.strokeStyle='rgba(20,20,50,1)'; ctx.lineWidth=0.5*dpr;
+  for(let i=0;i<=4;i++){
+    const v=i/4*TAU;
+    const [x]=tC(0,v); ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,padT+fh);ctx.stroke();
+    const [,y]=tC(v,0); ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(padL+fw,y);ctx.stroke();
+  }
+
+  // Distribution lines (kernel of η)
+  drawDistrib2d(curA, curB, padL, padT, fw, fh, dpr);
+
+  // Axis labels
+  ctx.fillStyle='rgba(70,70,100,1)'; ctx.font=`${9*dpr}px JetBrains Mono`;
+  ctx.textAlign='center';
+  const lbls=['0','π/2','π','3π/2','2π'];
+  for(let i=0;i<=4;i++){
+    const v=i/4*TAU;
+    const [x]=tC(0,v); ctx.fillText(lbls[i],x,H-18*dpr);
+    const [,y]=tC(v,0); ctx.fillText(lbls[i],14*dpr,y+3*dpr);
+  }
+  ctx.fillStyle='rgba(110,110,150,1)';
+  ctx.font=`italic ${11*dpr}px 'Crimson Pro',serif`;
+  ctx.fillText('θ',padL+fw/2,H-5*dpr);
+  ctx.save(); ctx.translate(7*dpr,padT+fh/2); ctx.rotate(-Math.PI/2);
+  ctx.textAlign='center'; ctx.fillText('r',0,0); ctx.restore();
+
+
+
+  // Cloud geodesics — cloud mode only
+  if (cloudResults && PRE.cloudPairs) {
+    // Gray: shortest (Riemannian) geodesic for each pair
+    PRE.cloudPairs.forEach(pair => {
+      let best=null, minLen=Infinity;
+      for(const g of Object.values(pair.geos)){if(g.length<minLen){minLen=g.length;best=g;}}
+      if(best) drawPath2d(best.path_r,best.path_th,'#888899',0.12,0.6,padL,padT,fw,fh,dpr);
+    });
+    ctx.fillStyle='#888899'; ctx.globalAlpha=0.45;
+    PRE.cloudPairs.forEach(pair => {
+      let best=null, minLen=Infinity;
+      for(const g of Object.values(pair.geos)){if(g.length<minLen){minLen=g.length;best=g;}}
+      if(!best) return;
+      const [mx,my]=tC(best.r_mid,best.th_mid);
+      ctx.beginPath(); ctx.arc(mx,my,2*dpr,0,TAU); ctx.fill();
+    });
+    ctx.globalAlpha=1;
+    // Colored: magnetic minimizer for each pair
+    cloudResults.forEach(({kl, g}) => {
+      if (!g) return;
+      drawPath2d(g.path_r, g.path_th, classColor(kl,1), 0.18, 0.8, padL,padT,fw,fh,dpr);
+    });
+    ctx.globalAlpha = 0.7;
+    cloudResults.forEach(({kl, g}) => {
+      if (!g) return;
+      const [mx,my]=tC(g.r_mid, g.th_mid);
+      ctx.beginPath(); ctx.arc(mx,my,2.5*dpr,0,TAU);
+      ctx.fillStyle=classColor(kl,1); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  // A/B markers: all cloud pts in cloud mode, single pt in point mode
+  const ptsA = cloudResults ? (PRE.cloudA||[]) : [PRE.pA];
+  const ptsB = cloudResults ? (PRE.cloudB||[]) : [PRE.pB];
+  ctx.fillStyle='rgba(255,255,255,0.9)';
+  ptsA.forEach(([r,th]) => {
+    const [x,y]=tC(r,th); const s=4*dpr;
+    ctx.beginPath();
+    ctx.moveTo(x, y-s);
+    ctx.lineTo(x+s*0.866, y+s*0.5);
+    ctx.lineTo(x-s*0.866, y+s*0.5);
+    ctx.closePath(); ctx.fill();
+  });
+  ctx.fillStyle='rgba(255,255,255,0.9)';
+  ptsB.forEach(([r,th]) => {
+    const [x,y]=tC(r,th); const s=3*dpr;
+    ctx.fillRect(x-s, y-s, 2*s, 2*s);
+  });
+
+  if(!cloudResults){
+    // Reference geodesic (gray) for A→B center pair
+    if(ref_kl && PRE.geodesics[ref_kl]){
+      const g=PRE.geodesics[ref_kl];
+      drawPath2d(g.path_r,g.path_th,'#888899',0.5,1.5,padL,padT,fw,fh,dpr);
+    }
+
+    // Magnetic minimizer for A→B center pair
+    if(cur_kl && PRE.geodesics[cur_kl]){
+      const g=PRE.geodesics[cur_kl];
+      drawPath2d(g.path_r,g.path_th,classColor(cur_kl,1),0.75,2,padL,padT,fw,fh,dpr);
+    }
+  }
+
+  // A and B labels
+  ctx.font=`bold ${13*dpr}px JetBrains Mono`; ctx.textAlign='left';
+  const [ax,ay]=tC(...PRE.pA);
+  ctx.strokeStyle='rgba(0,0,0,0.9)'; ctx.lineWidth=3*dpr; ctx.strokeText('A',ax+7*dpr,ay+4*dpr);
+  ctx.fillStyle='rgba(255,255,255,1)'; ctx.fillText('A',ax+7*dpr,ay+4*dpr);
+  const [bx,by]=tC(...PRE.pB);
+  ctx.strokeStyle='rgba(0,0,0,0.9)'; ctx.strokeText('B',bx+7*dpr,by+4*dpr);
+  ctx.fillStyle='rgba(255,255,255,1)'; ctx.fillText('B',bx+7*dpr,by+4*dpr);
+}
+
+// ── XY Pad ───────────────────────────────────────────────────────────────────
+const xyc=document.getElementById('xyc'), xyCtx=xyc.getContext('2d');
+const pad=document.getElementById('xy-pad');
+
+const classRGB={
+  '-1,-1':[255,100,100],
+  '-1,0': [100,200,255],
+  '-1,1': [255,160,50],
+  '0,-1': [255,90,190],
+  '0,0':  [80,220,220],
+  '0,1':  [170,255,90],
+  '1,-1': [255,180,50],
+  '1,0':  [100,255,180],
+  '1,1':  [200,100,255],
+};
+function classColor(kl,alpha){
+  const c=classRGB[kl]||[150,150,150];
+  return `rgba(${c[0]},${c[1]},${c[2]},${alpha})`;
+}
+
+function drawXYPad(a,b){
+  const W=110,H=110;
+  xyCtx.clearRect(0,0,W,H);
+  xyCtx.fillStyle='#08080f'; xyCtx.fillRect(0,0,W,H);
+
+  // Grid lines
+  xyCtx.strokeStyle='rgba(25,25,55,1)'; xyCtx.lineWidth=0.5;
+  xyCtx.beginPath();xyCtx.moveTo(W/2,0);xyCtx.lineTo(W/2,H);xyCtx.stroke();
+  xyCtx.beginPath();xyCtx.moveTo(0,H/2);xyCtx.lineTo(W,H/2);xyCtx.stroke();
+
+  // Norm boundary: a² + (b/φ_min)² = 1
+  // Pad axes: x = b, y = a  →  x-semi = φ_min, y-semi = 1
+  const pm=PRE.phi_min;
+  xyCtx.beginPath();
+  for(let t=0;t<=TAU+0.01;t+=0.04){
+    const xp=W/2+pm*Math.cos(t)/PRE.b_max*W/2;
+    const yp=H/2-Math.sin(t)/PRE.a_max*H/2;
+    t<0.01?xyCtx.moveTo(xp,yp):xyCtx.lineTo(xp,yp);
+  }
+  xyCtx.strokeStyle='rgba(124,111,255,0.35)'; xyCtx.lineWidth=1; xyCtx.stroke();
+
+  // Draw phase regions: x-axis = b (ib increases rightward), y-axis = a (ia increases upward)
+  const classColors=Object.fromEntries(Object.keys(classRGB).map(k=>[k,classColor(k,0.12)]));
+  const ng=PRE.n_grid;
+  const cw=W/ng, ch=H/ng;
+  for(let ia=0;ia<ng;ia++){
+    for(let ib=0;ib<ng;ib++){
+      const kl=PRE.grid[ia][ib];
+      if(!kl) continue;
+      const col=classColors[kl]||'rgba(150,150,150,0.08)';
+      const px=ib/ng*W, py=(ng-1-ia)/ng*H;
+      xyCtx.fillStyle=col;
+      xyCtx.fillRect(px,py,cw,ch);
+    }
+  }
+
+  // Crosshair: x = b, y = a
+  const px=W/2+b/PRE.b_max*W/2;
+  const py=H/2-a/PRE.a_max*H/2;
+  xyCtx.strokeStyle='rgba(124,111,255,0.4)'; xyCtx.lineWidth=0.5;
+  xyCtx.setLineDash([3,3]);
+  xyCtx.beginPath();xyCtx.moveTo(px,0);xyCtx.lineTo(px,H);xyCtx.stroke();
+  xyCtx.beginPath();xyCtx.moveTo(0,py);xyCtx.lineTo(W,py);xyCtx.stroke();
+  xyCtx.setLineDash([]);
+
+  // Dot
+  const norm2=a*a+(b/pm)**2;
+  xyCtx.beginPath();xyCtx.arc(px,py,5,0,TAU);
+  xyCtx.fillStyle=norm2<0.98?'#7c6fff':'#ff6b6b'; xyCtx.fill();
+
+  // Axis labels
+  xyCtx.fillStyle='rgba(60,60,90,1)'; xyCtx.font='9px JetBrains Mono';
+  xyCtx.textAlign='right';
+  xyCtx.fillText(`±${PRE.b_max}`,W-2,H/2-4);   // x-axis = b
+  xyCtx.fillText(`±${PRE.a_max}`,W/2-3,10);   // y-axis = a
+}
+
+function padCoords(cx,cy){
+  const rect=pad.getBoundingClientRect();
+  // x-axis = b (dθ coefficient, matches θ horizontal in 2D plot)
+  // y-axis = a (dr coefficient, matches r vertical in 2D plot)
+  const b= ((cx-rect.left)/rect.width -0.5)*2*PRE.b_max;
+  const a=-((cy-rect.top) /rect.height-0.5)*2*PRE.a_max;
+  return [Math.max(-PRE.a_max,Math.min(PRE.a_max,a)),
+          Math.max(-PRE.b_max,Math.min(PRE.b_max,b))];
+}
+
+function snap(a,b){
+  const ia=PRE.a_vals.reduce((best,v,i)=>Math.abs(v-a)<Math.abs(PRE.a_vals[best]-a)?i:best,0);
+  const ib=PRE.b_vals.reduce((best,v,i)=>Math.abs(v-b)<Math.abs(PRE.b_vals[best]-b)?i:best,0);
+  return [ia,ib];
+}
+
+// ── Update ───────────────────────────────────────────────────────────────────
+
+function update(a,b){
+  curA=a; curB=b;
+  const pm=PRE.phi_min;
+  const norm=Math.sqrt(a*a+(b/pm)**2);
+  document.getElementById('av').textContent=a.toFixed(3);
+  document.getElementById('bv').textContent=b.toFixed(3);
+  document.getElementById('norm-val').textContent=norm.toFixed(3);
+
+  const [ia,ib]=snap(a,b);
+  const cur_kl=PRE.grid[ia][ib];
+  const sa=PRE.a_vals[ia], sb=PRE.b_vals[ib];
+
+  // Stats
+  document.getElementById('ref-kl').textContent=PRE.ref_kl||'—';
+  const swRGB=classRGB[cur_kl]||[150,150,150];
+  document.getElementById('mag-swatch').style.background=`rgb(${swRGB[0]},${swRGB[1]},${swRGB[2]})`;
+  document.getElementById('cur-kl').textContent=cur_kl||'—';
+  const refG=PRE.geodesics[PRE.ref_kl];
+  const curG=cur_kl?PRE.geodesics[cur_kl]:null;
+  document.getElementById('geo-len').textContent=
+    refG?refG.length.toFixed(4):'—';
+  document.getElementById('mag-cost').textContent=
+    curG?(curG.length-sa*curG.Dr-sb*curG.Dth).toFixed(4):'—';
+
+
+  // Cloud geodesics: pick minimizer for each pair (only in cloud mode)
+  let cloudResults = null;
+  if (cloudMode) {
+    cloudResults = (PRE.cloudPairs||[]).map(pair => {
+      let best = Infinity, bestKL = null, bestG = null;
+      for (const [kl, g] of Object.entries(pair.geos)) {
+        const cost = g.length - a*g.Dr - b*g.Dth;
+        if (cost < best) { best = cost; bestKL = kl; bestG = g; }
+      }
+      return { kl: bestKL, g: bestG };
+    });
+  }
+  drawXYPad(a,b);
+  draw2d(PRE.ref_kl, cur_kl, cloudResults);
+}
+
+// Pad interaction
+let padDown=false;
+function onPad(e){
+  const pt=e.touches?e.touches[0]:e;
+  const [a,b]=padCoords(pt.clientX,pt.clientY);
+  update(a,b);
+}
+pad.addEventListener('mousedown',e=>{padDown=true;onPad(e);});
+pad.addEventListener('touchstart',e=>{padDown=true;onPad(e);e.preventDefault();},{passive:false});
+window.addEventListener('mousemove',e=>{if(padDown)onPad(e);});
+window.addEventListener('touchmove',e=>{if(padDown)onPad(e);},{passive:false});
+window.addEventListener('mouseup',()=>padDown=false);
+window.addEventListener('touchend',()=>padDown=false);
+
+// ── Render loop ──────────────────────────────────────────────────────────────
+function animate(){
+  requestAnimationFrame(animate);
+  if(resize2d() && PRE.geodesics) update(curA, curB);
+}
+// ── Geodesic computation (inlined, runs on main thread) ──────────────────────
+// phi(r) = R + am*cos(r),  metric = dr^2 + phi^2 dtheta^2
+// R and am already declared in main script.
+
+const WINDINGS_G = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,0],[0,1],[1,-1],[1,0],[1,1]];
+
+// Cloud parameters: 19-point sunflower disc → 361 pairs
+const CLOUD_N = 19, CLOUD_R = 0.25;
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5)); // ≈ 2.399 rad
+function generateCloud(center) {
+  const [r0, th0] = center;
+  const pts = [];
+  for (let k = 0; k < CLOUD_N; k++) {
+    const rr = CLOUD_R * Math.sqrt(k / (CLOUD_N - 1));  // k=0 → center
+    const angle = k * GOLDEN_ANGLE;
+    pts.push([
+      ((r0  + rr * Math.cos(angle)) % TAU + TAU) % TAU,
+      ((th0 + rr * Math.sin(angle)) % TAU + TAU) % TAU
+    ]);
+  }
+  return pts;
+}
+
+
+function gComputeGeodesic(r0, th0, r1l, th1l) {
+  const Dr = r1l - r0, Dth = th1l - th0;
+  const length = Math.sqrt(Dr*Dr + Dth*Dth);
+  if (length < 1e-8) return null;
+  const N = 60, path_r = [], path_th = [];
+  for (let i = 0; i <= N; i++) {
+    path_r.push(r0 + Dr*i/N);
+    path_th.push(th0 + Dth*i/N);
+  }
+  const rm = ((r0 + Dr/2) % TAU + TAU) % TAU;
+  const tm = ((th0 + Dth/2) % TAU + TAU) % TAU;
+  return { length, Dr, Dth, r_mid: rm, th_mid: tm, path_r, path_th };
+}
+
+function gComputeAll(pA, pB, aVals, bVals) {
+    const [r0,th0] = pA, [r1,th1] = pB;
+    const geodesics = {};
+    for (const [k,l] of WINDINGS_G) {
+        const res = gComputeGeodesic(r0, th0, r1+TAU*k, th1+TAU*l);
+        if (res) geodesics[k+','+l] = res;
+    }
+    let ref_kl = null, ref_cost = Infinity;
+    for (const [kl,g] of Object.entries(geodesics)) {
+        if (g.length < ref_cost) { ref_cost = g.length; ref_kl = kl; }
+    }
+    const grid = [];
+    for (let ia = 0; ia < aVals.length; ia++) {
+        const row = [], a = aVals[ia];
+        for (let ib = 0; ib < bVals.length; ib++) {
+            const b = bVals[ib];
+            if (a*a + (b/PRE.phi_min)*(b/PRE.phi_min) >= 0.98) { row.push(null); continue; }
+            let best = Infinity, bestKL = null;
+            for (const [kl,g] of Object.entries(geodesics)) {
+                const cost = g.length - a*g.Dr - b*g.Dth;
+                if (cost < best) { best = cost; bestKL = kl; }
+            }
+            row.push(bestKL);
+        }
+        grid.push(row);
+    }
+    // Cloud pairs: all 7×7 = 49 pairs, all 9 winding classes each
+    const cloudA = generateCloud(pA), cloudB = generateCloud(pB);
+    const cloudPairs = [];
+    for (const ptA of cloudA) {
+        for (const ptB of cloudB) {
+            const pairGeos = {};
+            const [ra, tha] = ptA, [rb, thb] = ptB;
+            for (const [k,l] of WINDINGS_G) {
+                const res = gComputeGeodesic(ra, tha, rb+TAU*k, thb+TAU*l);
+                if (res) pairGeos[k+','+l] = res;
+            }
+            cloudPairs.push({ geos: pairGeos, ptA, ptB });
+        }
+    }
+    return { geodesics, grid, ref_kl, cloudA, cloudB, cloudPairs };
+}
+
+
+let curA = 0, curB = 0;
+function recompute() {
+  document.getElementById('computing').style.display = 'flex';
+  requestAnimationFrame(() => {
+    const result = gComputeAll(PRE.pA, PRE.pB, PRE.a_vals, PRE.b_vals);
+    PRE.geodesics  = result.geodesics;
+    PRE.grid       = result.grid;
+    PRE.ref_kl     = result.ref_kl;
+    PRE.cloudA     = result.cloudA;
+    PRE.cloudB     = result.cloudB;
+    PRE.cloudPairs = result.cloudPairs;
+    document.getElementById('computing').style.display = 'none';
+    update(curA, curB);
+  });
+}
+
+function setCloudMode(on) {
+  cloudMode = on;
+  const bp = document.getElementById('btn-point');
+  const bc = document.getElementById('btn-cloud');
+  bp.style.background = on ? 'transparent' : 'rgba(124,111,255,0.5)';
+  bp.style.color = on ? 'rgba(200,200,200,0.4)' : '#fff';
+  bc.style.background = on ? 'rgba(124,111,255,0.5)' : 'transparent';
+  bc.style.color = on ? '#fff' : 'rgba(200,200,200,0.4)';
+  document.getElementById('legend-geo-mag').style.display = on ? 'none' : '';
+  update(curA, curB);
+}
+
+// ── Draggable A/B in 2D canvas ────────────────────────────────────────────────
+let draggingPt = null;
+
+function ptFromCanvasXY(cx, cy) {
+  const W=c2d.width, H=c2d.height;
+  const padL=28*devicePixelRatio, padT=12*devicePixelRatio;
+  const padR=12*devicePixelRatio, padB=36*devicePixelRatio;
+  const fw=W-padL-padR, fh=H-padT-padB;
+  const th=((cx-padL)/fw)*TAU, r=(1-(cy-padT)/fh)*TAU;  // r=0 at bottom
+  return [Math.max(0.05,Math.min(TAU-0.05,r)),((th%TAU)+TAU)%TAU];
+}
+function canvasXY(e) {
+  const rect=c2d.getBoundingClientRect();
+  const pt=e.touches?e.touches[0]:e;
+  return [(pt.clientX-rect.left)*devicePixelRatio,(pt.clientY-rect.top)*devicePixelRatio];
+}
+function distToCanvasPt(cx,cy,pt2d) {
+  const W=c2d.width, H=c2d.height;
+  const padL=28*devicePixelRatio, padT=12*devicePixelRatio;
+  const padR=12*devicePixelRatio, padB=36*devicePixelRatio;
+  const fw=W-padL-padR, fh=H-padT-padB;
+  const px=padL+pt2d[1]/TAU*fw, py=padT+fh*(1-pt2d[0]/TAU);  // r=0 at bottom
+  return Math.sqrt((cx-px)**2+(cy-py)**2);
+}
+
+c2d.addEventListener('mousedown', e => {
+  const [cx,cy]=canvasXY(e);
+  const dA=distToCanvasPt(cx,cy,PRE.pA), dB=distToCanvasPt(cx,cy,PRE.pB);
+  const thresh=16*devicePixelRatio;
+  if      (dA<thresh && dA<=dB) draggingPt='A';
+  else if (dB<thresh)           draggingPt='B';
+});
+c2d.addEventListener('touchstart', e => {
+  const [cx,cy]=canvasXY(e);
+  const dA=distToCanvasPt(cx,cy,PRE.pA), dB=distToCanvasPt(cx,cy,PRE.pB);
+  const thresh=22*devicePixelRatio;
+  if      (dA<thresh && dA<=dB) draggingPt='A';
+  else if (dB<thresh)           draggingPt='B';
+  if (draggingPt) e.preventDefault();
+},{passive:false});
+window.addEventListener('mousemove', e => {
+  if (!draggingPt) return;
+  const [cx,cy]=canvasXY(e);
+  const newPt=ptFromCanvasXY(cx,cy);
+  if (draggingPt==='A') PRE.pA=newPt; else PRE.pB=newPt;
+  draw2d(null, null);  // stale geodesics during drag — just show A/B positions
+});
+window.addEventListener('touchmove', e => {
+  if (!draggingPt) return;
+  const [cx,cy]=canvasXY(e);
+  const newPt=ptFromCanvasXY(cx,cy);
+  if (draggingPt==='A') PRE.pA=newPt; else PRE.pB=newPt;
+  draw2d(null, null);
+  e.preventDefault();
+},{passive:false});
+window.addEventListener('mouseup',  () => { if (draggingPt) { draggingPt=null; recompute(); } });
+window.addEventListener('touchend', () => { if (draggingPt) { draggingPt=null; recompute(); } });
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  resize2d();
+  draw2d(PRE.ref_kl, PRE.grid[Math.floor(PRE.n_grid/2)][Math.floor(PRE.n_grid/2)]);
+});
+resize2d();
+recompute();   // builds cloud pairs on startup
+animate();
+</script>
+</body>
+</html>

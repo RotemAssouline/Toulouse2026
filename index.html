@@ -482,11 +482,11 @@
         <span class="fragment fade-in-then-out" data-fragment-index="6" style="position: absolute; left: 0; top: 0;">\(\Omega = dx\wedge dy\)</span>
       </div>
       <div style="position: relative; width: 460px; height: 460px;">
-        <img src="../Numerics/fig_euc_c0.png"   class="fragment fade-in-then-out" data-fragment-index="4"
+        <img src="media/fig_euc_c0.png"   class="fragment fade-in-then-out" data-fragment-index="4"
              style="position: absolute; top: 0; left: 0; width: 100%;">
-        <img src="../Numerics/fig_euc_c085.png" class="fragment fade-in-then-out" data-fragment-index="5"
+        <img src="media/fig_euc_c085.png" class="fragment fade-in-then-out" data-fragment-index="5"
              style="position: absolute; top: 0; left: 0; width: 100%;">
-        <img src="../Numerics/fig_euc_c1.png"   class="fragment fade-in-then-out" data-fragment-index="6"
+        <img src="media/fig_euc_c1.png"   class="fragment fade-in-then-out" data-fragment-index="6"
              style="position: absolute; top: 0; left: 0; width: 100%;">
       </div>
     </div>
@@ -786,13 +786,13 @@
   </section>
 
   <section data-auto-animate class="tight-math">
-    <h3 style="color: #1864AB;" data-id="closedpotitle">Closed magnetic potentials</h3>
+    <h2 style="color: #1864AB; font-size: .8em;" data-id="heisenbergtitle">Example<span style="color: #111; font-family: 'Alegreya Sans', sans-serif; font-weight: 400;">: Closed magnetic potentials</span></h2>
     <div style="text-align: left; font-size: .8em;">
       <p>Suppose \(\eta\) is closed: \(\Omega = d\eta = 0\). Then:</p>
       <ul>
         <li class="fragment">magnetic geodesics are ordinary geodesics;</li>
         <li class="fragment">\(\mathrm{Ric}_\Omega = \mathrm{Ric}\).</li>
-        <li class="fragment">But the class of <b>minimizing</b> magnetic geodesics depends on the cohomology class \([\eta]\in H^1(M)\) &mdash; and can be a strict subclass of length-minimizing geodesics.</li>
+        <li class="fragment">The class of <b>minimizing</b> magnetic geodesics depends on the cohomology class \([\eta]\in H^1(M)\) &mdash; and can be a strict subclass of length-minimizing geodesics.</li>
       </ul>
       <p class="fragment">
         \(\Rightarrow\) Each cohomology class gives a (potentially) different Minkowski average, and all of them satisfy the (undistorted) Brunn-Minkowski inequality whenever \((M,g)\) is geodesically convex with \(\mathrm{Ric}\ge 0\).
@@ -800,99 +800,11 @@
     </div>
   </section>
 
-  <section data-auto-animate class="tight-math">
-    <h3 style="color: #1864AB;" data-id="closedpotitle">Example: the cylinder</h3>
-    <div style="text-align: left; font-size: .78em;">
-      <p>
-        Let \(M = S^1\times\mathbb{R}\) with the flat metric \(g = d\theta^2 + dt^2\), and
-        \[A_0 = [0,\tfrac{\pi}{2}]\times[0,1], \qquad A_1 = [\pi,\tfrac{3\pi}{2}]\times[0,1].\]
-      </p>
-
-      <!-- shared <defs> for the arrow markers used in the SVG below -->
-      <svg width="0" height="0" style="position:absolute;">
-        <defs>
-          <marker id="closed-pot-arrow" viewBox="0 0 10 10" refX="9" refY="5"
-                  markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="#777"/>
-          </marker>
-        </defs>
-      </svg>
-
-      <div style="display: flex; gap: 3em; justify-content: center; align-items: flex-start; margin-top: .8em;">
-
-        <!-- Panel 1: eta = 0 -->
-        <div style="text-align: center;">
-          <svg viewBox="-15 -22 460 165" width="320" xmlns="http://www.w3.org/2000/svg">
-            <text x="200" y="-6" text-anchor="middle" font-family="serif" font-size="16" font-style="italic">η = 0</text>
-            <rect x="0"   y="0" width="100" height="100" fill="#5B9BD5" opacity="0.65"/>
-            <rect x="100" y="0" width="100" height="100" fill="#FFC000" opacity="0.65"/>
-            <rect x="200" y="0" width="100" height="100" fill="#ED7D31" opacity="0.65"/>
-            <rect x="300" y="0" width="100" height="100" fill="#FFC000" opacity="0.65"/>
-            <g stroke="#aaa" stroke-width="0.6">
-              <line x1="100" y1="0" x2="100" y2="100"/>
-              <line x1="200" y1="0" x2="200" y2="100"/>
-              <line x1="300" y1="0" x2="300" y2="100"/>
-            </g>
-            <rect x="0" y="0" width="400" height="100" fill="none" stroke="black" stroke-width="2"/>
-            <polygon points="-8,42 8,42 0,58" fill="#555"/>
-            <polygon points="392,42 408,42 400,58" fill="#555"/>
-            <g font-family="serif" font-size="14" text-anchor="middle">
-              <text x="0"   y="122">0</text>
-              <text x="200" y="122">π</text>
-              <text x="400" y="122">2π</text>
-            </g>
-            <g font-family="serif" font-size="18" font-style="italic">
-              <text x="50"  y="56" text-anchor="middle">A<tspan dy="6" font-size="12">0</tspan></text>
-              <text x="250" y="56" text-anchor="middle">A<tspan dy="6" font-size="12">1</tspan></text>
-            </g>
-          </svg>
-          <div style="font-size: .9em;">\(A_{1/2}^{\mathrm{geo}}\): two components</div>
-        </div>
-
-        <!-- Panel 2: eta = (1/2) dtheta -->
-        <div style="text-align: center;">
-          <svg viewBox="-15 -22 460 165" width="320" xmlns="http://www.w3.org/2000/svg">
-            <text x="200" y="-6" text-anchor="middle" font-family="serif" font-size="16" font-style="italic">η = ½&#8239;dθ</text>
-            <rect x="0"   y="0" width="100" height="100" fill="#5B9BD5" opacity="0.65"/>
-            <rect x="100" y="0" width="100" height="100" fill="#70AD47" opacity="0.65"/>
-            <rect x="200" y="0" width="100" height="100" fill="#ED7D31" opacity="0.65"/>
-            <!-- arrows showing eta-sharp direction in the empty fourth -->
-            <g stroke="#777" stroke-width="2" fill="none">
-              <line x1="320" y1="33" x2="378" y2="33" marker-end="url(#closed-pot-arrow)"/>
-              <line x1="320" y1="67" x2="378" y2="67" marker-end="url(#closed-pot-arrow)"/>
-            </g>
-            <g stroke="#aaa" stroke-width="0.6">
-              <line x1="100" y1="0" x2="100" y2="100"/>
-              <line x1="200" y1="0" x2="200" y2="100"/>
-              <line x1="300" y1="0" x2="300" y2="100"/>
-            </g>
-            <rect x="0" y="0" width="400" height="100" fill="none" stroke="black" stroke-width="2"/>
-            <polygon points="-8,42 8,42 0,58" fill="#555"/>
-            <polygon points="392,42 408,42 400,58" fill="#555"/>
-            <g font-family="serif" font-size="14" text-anchor="middle">
-              <text x="0"   y="122">0</text>
-              <text x="200" y="122">π</text>
-              <text x="400" y="122">2π</text>
-            </g>
-            <g font-family="serif" font-size="18" font-style="italic">
-              <text x="50"  y="56" text-anchor="middle">A<tspan dy="6" font-size="12">0</tspan></text>
-              <text x="250" y="56" text-anchor="middle">A<tspan dy="6" font-size="12">1</tspan></text>
-            </g>
-          </svg>
-          <div style="font-size: .9em;">\(A_{1/2}^{\mathrm{mag}}\): one component</div>
-        </div>
-
-      </div>
-
-      <p class="fragment" style="font-size: .9em; margin-top: .8em;">
-        The closed potential \(\eta\) breaks the tie between the two equivalent geodesics from \(A_0\) to \(A_1\): only the eastward one minimizes the magnetic action.
-      </p>
-    </div>
+ 
   </section>
 
-  <section data-auto-animate>
-    <h3 style="color: #1864AB;" data-id="closedpotitle">Live demo: flat torus</h3>
-    <iframe data-src="../Simulation%20-%20closed%20potentials/flat_torus.html"
+  <section data-auto-animate data-background-color="black">
+    <iframe data-src="online_simulations/flat_torus.html"
             width="100%" height="660" style="border:0;"
             allow="fullscreen"></iframe>
   </section>
