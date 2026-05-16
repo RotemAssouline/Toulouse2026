@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Curvature-Dimension for Autonomous Lagrangians</title>
+  <title>Magnetic Brunn-Minkowski inequalities</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css" id="theme">
@@ -61,7 +61,7 @@
   .small { font-size: 85%; }
   .img-row { display:flex; gap:1rem; align-items:center; justify-content:center; }
   .img-row img { max-height: 320px; }
-  .credit { color:#888; font-size: 70%; }
+  .credit { color:#82898e; font-size: 70%; }
   .math { font-size: 0.95em; }
 
   /* Enhanced color scheme */
@@ -154,51 +154,51 @@
   <section data-auto-animate>
     <h3 style="color: #1864AB" data-id="bmeq">The Brunn-Minkowski inequality</h3>
     <div style="text-align: left; font-size: .9em;">
-      <p>\(A,B \subseteq \mathbb{R}^n\) &nbsp;, \(0 \le \lambda \le 1\) &nbsp.</p>
-      \[(1-\lambda) A + \lambda B : = \left\{(1-\lambda)a + \lambda b \, \mid \, a \in A, \, b \in B\right\}.\]
+      <p>\(A_0,A_1 \subseteq \mathbb{R}^n\) &nbsp;, \(0 \le \lambda \le 1\) &nbsp.</p>
+      \[A_\lambda : =(1-\lambda) A_0 + \lambda A_1 = \left\{(1-\lambda)a_0 + \lambda a_1 \, \mid \, a_0 \in A_0, \, a_1 \in A_1\right\}.\]
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 2048 646"  data-id="bmfig">
     <g>
     <rect width="100%" height="100%" fill="white"/>
     <path d="M 1698 32 L 1455 233 L 1932 623 L 2033 109 Z" fill="#e2e2e2" stroke="none"/>
-    <text x = "0" y = "70" style="font-size: 100;font-family:'Alegreya'">(λ = 1/2)</text>
+    <!-- <text x = "0" y = "70" style="font-size: 100;font-family:'Alegreya'">(λ = 1/2)</text> -->
     <path d="M 287 212 L 152 433 L 495 500 Z" fill="#e2e2e2" stroke="none"/>
     <path d="M 993 118 L 867 221 L 799 328 L 1045 533 L 1215 566 L 1269 304 L 1163 158 Z" fill="#A5D8FF" stroke="none"/>
     <!-- Original color was #ffb3c8 -->
-    <text x="300" y="360" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A</text>
-    <text x="1050" y="320" text-anchor="middle" dominant-baseline="middle" style="font-size:80; font-family:'Alegreya'">(1-λ)A + λB</text>
-    <text x="1770" y="280" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">B</text>
+    <text x="300" y="360" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A₀</text>
+    <text x="1050" y="320" text-anchor="middle" dominant-baseline="middle" style="font-size:80; font-family:'Alegreya'">½A₀ + ½A₁</text>
+    <text x="1770" y="280" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A₁</text>
     </g>
     </svg>  
   </section>
 
   <section data-auto-animate>
     <h3 style="color: #1864AB" data-id="bmeq">The Brunn-Minkowski inequality</h3>
-    <div style="text-align: left; font-size: .9em;">
-      <p><b class="accent-warm">Theorem</b> (Brunn-Minkowski) :</p> \(A,B \subseteq \mathbb{R}^n\) &nbsp; Borel, nonempty, \(\qquad 0 \le \lambda \le 1\) &nbsp;,
-      \[\mathrm{Vol}((1-\lambda) A + \lambda B)^{1/n} \ge (1-\lambda)\cdot\mathrm{Vol}(A)^{1/n} + \lambda\cdot\mathrm{Vol}(B)^{1/n}.\]
+    <div style="text-align: left; font-size: .8em;">
+      <p><b class="accent-warm">Theorem</b> (Brunn-Minkowski) :</p> <span data-id="A0A1">\(A_0,A_1 \subseteq \mathbb{R}^n\)</span> &nbsp; Borel, nonempty, \(\qquad 0 \le \lambda \le 1\) &nbsp;,
+      \[\mathrm{Vol}(A_\lambda)^{1/n} \ge (1-\lambda)\cdot\mathrm{Vol}(A_0)^{1/n} + \lambda\cdot\mathrm{Vol}(A_1)^{1/n}.\]
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 2048 646" data-id="bmfig">
     <g>
     <rect width="100%" height="100%" fill="white"/>
     <path d="M 1698 32 L 1455 233 L 1932 623 L 2033 109 Z" fill="#e2e2e2" stroke="none"/>
-    <text x = "0" y = "70" style="font-size: 100;font-family:'Alegreya'">(λ = 1/2)</text>
+    <!-- <text x = "0" y = "70" style="font-size: 100;font-family:'Alegreya'">(λ = 1/2)</text> -->
     <path d="M 287 212 L 152 433 L 495 500 Z" fill="#e2e2e2" stroke="none"/>
     <path d="M 993 118 L 867 221 L 799 328 L 1045 533 L 1215 566 L 1269 304 L 1163 158 Z" fill="#A5D8FF" stroke="none"/>
     <!-- Original color was #ffb3c8 -->
-    <text x="300" y="360" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A</text>
-    <text x="1050" y="320" text-anchor="middle" dominant-baseline="middle" style="font-size:80; font-family:'Alegreya'">(1-λ)A + λB</text>
-    <text x="1770" y="280" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">B</text>
+    <text x="300" y="360" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A₀</text>
+    <text x="1050" y="320" text-anchor="middle" dominant-baseline="middle" style="font-size:80; font-family:'Alegreya'">½A₀ + ½A₁</text>
+    <text x="1770" y="280" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A₁</text>
     </g>
     </svg> 
   </section>
 
-  <section>
+  <section data-auto-animate="">
     <h3 style="color: #1864AB" data-id="bmeq">The Brunn-Minkowski inequality</h3>
-    <div style="text-align: left; font-size: .9em;">
-      <p style="visibility: hidden;"><b class="accent-warm">Theorem</b> (Brunn-Minkowski) :</p> \(A,B \subseteq (M,g)\) &nbsp; <span style="visibility: hidden;"> Borel, nonempty, \(\qquad 0 \le \lambda \le 1\) &nbsp;,</span>
+    <div style="text-align: left; font-size: .8em;">
+      <p style="visibility: hidden;"><b class="accent-warm">Theorem</b> (Brunn-Minkowski) :</p> <span data-id="A0A1">\(A_0,A_1 \subseteq (M,g)\)</span> &nbsp; <span style="visibility: hidden;"> Borel, nonempty, \(\qquad 0 \le \lambda \le 1\) &nbsp;,</span>
       <span style="visibility: hidden;">
-      \[\mathrm{Vol}((1-\lambda) A + \lambda B)^{1/n} \ge (1-\lambda)\cdot\mathrm{Vol}(A)^{1/n} + \lambda\cdot\mathrm{Vol}(B)^{1/n}.\]
+      \[\mathrm{Vol}(A_\lambda)^{1/n} \ge (1-\lambda)\cdot\mathrm{Vol}(A_0)^{1/n} + \lambda\cdot\mathrm{Vol}(A_1)^{1/n}.\]
       </span>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 2048 646" data-id="bmfig">
@@ -209,20 +209,21 @@
     <path d="M 287 212 L 152 433 L 495 500 Z" fill="#e2e2e2" stroke="none"/>
     <path d="M 993 118 L 867 221 L 799 328 L 1045 533 L 1215 566 L 1269 304 L 1163 158 Z" fill="#A5D8FF" stroke="none"/>
     <!-- Original color was #ffb3c8 -->
-    <text x="300" y="360" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A</text>
+    <text x="300" y="360" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A₀</text>
     <text x="1050" y="320" text-anchor="middle" dominant-baseline="middle" style="font-size:80; font-family:'Alegreya'">?</text>
-    <text x="1770" y="280" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">B</text>
+    <text x="1770" y="280" text-anchor="middle" dominant-baseline="middle" style="font-size:100; font-family:'Alegreya'">A₁</text>
     </g>
     </svg> 
   </section>
 
 <section data-auto-animate
          data-background-image="SphMsum2_color_cropped.png"
-         data-background-size="95% auto"
+         data-background-size="85% auto"
          data-background-position="center calc(110% + 60px)"
          data-background-repeat="no-repeat">
-  <h3 style="color: #1864AB;" data-id="bmeq">The Brunn-Minkowski inequality</h3>
+  <h3 style="color: #1864AB" data-id="bmeq">The Brunn-Minkowski inequality</h3>
   <div style="text-align: left; font-size: .8em;">
+  <span data-id="A0A1">\(A_0,A_1 \subseteq (M,g)\)</span>
     \[
     A_\lambda : = \left\{\gamma(\lambda T) \, \bigg\vert \, \begin{array}{c} \gamma:[0,T] \to M\,\,\text{unit-speed minimizing geodesic,}\\ \gamma(0) \in A_0,\,\, \gamma(T) \in A_1\end{array}\right\}.
     \]
@@ -232,14 +233,14 @@
 
 <section data-auto-animate
          data-background-image="SphMsum2_color_cropped.png"
-         data-background-opacity="25%"
-         data-background-size="95% auto"
+         data-background-opacity="20%"
+         data-background-size="85% auto"
          data-background-position="center calc(110% + 60px)"
          data-background-repeat="no-repeat">
   <h3 style="color: #1864AB;" data-id="bmeq">The Brunn-Minkowski inequality</h3>
   <div style="text-align: left; font-size: .75em;">
     <p data-id="CMS"><b class="accent-warm">Theorem</b> <span class="citation">(Cordero-Erausquin, McCann &amp; Schmuckenschläger '01, Sturm '06)</span>:
-      \((M,g)\)&nbsp; complete \(n\)-dim Riemannian manifold, 
+      \((M,g)\)&nbsp; complete \(n\)-dim Riemannian manifold,
       \[\mathrm{Ric}_g \ge 0\quad \implies \quad \forall A_0,A_1\,\, \text{Borel,} \,\,\mathrm{Vol}_g(A_0)\mathrm{Vol}_g(A_1) >0\]
       \[\mathrm{Vol}_g(A_\lambda)^{1/n} \ge (1-\lambda)\cdot\mathrm{Vol}_g(A_0)^{1/n} + \lambda\cdot\mathrm{Vol}_g(A_1)^{1/n}.\]
     </p>
@@ -247,6 +248,29 @@
     <p style="visibility: hidden;">In fact \(\iff\)&nbsp; <span class="citation">(Magnabosco, Portinale, Rossi '22)</span>.</p>
     <p style="visibility: hidden;">
     Metric measure spaces <span class="citation" style="font-size: .9em">(Sturm '06, Cavalletti-Mondino '15)</span>, Finsler <span class="citation" style="font-size: .9em">(Ohta '09)</span>, Sub-Riemannian <span class="citation" style="font-size: .9em">(Balogh, Kristály &amp; Sipos '16, Barilari, Rizzi &amp; Mondino '22)</span>, Lorentzian <span class="citation" style="font-size: .9em">(McCann '20, Cavalletti-Mondino '20).
+    </p>
+  </div>
+</section>
+
+<section data-auto-animate
+         data-background-image="SphMsum2_color_cropped.png"
+         data-background-opacity="20%"
+         data-background-size="85% auto"
+         data-background-position="center calc(110% + 60px)"
+         data-background-repeat="no-repeat">
+  <h3 style="color: #1864AB;" data-id="bmeq">The Brunn-Minkowski inequality</h3>
+  <div style="text-align: left; font-size: .75em;">
+    <p data-id="CMS"><b class="accent-warm">Theorem</b> <span class="citation">(Cordero-Erausquin, McCann &amp; Schmuckenschläger '01, Sturm '06)</span>:
+      \((M,g)\)&nbsp; complete \(n\)-dim Riemannian manifold, \(k\in\mathbb{R}\).
+      \[\mathrm{Ric}_g \ge k\quad \implies  \quad \forall A_0,A_1\,\, \text{Borel,} \,\,\mathrm{Vol}_g(A_0)\mathrm{Vol}_g(A_1) >0\]
+      \[
+        \mathrm{Vol}_g(A_\lambda)^{1/n} \,\ge\, \tau_{1-\lambda}^{k,n}(A_0,A_1)\cdot\mathrm{Vol}_g(A_0)^{1/n} \,+\, \tau_\lambda^{k,n}(A_0,A_1)\cdot\mathrm{Vol}_g(A_1)^{1/n}.
+      \]
+    </p>
+    <p class="fragment">\((M,g,\mu)\) weighted Riemannian manifold, \(N \in [n,\infty]\), &nbsp;\(\mathrm{Ric}_{\mu,N} \ge k \implies\) distorted Brunn-Minkowski for \(\mu\) with exponent \(1/N\).</p>
+    <p class="fragment">In fact \(\iff\)&nbsp; <span class="citation">(Magnabosco, Portinale, Rossi '22)</span>.</p>
+    <p class="fragment">
+    Metric measure spaces <span class="citation" style="font-size: .9em">(Sturm '06, Cavalletti-Mondino '15)</span>, Finsler <span class="citation" style="font-size: .9em">(Ohta '09)</span>, negative exponent <span class="citation" style="font-size: .9em">(Ohta '16)</span>, Sub-Riemannian <span class="citation" style="font-size: .9em">(Balogh, Kristály &amp; Sipos '16, Barilari, Rizzi &amp; Mondino '22)</span>, Lorentzian <span class="citation" style="font-size: .9em">(McCann '20, Cavalletti-Mondino '20).
     </p>
   </div>
 </section>
@@ -308,7 +332,7 @@
  <section data-auto-animate>
     <h3 style="color: #1864AB; font-size: .9em" data-id="horobmeq">Horocyclic Brunn-Minkowski inequality</h3>
     <div style="text-align: left; font-size: .7em;">
-    <p>Let \(\mathbf{H}\)&nbsp; denote the <b>hyperbolic plane</b>. 
+    <p>Let \(\mathbf{H}\) denote the <b>hyperbolic plane</b>. 
     <ul> 
       <li class="fragment">
         A <b>horocycle</b> is a curve of signed geodesic curvature \(\equiv 1\). 
@@ -317,7 +341,7 @@
         For every  \(x,y \in \mathbf{H}\)&nbsp; there exists a unique horocycle \(\gamma:[0,T]\to \mathbf{H}\)&nbsp; satisfying \(\gamma(0) = x\)&nbsp; and \(\gamma(T) = y\)&nbsp;.
       </li>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 60 800 320" class="fragment" transform="scale(1.3) translate(0,80)"">
+      <svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 60 800 320" class="fragment" transform="scale(1.3) translate(0,80)">
         <!-- teal horizontal line (intersects big circle) -->
         <line x1="0" y1="150" x2="800" y2="150" stroke="#5C9BD1" stroke-width="2"/>
         <!-- left-to-right arrowhead on horizontal horocycle -->
@@ -381,7 +405,7 @@
       \((M,g)\)-Riemannian manifold, \(\Omega\) two-form on \(M.\)
     </p>
       <ul style="text-align: left; font-size: .8em;">
-        <li class="fragment"">
+        <li class="fragment">
           A <b class="key-term">magnetic geodesic</b> is a smooth curve \(\gamma\) satisfying
           \[
             g\left(\nabla_{\dot\gamma}\dot\gamma,\cdot\right) = \Omega(\dot\gamma,\cdot).
@@ -413,59 +437,59 @@
           <div style="margin-bottom: .35em; line-height: 1.5;">
               <b>The Euclidean plane</b> <br>
               \(\Omega = \kappa\,dx\wedge dy, \quad \kappa\in\mathbb{R}\)
-              <div class="fragment grow-fragment"><b>Circular arcs</b> of radius \(1/\kappa.\)</div>
+            <div class="fragment grow-fragment"><b>Circular arcs</b> of radius \(1/\kappa.\)
+              <svg viewBox="0 0 320 160" width="100%" style="height: 220px;">
+                <rect x="0" y="0" width="320" height="160" rx="18" fill="white"/>
+                <path d="M 55 122 A 78 78 0 0 1 211 122" fill="none" stroke="#d4825f" stroke-width="3" stroke-linecap="round"/>
+                <circle r="4" fill="#1864AB">
+                <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#euclid-arc"/>
+                </animateMotion>
+                </circle>
+                <path id="euclid-arc" d="M 211 122 A 78 78 0 0 0 55 122" fill="none" stroke="none"/>
+              </svg>
+            </div>
           </div>
-          <svg viewBox="0 0 320 160" width="100%" style="height: 220px;" class="fragment grow-fragment">
-            <rect x="0" y="0" width="320" height="160" rx="18" fill="white"/>
-            <path d="M 55 122 A 78 78 0 0 1 211 122" fill="none" stroke="#d4825f" stroke-width="3" stroke-linecap="round"/>
-            <circle r="4" fill="#1864AB">
-              <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
-                <mpath href="#euclid-arc"/>
-              </animateMotion>
-            </circle>
-            <path id="euclid-arc" d="M 211 122 A 78 78 0 0 0 55 122" fill="none" stroke="none"/>
-          </svg>
         </div>
         <div style="flex:1; background: rgba(24,100,171,0.12); border-radius: 24px; padding: 1rem 1rem .8rem;" class="fragment">
           <div style="margin-bottom: .35em; line-height: 1.5;">
-            <div>
-              <b>The Hyperbolic plane</b> 
-              <br>
-              \(\Omega = d\mathrm{Vol}.\)
-              <div class="fragment grow-fragment"><b>Horocycles.</b></div>
+            <b>The Hyperbolic plane</b> 
+            <br>
+            \(\Omega = d\mathrm{Vol}.\)
+            <div class="fragment grow-fragment"><b>Horocycles.</b>
+              <svg viewBox="0 0 320 160" width="100%" style="height: 220px;">
+              <rect x="0" y="0" width="320" height="160" rx="18" fill="white"/>
+              <line x1="24" y1="138" x2="296" y2="138" stroke="gray" stroke-width="2"/>
+              <line x1="56" y1="84" x2="214" y2="84" stroke="#d4825f" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="248" cy="112" r="26" fill="none" stroke="#d4825f" stroke-width="3" opacity=".25"/>
+              <path d="M 222.63 117.71 A 26 26 0 0 1 248 86 A 26 26 0 0 1 273.37 117.71" fill="none" stroke="#d4825f" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+              <circle r="4" fill="#1864AB">
+                <animateMotion dur="2.6s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#horo-arc"/>
+                </animateMotion>
+              </circle>
+              <path id="horo-arc" d="M 56 84 L 214 84" fill="none" stroke="none"/>
+              <circle cx="273.37" cy="117.71" r="4" fill="#1864AB">
+                <animate attributeName="cx" dur="4.1s" repeatCount="indefinite"
+                  values="273.37;274;272.96;268.8;260.24;248;235.76;227.2;223.04;222;222.63"/>
+                <animate attributeName="cy" dur="4.1s" repeatCount="indefinite"
+                  values="117.71;112;104.72;96.4;89.06;86;89.06;96.4;104.72;112;117.71"/>
+              </circle>
+              <!-- <text x="136" y="28" text-anchor="middle" style="font-size: 16px; font-family: 'Alegreya Sans'; fill: #82898e;">upper half-plane model</text> -->
+              </svg>
             </div>
           </div>
-          <svg viewBox="0 0 320 160" width="100%" style="height: 220px;" class="fragment grow-fragment">
-            <rect x="0" y="0" width="320" height="160" rx="18" fill="white"/>
-            <line x1="24" y1="138" x2="296" y2="138" stroke="gray" stroke-width="2"/>
-            <line x1="56" y1="84" x2="214" y2="84" stroke="#d4825f" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="248" cy="112" r="26" fill="none" stroke="#d4825f" stroke-width="3" opacity=".25"/>
-            <path d="M 222.63 117.71 A 26 26 0 0 1 248 86 A 26 26 0 0 1 273.37 117.71" fill="none" stroke="#d4825f" stroke-width="3" stroke-linecap="round" opacity=".9"/>
-            <circle r="4" fill="#1864AB">
-              <animateMotion dur="2.6s" repeatCount="indefinite" rotate="auto">
-                <mpath href="#horo-arc"/>
-              </animateMotion>
-            </circle>
-            <path id="horo-arc" d="M 56 84 L 214 84" fill="none" stroke="none"/>
-            <circle cx="273.37" cy="117.71" r="4" fill="#1864AB">
-              <animate attributeName="cx" dur="4.1s" repeatCount="indefinite"
-                values="273.37;274;272.96;268.8;260.24;248;235.76;227.2;223.04;222;222.63"/>
-              <animate attributeName="cy" dur="4.1s" repeatCount="indefinite"
-                values="117.71;112;104.72;96.4;89.06;86;89.06;96.4;104.72;112;117.71"/>
-            </circle>
-            <!-- <text x="136" y="28" text-anchor="middle" style="font-size: 16px; font-family: 'Alegreya Sans'; fill: #868E96;">upper half-plane model</text> -->
-          </svg>
         </div>
       </div>
     </div>
   </section>
 
   <section data-auto-animate class="tight-math">
-    <h3 style="color: #1864AB;">Magnetic Minkowski average</h3>
-    <p style="text-align: left; font-size: .8em;" class="fragment" data-fragment-index="1">
-      \(M,g\) Riemannian manifold, \(\eta\) one-form, \(\Omega = d\eta\).
+    <h3 style="color: #1864AB;" data-id="maggeo">Magnetic geodesics</h3>
+    <p style="text-align: left; font-size: .8em;">
+      \((M,g)\) Riemannian manifold, \(\eta\) one-form, \(\Omega = d\eta\).
     </p>
-    <p style="text-align: left; font-size: .8em;" class="fragment" data-fragment-index="2">
+    <p style="text-align: left; font-size: .8em;">
       \(A_0,A_1\subseteq M, \quad 0 \le \lambda \le 1\)
     </p>
     <div style="text-align: left; font-size: .8em;" class="fragment" data-fragment-index="3" >
@@ -476,17 +500,19 @@
     <div style="display: flex; align-items: center; justify-content: center; gap: 2em;">
       <div style="font-size: 1.1em; text-align: left; position: relative;">
         <!-- sizer to reserve space for the widest option -->
-        <span style="visibility: hidden;">\(\Omega = 0.85\,dx\wedge dy\)</span>
-        <span class="fragment fade-in-then-out" data-fragment-index="4" style="position: absolute; left: 0; top: 0;">\(\Omega = 0\)</span>
-        <span class="fragment fade-in-then-out" data-fragment-index="5" style="position: absolute; left: 0; top: 0;">\(\Omega = 0.85\,dx\wedge dy\)</span>
-        <span class="fragment fade-in-then-out" data-fragment-index="6" style="position: absolute; left: 0; top: 0;">\(\Omega = dx\wedge dy\)</span>
+        <span style="visibility: hidden;">\(\Omega = 0.5\,dx\wedge dy\)</span>
+        <span class="fragment fade-in-then-out" data-fragment-index="5" style="position: absolute; left: 0; top: 0;">\(\Omega = 0\)</span>
+        <span class="fragment fade-in-then-out" data-fragment-index="6" style="position: absolute; left: 0; top: 0;">\(\Omega = 0.5\,dx\wedge dy\)</span>
+        <span class="fragment fade-in-then-out" data-fragment-index="7" style="position: absolute; left: 0; top: 0;">\(\Omega = dx\wedge dy\)</span>
       </div>
       <div style="position: relative; width: 460px; height: 460px;">
-        <img src="media/fig_euc_c0.png"   class="fragment fade-in-then-out" data-fragment-index="4"
+        <img src="media/fig_euc_base.png" class="fragment" data-fragment-index="4"
              style="position: absolute; top: 0; left: 0; width: 100%;">
-        <img src="media/fig_euc_c085.png" class="fragment fade-in-then-out" data-fragment-index="5"
+        <img src="media/fig_euc_c0_avg.png"  class="fragment fade-in-then-out" data-fragment-index="5"
              style="position: absolute; top: 0; left: 0; width: 100%;">
-        <img src="media/fig_euc_c1.png"   class="fragment fade-in-then-out" data-fragment-index="6"
+        <img src="media/fig_euc_c05_avg.png" class="fragment fade-in-then-out" data-fragment-index="6"
+             style="position: absolute; top: 0; left: 0; width: 100%;">
+        <img src="media/fig_euc_c1_avg.png"  class="fragment fade-in-then-out" data-fragment-index="7"
              style="position: absolute; top: 0; left: 0; width: 100%;">
       </div>
     </div>
@@ -494,11 +520,11 @@
 
 
   <section data-auto-animate>
-    <h3 style="color: #1864AB;" data-id="rictitle">Ricci curvature</h3>
+    <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3>
   </section>
 
   <section data-auto-animate>
-    <h3 style="color: #1864AB;" data-id="rictitle">Ricci curvature</h3>
+    <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3>
     <div style="text-align: left; font-size: .8em;">
     <!-- <p style="color: rgb(24, 100, 171); font-size: 1.1em"><b>Ricci curvature of Riemannian manifolds</b></p> -->
     The <b class="key-term"> Ricci curvature</b> of a Riemannian manifold is a fiberwise quadratic form which is a trace of the <b class="key-term"> Riemann Curvature tensor</b>:
@@ -514,34 +540,21 @@
     </div>
   </section>
 
-  <section data-auto-animate>
-    <h3 style="color: #1864AB;" data-id="rictitle">Ricci curvature</h3>
-    <div style="display: flex; justify-content: space-around; align-items: center; gap: 1em;">
-      <div style="flex: 1; text-align: center;">
-        <h4 style="font-size: .7em; margin: 0;">Sphere \(S^2\)</h4>
-        <iframe data-src="flowsph.html" width="100%" height="480" scrolling="no" style="border:0; overflow:hidden;"></iframe>
-      </div>
-      <div style="flex: 1; text-align: center;">
-        <h4 style="font-size: .7em; margin: 0;">Hyperbolic plane \(\mathbb{H}^2\)</h4>
-        <iframe data-src="flowhyp.html" width="100%" height="480" scrolling="no" style="border:0; overflow:hidden;"></iframe>
-      </div>
-    </div>
-  </section>
-
   <section data-auto-animate class="tight-math">
     <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3>
     <div style="text-align: left; font-size: .8em;">
       <p>
-        Let \(\Omega\) be a closed 2-form on \(M\) and let \(SM = \{v\in TM : g(v,v)=1\}\) be the unit tangent bundle. The <b class="key-term">magnetic Ricci curvature</b> is 
+        Let \(\Omega\) be a closed 2-form on \(M\) and let \(SM = \{v\in TM : g(v,v)=1\}\) be the unit tangent bundle. <span class="fragment">The <b class="key-term">magnetic Ricci curvature</b> is 
         \[\mathrm{Ric}_\Omega(v) \,:=\, \mathrm{Ric}(v) \,-\, (\delta\Omega)(v) \,+\, \tfrac12|\iota_v\Omega|^2 \,+\, \tfrac14|\Omega|^2, \qquad v \in SM.\]
         <span style="display: block; text-align: right; font-size: .85em;">cf. <span class="citation">(Gouda '97, Grognet '99, Wojtkowski '00, Bai-Adachi '13, Assenza '24)</span></span>
-      </p>
+      </p></span>
       <p class="fragment">
-        Here \(\delta\) is the codifferential, \(\iota_v\Omega = \Omega(v,\cdot)\), and \(|\Omega|^2 = \sum_{i,j}\Omega(e_i,e_j)^2\) for any orthonormal frame.
+        Here \(\delta\) is the codifferential, \(\iota_v\Omega = \Omega(v,\cdot)\), and \(|\Omega|^2 = \sum_{i,j}\Omega(e_i,e_j)^2\) for any orthonormal frame \((e_j)\).
       </p>
-      <p class="fragment">
-        There exists a metric \(\tilde g\) on \(M\times S^1\), the <b>Kaluza-Klein metric</b>, such that \(\mathrm{Ric}_\Omega(v) = \mathrm{Ric}_{\tilde g}(\tilde v),\) &nbsp; where \(\tilde v = v + (1-\eta(v))\partial_\varphi.\)
-      </p>
+      <br>
+      <div class="fragment" style="font-size: .8em">
+        \((*)\) There exists a metric \(\tilde g\) on \(M\times S^1\), the <b>Kaluza-Klein metric</b>, such that \(\mathrm{Ric}_\Omega(v) = \mathrm{Ric}_{\tilde g}(\tilde v),\) &nbsp; where \(\tilde v = v + (1-\eta(v))\partial_\varphi.\)
+      </div>
     </div>
   </section>
 
@@ -549,12 +562,12 @@
     <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3>
     <div style="text-align: left; font-size: .8em;">
       <p>
-        <b class="accent-warm">Proposition:</b>
+        <b class="accent-warm">Proposition</b> (Magnetic Bochner formula):
         Let \(\sigma\) be a one-form on an open set \(U\subseteq M\) satisfying
         \[d\sigma = \Omega \qquad \text{and}\qquad |\sigma|\equiv 1.\]
         Then
         \[\,-\langle\sigma,\,d\delta\sigma\rangle \,+\, |\Sigma|^2 \,+\, \mathrm{Ric}_\Omega(\sigma^\sharp) \,=\, 0\,\]
-        where \(\Sigma\) is the symmetric part of \(\nabla\sigma\big|_{\ker\sigma}\).
+        where \(\Sigma\) is the symmetric part of \(\nabla\sigma\big|_{\ker\sigma}\), and \(\sigma = \langle \sigma^\sharp,\cdot\rangle.\)
       </p>
       <p class="fragment">
         In particular,
@@ -562,13 +575,30 @@
         with equality iff \(\Sigma\) is scalar.
       </p>
       <p class="fragment">
-        When \(\Omega = 0\), \(\nabla\sigma\) is symmetric with \(\nabla\sigma\,\sigma^\sharp = 0\), and we recover the classical Bochner formula.
+        When \(\Omega = 0\), \(\nabla\sigma\) is symmetric with \(\nabla\sigma\vert_{\sigma^\sharp} = 0\), and locally \(\sigma = du\) and \(\Sigma = \nabla^2u.\)
       </p>
     </div>
   </section>
 
   <section data-auto-animate class="tight-math">
-    <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3> 
+    <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3>
+    <div style="text-align: left; font-size: .8em;">
+      <p>
+        Setting \(V = \sigma^\sharp\), the unit vector field \(V\) satisfies the magnetic geodesic equation
+        \[|V|\equiv 1 \qquad \text{and}\qquad \langle\nabla_V V,\,\cdot\,\rangle = \Omega(V,\,\cdot),\]
+        and the Bochner identity and inequality become
+        \[V(\mathrm{div}\,V) \,+\, |\Sigma|^2 \,+\, \mathrm{Ric}_\Omega(V) \,=\, 0,\]
+        \[V(\mathrm{div}\,V) \,+\, \frac{(\mathrm{div}\,V)^2}{n-1} \,+\, \mathrm{Ric}_\Omega(V) \,\le\, 0,\]
+        where now \(\Sigma\) is the symmetric part of \(\nabla V\big|_{V^\perp}\).
+      </p>
+      <p class="fragment">
+        When \(\Omega = 0\), \(\nabla V\) is symmetric with \(\nabla V\vert_{V} = 0\), and locally \(V = \nabla u\) and \(\Sigma = \nabla^2u.\)
+      </p>
+    </div>
+  </section>
+
+  <section data-auto-animate class="tight-math">
+    <h3 style="color: #1864AB;" data-id="magrictitle">Magnetic Ricci curvature</h3>
     <div style="text-align: left; font-size: .75em;">
     <p style="font-size:1.3em">Examples:</p>
     <ul>
@@ -632,7 +662,7 @@
   <section data-auto-animate class="tight-math">
     <h3 style="color: #1864AB;" data-id="magBMthm">Magnetic Brunn-Minkowski inequality</h3>
     <div style="text-align: left; font-size: .8em;">
-      <b>Global assumptions:</b>
+      <p><b>Global assumptions:</b></p>
       <ol style="line-height: 1.6; list-style-type: upper-roman">
         <li class="fragment">
           Every pair of points \(x,y\in M\) can be joined by a minimizing magnetic geodesic.
@@ -650,14 +680,14 @@
 
   <section data-auto-animate class="tight-math">
     <h3 style="color: #1864AB;" data-id="magBMthm">Magnetic Brunn-Minkowski inequality</h3>
-    <div style="text-align: left; font-size: .8em;">
+    <div style="text-align: left; font-size: .8em;" data-id="magMBthmstatement">
       <p><b class="accent-warm">Theorem</b> <span class="citation">(A. '25)</span>: The following are equivalent:</p>
       <ol style="line-height: 1.8; list-style-type: lower-roman">
         <li class="fragment">
           \(\mathrm{Ric}_\Omega \ge 0\) on \(SM\).
         </li>
         <li class="fragment">
-          For every Borel \(A_0, A_1\subseteq M\) of positive measure and every \(\lambda\in[0,1]\),
+          For every Borel \(A_0, A_1\subseteq M\) of positive measure and \(\lambda\in[0,1]\),
           \[\mathrm{Vol}(A_\lambda)^{1/n} \,\ge\, (1-\lambda)\cdot\mathrm{Vol}(A_0)^{1/n} \,+\, \lambda\cdot\mathrm{Vol}(A_1)^{1/n},\]
           where \(n = \dim M\).
         </li>
@@ -665,17 +695,18 @@
     </div>
   </section>
 
-  <section data-auto-animate class="tight-math">
+  <section data-auto-animate="" class="tight-math">
     <h3 style="color: #1864AB;" data-id="magBMthm">Magnetic Brunn-Minkowski inequality</h3>
-    <div style="text-align: left; font-size: .8em;">
+    <div style="text-align: left; font-size: .8em;" data-id="magMBthmstatement">
       <p><b class="accent-warm">Theorem</b> <span class="citation">(A. '25)</span>: For \(k\in\mathbb{R}\), the following are equivalent:</p>
       <ol style="line-height: 1.8; list-style-type: lower-roman">
-        <li class="fragment">
+        <li>
           \(\mathrm{Ric}_\Omega \ge k\) on \(SM\).
         </li>
-        <li class="fragment">
-          For every Borel \(A_0, A_1\subseteq M\) of positive measure and every \(\lambda\in[0,1]\),
-          \[\mathrm{Vol}(A_\lambda)^{1/n} \,\ge\, \tau_{1-\lambda}^{k,n}(A_0,A_1)\cdot\mathrm{Vol}(A_0)^{1/n} \,+\, \tau_\lambda^{k,n}(A_0,A_1)\cdot\mathrm{Vol}(A_1)^{1/n}.\]
+        <li>
+          For every Borel \(A_0, A_1\subseteq M\) of positive measure and \(\lambda\in[0,1]\),
+          \[\mathrm{Vol}(A_\lambda)^{1/n} \,\ge\, \tau_{1-\lambda}^{k,n}(A_0,A_1)\cdot\mathrm{Vol}(A_0)^{1/n} \,+\, \tau_\lambda^{k,n}(A_0,A_1)\cdot\mathrm{Vol}(A_1)^{1/n},\]
+          where \(n = \dim M\).
         </li>
       </ol>
     </div>
@@ -737,6 +768,9 @@
           \]
           where \(\mathrm{Vol}\)&nbsp; denotes the hyperbolic volume measure and \(n = 2d.\)&nbsp;
         </p>
+        <p class="fragment">
+          If \(A_0\) and \(A_1\) are concentric balls, then equality holds.
+        </p>
       </div>
   </section>
 
@@ -744,7 +778,7 @@
     <h2 style="color: #1864AB; font-size: .8em;" data-id="contacttitle">Example<span style="color: #111; font-family: 'Alegreya Sans', sans-serif; font-weight: 400;">: Contact magnetic Brunn-Minkowski on \(S^{2d+1}\)</span></h2>
     <div style="text-align: left; font-size: .7em;">
     <p>
-      Let \(S^{2d+1} = \{z \in \mathbb{C}^{d+1}\, \mid \, |z|=1\}.\) &nbsp; A <b>contact magnetic geodesic of strength \(s \in (-1,1)\)</b> is a solution to
+      Let \(S^{2d+1} = \{z \in \mathbb{C}^{d+1}\, \mid \, |z|=1\}.\) &nbsp;&nbsp; A <b>contact magnetic geodesic of strength \(s \in (-1,1)\)</b> is a solution to
       \[\nabla_{\dot\gamma}\dot\gamma = 2si\left(\dot\gamma - \eta(\dot\gamma)\cdot i\gamma\right), \qquad |\dot\gamma| \equiv 1,\]
       where \(\eta\) is the <b>contact one-form</b>
       \[\eta(v) = \mathrm{Re}\left\langle iz,v\right\rangle, \qquad v \in T_zS^{2d+1}, \,\, z \in S^{2d+1}.\]
@@ -777,8 +811,8 @@
         <li> <b>Reeb trajectories</b> \(t\mapsto (0,0,t)\) are contact magnetic geodesics.</li>
         <li> Legendrian contact magnetic geodesics are <b>sub-Riemannian geodesics</b>.</li>
       </ul>
-      <p class="fragment" data-fragment-index="1"><b class="accent-warm">Theorem</b> <span class="citation">(A. '25)</span>:
-      Let \(A_0,A_1 \subseteq \mathbb{H}^m\) be Borel sets of positive measure and let \(0<\lambda<1\). Denote by \(A_\lambda\) the set of points of the form \(\gamma(\lambda \ell)\), where \(\gamma:[0,\ell]\to \mathbb{H}^m\) is a unit-speed minimizing contact magnetic geodesic satisfying \(\gamma(0)\in A_0\) and \(\gamma(\ell)\in A_1\). <span class="fragment" data-fragment-index="2">Then
+      <p class="fragment" data-fragment-index="1"><b class="accent-warm">Theorem</b> <span class="citation">(A. '26+)</span>:
+      Let \(A_0,A_1 \subseteq \mathbb{H}^m\) be Borel sets of positive measure and \(0\le\lambda\le 1\). Denote by \(A_\lambda\) the set of points of the form \(\gamma(\lambda \ell)\), where \(\gamma:[0,\ell]\to \mathbb{H}^m\) is a unit-speed minimizing contact magnetic geodesic satisfying \(\gamma(0)\in A_0\) and \(\gamma(\ell)\in A_1\). <span class="fragment" data-fragment-index="2">Then
       \[\mathrm{Vol}(A_\lambda)^{1/n} \ge (1-\lambda)\cdot\mathrm{Vol}(A_0)^{1/n} + \lambda\cdot\mathrm{Vol}(A_1)^{1/n},\]
       where \(\mathrm{Vol}\) denotes the Riemannian volume measure and \(n=2m+1\).
       </span></p>
@@ -792,15 +826,12 @@
       <ul>
         <li class="fragment">magnetic geodesics are ordinary geodesics;</li>
         <li class="fragment">\(\mathrm{Ric}_\Omega = \mathrm{Ric}\).</li>
-        <li class="fragment">The class of <b>minimizing</b> magnetic geodesics depends on the cohomology class \([\eta]\in H^1(M)\) &mdash; and can be a strict subclass of length-minimizing geodesics.</li>
+        <li class="fragment">The class of <b>minimizing</b> magnetic geodesics depends on the cohomology class \([\eta]\in H^1(M)\).</li>
+        <li class="fragment">
+        Each cohomology class gives rise to a potentially different Minkowski average, and all of them satisfy the (undistorted) Brunn-Minkowski inequality whenever \((M,g)\) is geodesically convex and \(\mathrm{Ric}\ge 0\).
+        </li>
       </ul>
-      <p class="fragment">
-        \(\Rightarrow\) Each cohomology class gives a (potentially) different Minkowski average, and all of them satisfy the (undistorted) Brunn-Minkowski inequality whenever \((M,g)\) is geodesically convex with \(\mathrm{Ric}\ge 0\).
-      </p>
     </div>
-  </section>
-
- 
   </section>
 
   <section data-auto-animate data-background-color="black">
@@ -810,13 +841,28 @@
   </section>
 
   <section data-auto-animate>
-    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ricot">Ricci curvature and optimal transport</h3>
+    <h2 style="color: #1864AB; font-size: .8em;" data-id="heisenbergtitle">Example<span style="color: #111; font-family: 'Alegreya Sans', sans-serif; font-weight: 400;">: Closed magnetic potentials</span></h2>
+    <div style="text-align: center;">
+      <img src="media/torus_closed_potential.png"
+           alt="Geodesic vs magnetic Minkowski average on the flat torus with closed potential eta = (dtheta_1 + dtheta_2)/2"
+           style="max-width: 95%; height: auto;">
+    </div>
+  </section>
+
+  
+  <section data-auto-animate>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
+  </section>
+
+  <section data-auto-animate>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
     <div style="text-align: left; font-size: .9em;">
       <p>\(L^1\) localization (needle decomposition):</p>
       <ul>
         <li class = "fragment"><span class="citation">Evans-Gangbo '00, Caffarelli-Feldman-McCann '01, Feldman-McCann '02</span> - The solution to the Monge-Kantorovich problem with cost <b>d</b> provides a disintegration of the manifold into disjoint geodesics ("transport rays").</li>
         <li class = "fragment"><span class="citation">Klartag '14</span> - together with CD bounds, this can be used to prove geometric inequalities on weighted Riemannian manifolds <span class="citation" style="font-size: .8em">(Gromov-Milman '87, Lovasz-Simonovits '93)</span>.</li>
         <li class = "fragment">Finsler <span class="citation" style="font-size: .8em">(Ohta '15)</span>, mms <span class="citation" style="font-size: .8em">(Cavalletti-Mondino '15)</span>, Sub-Riemannian <span class="citation" style="font-size: .8em">(Milman '19)</span>, Lorentzian <span class="citation" style="font-size: .8em">(Braun-McCann '23, Cavalletti-Mondino '24).</span></li>
+        <li class = "fragment">Tonelli Lagrangians <span class="citation" style="font-size: .8em">(A '25).</span></li>
       </ul>
     </div>
   </section>
@@ -827,129 +873,10 @@
   </section> -->
 
   <section data-auto-animate>
-  <h3 style="color: #1864AB; font-size: 1.1em" data-id="setuptitle">setup</h3>
-  <div style="text-align: left; font-size: .9em;">
-    <ul>
-      <li class = "fragment">
-        \(M\) smooth manifold of dimension \(n \ge 2.\)
-      </li>
-      <li class = "fragment">
-        \(L:TM \to \mathbb{R}\) &nbsp; Lagrangian which is:
-        <ul>
-          <li> Smooth away from the zero section </li>
-          <li> Fiberwise strongly convex and superlinear </li>
-          <li> Supercritical (i.e. closed curves have positive action) </li>
-        </ul>
-        <div  class = "fragment">and such that:
-        <ul>
-          <li>Every pair of points can be joined by a minimizing extremal. </li>
-          <li>For every compact set \(A\) there exists a compact set \(A'\) such that all minimizing extremals with endpoints in \(A\) are contained in \(A'.\) </li>
-        </ul></div>
-      </li>
-      <li class = "fragment">
-        \(\mu\) measure on \(M\) with a smooth, positive density.
-      </li>
-    </ul>
-  </div>
-  </section>
-
-  <section data-auto-animate>
-    <h3 style="color: #1864AB; font-size: .85em" data-id="mainresulttitle">Main result: Displacement Convexity for Lagrangians</h3>
-    <div style="text-align: left; font-size: .75em;">
-      <p><b class="accent-warm">Theorem </b><span class="citation">(A. '25)</span>: Let \(N \in [n,\infty]\)&nbsp;. The following are equivalent:</p>
-      <ul>
-        <li class = "fragment"> \(\mathrm{Ric}_{L,\mu,N} \ge 0\) &nbsp; on \(E^{-1}(0)\) &nbsp;.</li>
-        <li class = "fragment"> For every local solution \(u\) to the H-J equation \(H(du) = 0\) &nbsp;,
-          \[
-            (d\mathbf{L}u)(\nabla u) + \frac{(\mathbf{L}u)^2}{N-1} \le 0.
-          \]
-        <li class = "fragment"> \(\forall \mu_0,\mu_1\in\mathcal{P}_1(L)\) &nbsp; there exists a displacement interpolation \(\{\mu_\lambda\}_{0 \le \lambda \le 1}\)&nbsp; between \(\mu_0\) and \(\mu_1\) such that
-          \(
-          \mathrm{S}_{N}[\mu_\lambda|\mu]
-          \)
-          is convex in \(\lambda.\)
-        </li>
-      </ul>
-      <div class = "fragment">
-      <p style="font-size: .75em">
-        \[
-        \mathrm{S}_N[f_0\mu |\mu] := -\int_M f_0^{1-1/N} \, d\mu 
-        \quad (1 \lt N \lt \infty) \quad \text{and} \quad 
-        \mathrm{S}_{\infty}[f_0\mu |\mu] := \int_M f_0\log f_0 \, d\mu.
-        \]
-      </p>
-      <p style="color:#888; font-size: .65em">
-        \[
-        \mathcal{P}_1(L):= \left\{
-        \begin{array}{c}
-        \text{Absolutely continuous Borel probability measures \(\mu_0\) on \(M\)}\\
-        \text{such that \(\int(|\mathrm{c}(x_0,\cdot)|+|\mathrm{c}(\cdot,x_0)|)d\mu_0 \lt \infty\) for some \(x_0 \in M\)}
-        \end{array}
-        \right\}.
-        \]
-      </p>
-      </div>
-  </section>
-
-  <section data-auto-animate>
-    <h3 style="color: #1864AB; font-size: .85em" data-id="mainresulttitle">Main result: Displacement Convexity for Lagrangians</h3>
-    <div style="text-align: left; font-size: .7em;">
-        <p>
-            <b class="accent-warm">Theorem</b> <span class="citation">(A. '25)</span>:
-            Let \(N \in [n,\infty]\) and \(K \in \mathbb{R}.\) TFAE:
-        </p>
-        <ol>
-            <li class="fragment">
-                \(\mathrm{Ric} _{L,\mu,N} \ge {K}\) on \(SM.\)
-            </li>
-            <li class="fragment">
-                Every local solution \(u\) to the Hamilton-Jacobi equation \(H(du) = 0\) satisfies
-                \[
-                    (d\mathbf{L} u)(\nabla u) + \frac{(\mathbf{L} u)^2}{N-1} + {K} \le 0.
-                \]
-            </li>
-            <li class="fragment">
-                For every \(\mu_0 = f_0\mu,\;\mu_1 = f_1\mu \in \mathcal{P}_1(L)\,\,\) there exists a displacement interpolation \(\mu_\lambda\) between \(\mu_0\) and \(\mu_1\) such that for every \(\lambda \in [0,1],\)
-                \[
-                \small
-                    \mathrm{S}_{N}[\mu_\lambda|\mu] \le 
-                    \begin{cases}
-                        \mathbb{E}\left[\tau_{1-\lambda}^{{K},{N}}\cdot \left(-f_0(\gamma(0))^{-1/{N}}\right) + \tau_{\lambda}^{{K},{N}}\cdot \left(-f_1(\gamma(T))^{-1/{N}}\right)\right] & {N} < \infty\\[9pt]
-                        (1-\lambda)\cdot\mathrm{S}_\infty[\mu_0|\mu] + \lambda\cdot\mathrm{S}_\infty[\mu_1|\mu] - \frac{K}{2}\cdot\lambda\cdot(1-\lambda)\cdot \mathbb{E} T^2 & {N} =\infty,
-                    \end{cases}
-                \]
-                where \(\gamma:[0,T] \to M\) is a random minimizing extremal such that \[\gamma(\lambda T)\sim \mu_\lambda \quad \text{ for all } \quad 0\le\lambda\le1.\]
-            </li>
-        </ol>
-    </div>
-</section>
-
-  <section data-auto-animate>
-    <h3 style="color: #1864AB; font-size: .85em" data-id:"mainresulttitle">Main result: Displacement Convexity for Lagrangians</h3>
-    <div style="text-align: left; font-size: .85em;">
-      <ul>
-        <li class = "fragment">depends only on the dynamics on \(E^{-1}(0).\)</li>
-        <li class = "fragment">Autonomous Lagrangian, unrestricted time \(\rightarrow\) extends <span style="color:#1864AB">\(L^1\)</span> d.c. <span class="citation" style="font-size:.8em">(Cavalletti & Milman '16, Cavalletti, Gigli & Santarcangelo '20)</span>.</li>
-        <li class = "fragment">Consequences of curvature-dimension bounds:
-        <ul>
-          <li>Brunn-Minkowski</li>
-          <li>Prékopa–Leindler / Borell-Brascamp-Lieb</li>
-          <li>Bishop-Gromov</li>
-          <li>Bonnet-Myers</li>
-          <li>Isoperimetry</li>
-          <li>Poincaré / log-Sobolev</li>
-        </ul>
-        </li>
-        <li class="fragment">cf. <span class="citation">Lee '13, Ohta '14, Schachter '17, Yang '22</span>.</li>
-      </ul>
-    </div>
-  </section>  
-
-  <section data-auto-animate>
-    <h2 style="color: #1864AB; font-size: .9em">Key technical result: needle decomposition</h2>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
     <div style="text-align: left;font-size: .6em">
     <p><b class="accent-warm">Theorem</b> <span class="citation">(A. '25, cf. Klartag '14')</span>:
-    Let \(N \in (-\infty,\infty]\setminus[0,n)\) &nbsp; and \(K \in \mathbb{R}\) &nbsp; and suppose that \(\mathrm{Ric}_{L,\mu,N} \ge K.\) Let \(f : M \to \mathbb{R}\) &nbsp be a \(\mu\)-intergrable function satisfying
+    Let \(N \in (-\infty,\infty]\setminus[0,n)\) &nbsp; and \(k \in \mathbb{R}\) &nbsp; and suppose that \(\mathrm{Ric}_\Omega \ge k.\) Let \(f : M \to \mathbb{R}\) &nbsp; be a \(\mu\)-integrable function satisfying
      \[\int_Mfd\mu = 0, \qquad \qquad  {\exists x_0\in M \quad \int_M\left(|\mathrm{c}(x_0,\cdot)| + |\mathrm{c}(\cdot,x_0)|\right)fd\mu < \infty.}\]
     </p>
     <p class="fragment">
@@ -958,10 +885,10 @@
     <ul>
         <li class="fragment"> For \(\nu\)-almost every \(\alpha \in \mathscr{A},\) either \(\mu_\alpha\) is a Dirac measure, or
         \(\mu_\alpha = \left(\gamma_\alpha\right)_*m_\alpha\)&nbsp;
-        where \(m_\alpha\) is a measure on an interval \(I_\alpha \subseteq \mathbb{R}\) &nbsp; satisfying \(\mathrm{CD}({K},N)\) with respect to the Euclidean metric on \(\mathbb{R},\) and \(\gamma_\alpha : I_\alpha \to M\) &nbsp; is a minimizing extremal.</li>
-        <li class="fragment"> <b class="key-term">Disintegration of measure</b>: The measure \(\mu\) disintegrates as
+        where \(m_\alpha\) is a measure on an interval \(I_\alpha \subseteq \mathbb{R}\) &nbsp; satisfying \(\mathrm{CD}({k},n)\) with respect to the Euclidean metric on \(\mathbb{R},\) and \(\gamma_\alpha : I_\alpha \to M\) &nbsp; is a minimizing magnetic geodesic.</li>
+        <li class="fragment"> <b>Disintegration of measure</b>: The measure \(\mu\) disintegrates as
         \[\mu = \int_{\mathscr{A}}\mu_\alpha d\nu(\alpha).\]</li>
-        <li class="fragment"> <b class="key-term">Mass Balance</b>: For \(\nu\)-almost every \(\alpha \in \mathscr{A},\)
+        <li class="fragment"> <b>Mass Balance</b>: For \(\nu\)-almost every \(\alpha \in \mathscr{A},\)
         \[
             \int_Mfd\mu_\alpha = 0.
         \]
@@ -970,47 +897,37 @@
   </div>
   </section>
 
-  <!-- <section data-background-iframe="flowfinal.html" data-background-interactive> -->
-  <section data-background-color="#5C9BD1">
-    <h2 style="font-size: 2.5em; font-weight: 1000;">Thank you!</h2>
-  </section>
-
 <section data-auto-animate>
-    <h2 style="color: #1864AB; font-size: .9em" data-id="sketchtitle">Sketch of proof</h2>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
     <div style="text-align: left; font-size: .6em;">
+        <b class="accent-warm">Proof sketch:</b> 
         <p>
             <u>Part I</u>: \(L^1\) optimal transport <span class="citation">(Evans-Gangbo '99, Feldman-McCann '02, Caffarelli- Feldman-McCann '02. <i>Also</i>: Bernard-Buffoni '06, Figalli '07, Fathi-Figalli '10)</span>. Let \(u : M \to \mathbb{R}\) satisfy
         </p>
         \[
-            \int_M fu\, d\mu = \inf\left\{\int_M fv \, d\mu \quad \Big\vert \quad v : M \to \mathbb{R}, \,\, H(dv) \le 0\right\}.
+            \int_M fu\, d\mathrm{Vol}_g = \inf\left\{\int_M fv \, d\mathrm{Vol}_g \quad \Big\vert \quad v : M \to \mathbb{R}, \,\, |dv + \eta| \le 1\right\}.
         \]
         <p>
             A <em>transport ray</em> of \(u\) is a maximal curve \(\gamma : I \to \mathbb{R}\) with the properties
         </p>
         \[
-            \dot\gamma \equiv \nabla u \qquad \text{ and } \qquad E(\dot\gamma) \equiv 0.
+            \dot\gamma \equiv \nabla u + \eta^\sharp \qquad \text{ and } \qquad |\dot\gamma| \equiv 1.
         \]
         <p>
-            Note that in this case 
-        </p>
-        \[
-            H(du\vert_{\gamma(t)}) = E(\nabla u\vert_{\gamma(t)}) = E(\dot\gamma(t)) = 0 \qquad \text{ for all $t \in I$.}
-        \]
-        <p>
-            If \(x\) is not contained in such a curve then we say that \(\{x\}\) is a (degenerate) transport ray. 
+        If \(x\) is not contained in such a curve then we say that \(\{x\}\) is a (degenerate) transport ray. 
         </p>
     
         <p>
             For every Borel set \(A\subseteq M\) which is a union of transport rays,
         </p>
         \[
-            \int_A  f \,d\mu = 0 \qquad \text{(Mass balance)}.
+            \int_A  f \,d\mathrm{Vol}_g = 0 \qquad \text{(Mass balance)}.
         \]
     </div>
 </section>
 
 <section data-auto-animate>
-    <h2 style="color: #1864AB; font-size: .9em" data-id="sketchtitle">Sketch of proof</h2>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
     <div style="text-align: left; font-size: .6em;">
         <p>
             Let \(\{\gamma_\alpha:I_\alpha \to M\}_{\alpha\in\mathscr{A}}\) be the collection of transport rays. Make a change of variables:
@@ -1025,31 +942,31 @@
             For every smooth \(\phi : M \to \mathbb{R},\)
         </p>
         \[
-            \int_M\phi\,d\mu = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))\rho(\alpha,t)dt\,d\alpha.
+            \int_M\phi\,d\mathrm{Vol}_g = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))\rho(\alpha,t)dt\,d\alpha.
         \]
         <p>
             How do we determine the ''Jacobian" \(\rho\)? since we have freedom in choosing the measure on \(\mathscr{A},\) we only need to determine \(\rho\) up to a multiplicative constant depending on \(\alpha.\) Thus it suffices to determine
+          \(
+              \partial_t\log\rho.
+          \)
         </p>
-        \[
-            \partial_t\log\rho.
-        \]
         <p>
-            But in this coordinate chart \(\partial/\partial t = \dot\gamma_\alpha = \nabla u,\) so
+            But in this coordinate chart \(\partial/\partial t = \dot\gamma_\alpha = \nabla u + \eta^\sharp\)&nbsp;&nbsp; so
         </p>
         \[
-            \partial_t\log\rho = \mathrm{div}_\mu(\partial / \partial t) = \mathrm{div}_\mu(\nabla u ) = \mathbf{L} u.
+            \partial_t\log\rho = \mathrm{div}(\partial / \partial t) = \mathrm{div}(\nabla u + \eta^\sharp) = \mathrm{div}(\sigma^\sharp) = -\delta\sigma \qquad \text{where \(\sigma = du + \eta\)}.
         \]
     </div>
 </section>
 
 <section data-auto-animate>
-    <h2 style="color: #1864AB; font-size: .9em" data-id="sketchtitle">Sketch of proof</h2>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
     <div style="text-align: left; font-size: .6em;">
         <p>
-            For every \(\alpha \in \mathscr{A}\) Define a measure \(m_\alpha\) on the interval \(I_\alpha\) by
+            For every \(\alpha \in \mathscr{A}\), define a measure \(m_\alpha\) on the interval \(I_\alpha\) by
         </p>
         \[
-            dm_\alpha(t) = e^{-\psi_\alpha(t)}dt, \qquad \text{ where } \qquad \frac{d\psi_\alpha}{dt} = -\mathbf{L} u \circ\gamma_\alpha.
+            dm_\alpha(t) = e^{-\psi_\alpha(t)}dt, \qquad \text{ where } \qquad \frac{d\psi_\alpha}{dt} = \delta\sigma \circ\gamma_\alpha.
         \]
         <p>
             Define a needle \(\mu_\alpha\) by
@@ -1062,7 +979,7 @@
         </p>
         \[
             \begin{aligned}
-                \int_M\phi\,d\mu & = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))e^{-\psi_\alpha(t)}dt\,d\nu(\alpha)\\
+                \int_M\phi\,d\mathrm{Vol}_g & = \int_{\mathscr{A}}\int_{I_\alpha}\phi(\gamma_\alpha(t))e^{-\psi_\alpha(t)}dt\,d\nu(\alpha)\\
                 & = \int_{\mathscr{A}}\int\phi d\mu_\alpha\,d\nu(\alpha).
             \end{aligned}
         \]
@@ -1076,39 +993,40 @@
 </section>
 
 <section data-auto-animate>
-    <h2 style="color: #1864AB; font-size: .9em" data-id="sketchtitle">Sketch of proof</h2>
+    <h3 style="color: rgb(24, 100, 171); font-size: 1em" data-id="ontheproof">On the proof</h3>
     <div style="text-align: left; font-size: .6em;">
         <p>
-            <u>Part II:</u> It remains to show that \(\nu\)-a.e needle \(\mu_\alpha\) satisfies \(\mathrm{CD}(K,N).\) Assume for simplicity \(K=0,N=\infty,\mu = \mathrm{Vol}_g\,\,\) and recall
+            <u>Part II:</u> It remains to show that \(\nu\)-a.e needle \(\mu_\alpha\) satisfies \(\mathrm{CD}(k,n),\) i.e.
         </p>
         \[
-            \mu_\alpha = (\gamma_\alpha)_*m_\alpha, \qquad dm_\alpha(t) = e^{-\psi_\alpha(t)}dt, \qquad \dot\psi_\alpha  = - \mathbf{L} u\circ\gamma_\alpha.
+            \ddot\psi_\alpha \,\ge\, k \,+\, \frac{\dot\psi_\alpha^{\,2}}{n-1}, \qquad \text{where}\qquad dm_\alpha(t) = e^{-\psi_\alpha(t)}dt, \quad \dot\psi_\alpha = \delta\sigma\circ\gamma_\alpha.
         \]
-        
-        <p>
-            We need to prove that \(\ddot \psi_\alpha \ge 0.\) 
-        </p>
 
         <p>
-            Since \(H(du) = 0\) on nondegenerate transport rays, <em>in some sense, \(u\) solves the Hamilton-Jacobi equation \(H(du) = 0\) on the set of nondegenerate transport rays</em>.
+            Loosely speaking, the one-form \(\sigma = du + \eta\) satisfies \(d\sigma = \Omega\) and \(|\sigma|\equiv 1\) on the set of nondegenerate transport rays.
         </p>
         <p>
-            Therefore, by the Bochner inequality, loosely speaking, on the set of nondegenerate transport rays 
+            Therefore, by the Bochner inequality and the assumption \(\mathrm{Ric}_\Omega \ge k\), on the set of nondegenerate transport rays
         </p>
         \[
-            (d\mathbf{L} u)(\nabla u) \le 0.
+            \langle d\delta\sigma,\sigma\rangle \,\ge\, \frac{(\delta\sigma)^2}{n-1} \,+\, \mathrm{Ric}_\Omega(\sigma^\sharp) \,\ge\, \frac{(\delta\sigma)^2}{n-1} \,+\, k.
         \]
         <p>
             Hence
         </p>
         \[
-            \ddot\psi_\alpha = \frac{d}{dt}\left(-\mathbf{L} u\circ\gamma_\alpha\right) = -(d\mathbf{L} u)(\dot\gamma_\alpha) = -(d\mathbf{L} u)(\nabla u) \ge 0
+            \ddot\psi_\alpha = \frac{d}{dt}\left(\delta\sigma\circ\gamma_\alpha\right) = (d\delta\sigma)(\dot\gamma_\alpha) = \langle d\delta\sigma,\sigma\rangle \,\ge\, k \,+\, \frac{\dot\psi_\alpha^{\,2}}{n-1}
         \]
         <p>
             for \(\nu\)-almost \(\alpha\) such that \(\gamma_\alpha\) is nondegenerate.
         </p>
     </div>
 </section>
+
+  <!-- <section data-background-iframe="flowfinal.html" data-background-interactive> -->
+  <section data-background-color="#1864AB">
+    <h2 style="font-size: 2.5em; font-weight: 1000;">Thank you!</h2>
+  </section>
 
 </div></div>
   
