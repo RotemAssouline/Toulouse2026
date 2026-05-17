@@ -402,7 +402,7 @@
   <section data-auto-animate class="tight-math">
     <h3 style="color: #1864AB;" data-id="maggeo">Magnetic geodesics</h3>
     <p style="text-align: left; font-size: .8em;">
-      \((M,g)\)-Riemannian manifold, \(\Omega\) two-form on \(M.\)
+      \((M,g)\)-Riemannian manifold, \(\Omega\) closed two-form on \(M.\)
     </p>
       <ul style="text-align: left; font-size: .8em;">
         <li class="fragment">
@@ -589,7 +589,7 @@
         and the Bochner identity and inequality become
         \[V(\mathrm{div}\,V) \,+\, |\Sigma|^2 \,+\, \mathrm{Ric}_\Omega(V) \,=\, 0,\]
         \[V(\mathrm{div}\,V) \,+\, \frac{(\mathrm{div}\,V)^2}{n-1} \,+\, \mathrm{Ric}_\Omega(V) \,\le\, 0,\]
-        where now \(\Sigma\) is the symmetric part of \(\nabla V\big|_{V^\perp}\).
+        where \(\Sigma\) is the symmetric part of \(\nabla V\big|_{V^\perp}\).
       </p>
       <p class="fragment">
         When \(\Omega = 0\), \(\nabla V\) is symmetric with \(\nabla V\vert_{V} = 0\), and locally \(V = \nabla u\) and \(\Sigma = \nabla^2u.\)
@@ -661,7 +661,7 @@
 
   <section data-auto-animate class="tight-math">
     <h3 style="color: #1864AB;" data-id="magBMthm">Magnetic Brunn-Minkowski inequality</h3>
-    <div style="text-align: left; font-size: .8em;">
+    <div style="text-align: left; font-size: .7em;">
       <p><b>Global assumptions:</b></p>
       <ol style="line-height: 1.6; list-style-type: upper-roman">
         <li class="fragment">
@@ -672,9 +672,12 @@
           \[\int_\gamma \eta < \mathrm{Len}[\gamma].\]
         </li>
         <li class="fragment">
-          Every compact \(A\subseteq M\) admits a compact \(\tilde A\supseteq A\) containing every minimizing magnetic geodesic with endpoints in \(A\).
+          For every compact \(A\subseteq M\) there exists a compact \(\tilde A\supseteq A\) containing every minimizing magnetic geodesic with endpoints in \(A\).
         </li>
       </ol>
+      <p class="fragment">
+      If \(M\) is compact and \(|\eta|{<}1\) then all three conditions hold.
+      </p>
     </div>
   </section>
 
