@@ -123,6 +123,48 @@
   .fragment-stack > * {
     grid-area: 1 / 1;
   }
+
+  /* Invisible-trigger definition popup */
+  .def-trigger { cursor: help; }
+  .def-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+  .def-overlay.open { display: flex; }
+  .def-overlay .def-box {
+    background: #fff;
+    color: #111;
+    max-width: 70%;
+    max-height: 80vh;
+    overflow: auto;
+    padding: 1.2em 1.6em;
+    border-left: 6px solid #1864AB;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: 0.7em;
+    line-height: 1.45;
+    text-align: left;
+  }
+  .def-overlay .def-box h4 {
+    margin: 0 0 .6em 0;
+    color: #1864AB;
+    font-weight: 700;
+  }
+  .def-overlay .def-close {
+    float: right;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 1.2em;
+    line-height: 1;
+    color: #888;
+  }
   </style>
   <style>
   h2 {
@@ -619,7 +661,7 @@
         </ul>
       </li>
       <li class="fragment">
-        <b>Sasakian manifolds</b> \((M,g,\eta)\) of dimension \(2m+1\), with \(\Omega = c\,d\eta\):
+        <b><span class="def-trigger" data-def="sasakian">Sasakian manifolds</span></b> \((M,g,\eta)\) of dimension \(2m+1\), with \(\Omega = c\,d\eta\):
         \[\mathrm{Ric}_\Omega \,=\, \mathrm{Ric} \,+\, 2c^2(m+1) \,-\, 4cm\,\eta \,-\, 2c^2\,\eta^2.\]
         <ul>
           <li class="fragment">
@@ -1032,7 +1074,61 @@
   </section>
 
 </div></div>
-  
+
+  <!-- Definition popups (one block per term) -->
+  <div class="def-overlay" id="def-overlay">
+    <div class="def-box" onclick="event.stopPropagation();">
+      <button class="def-close" type="button" aria-label="Close" onclick="closeDef()">&times;</button>
+      <div id="def-content"></div>
+    </div>
+  </div>
+
+  <template id="def-sasakian">
+    <h4>Sasakian manifold</h4>
+    <p>
+      An <b>almost contact structure</b> on a smooth manifold \(M^{2m+1}\) is a triple \((\eta,\xi,\Phi)\) consisting of a 1-form \(\eta\), a vector field \(\xi\), and a \((1,1)\)-tensor \(\Phi\) with
+      \[\eta(\xi)=1, \qquad \Phi^2 = -\mathrm{Id} + \eta\otimes\xi.\]
+      A Riemannian metric \(g\) is <b>compatible</b> with \((\eta,\xi,\Phi)\) if
+      \[g(\Phi X,\Phi Y) = g(X,Y) - \eta(X)\eta(Y)\]
+      for all vector fields \(X,Y\); the quintuple \((M,g,\eta,\xi,\Phi)\,\) is then an <b>almost contact metric manifold</b>.
+    </p>
+    <p>
+      An almost contact metric manifold is <b>Sasakian</b> if its metric cone \(t^2g + dt^2 \) is K&auml;hler, with K&auml;hler form 
+      \[
+        t^2\,d\eta + 2\eta\,dt\wedge d\eta.
+      \]
+    </p>
+  </template>
+
+  <script>
+  function openDef(key) {
+    var tpl = document.getElementById('def-' + key);
+    var content = document.getElementById('def-content');
+    var overlay = document.getElementById('def-overlay');
+    if (!tpl || !content || !overlay) return;
+    content.innerHTML = '';
+    content.appendChild(tpl.content.cloneNode(true));
+    overlay.classList.add('open');
+    if (window.MathJax && MathJax.Hub && MathJax.Hub.Queue) {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, content]);
+    }
+  }
+  function closeDef() {
+    document.getElementById('def-overlay').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    var t = e.target.closest('.def-trigger');
+    if (t) {
+      e.stopPropagation();
+      openDef(t.getAttribute('data-def'));
+    }
+  }, true);
+  document.getElementById('def-overlay').addEventListener('click', closeDef);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDef();
+  });
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/markdown/markdown.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/highlight.js"></script>
